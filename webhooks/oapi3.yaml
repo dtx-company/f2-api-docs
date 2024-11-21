@@ -1,0 +1,111 @@
+components:
+  schemas:
+    google.protobuf.Any:
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that
+        describes the type of the serialized message.
+      properties:
+        "@type":
+          description: The type of the serialized message.
+          type: string
+      type: object
+    google.protobuf.Timestamp:
+      description: |2
+         Non-negative fractions of a second at nanosecond resolution. Negative
+         second values with fractions must still have non-negative nanos values
+         that count forward in time. Must be from 0 to 999,999,999
+         inclusive.
+      properties:
+        nanos:
+          format: int32
+          type: integer
+        seconds:
+          type: string
+      type: object
+    google.rpc.Status:
+      description: 'The `Status` type defines a logical error model that is suitable
+        for different programming environments, including REST APIs and RPC APIs.
+        It is used by [gRPC](https://github.com/grpc). Each `Status` message contains
+        three pieces of data: error code, error message, and error details. You can
+        find out more about this error model and how to work with it in the [API Design
+        Guide](https://cloud.google.com/apis/design/errors).'
+      properties:
+        code:
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+          format: int32
+          type: integer
+        details:
+          description: A list of messages that carry the error details.  There is
+            a common set of message types for APIs to use.
+          items:
+            "$ref": "#/components/schemas/google.protobuf.Any"
+          type: array
+        message:
+          description: A developer-facing error message, which should be in English.
+            Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details]
+            field, or localized by the client.
+          type: string
+      type: object
+    webhooks.v1.GetReceiverDashboardRequest:
+      properties:
+        receiver_id:
+          type: string
+      type: object
+    webhooks.v1.GetReceiverDashboardResponse:
+      properties:
+        dashboardUrl:
+          type: string
+      type: object
+openapi: 3.0.3
+info:
+  version: 0.0.1
+  title: WebhooksService API
+paths:
+  "/api/v1/receivers/{receiverId}/dashboards":
+    get:
+      operationId: WebhooksService_GetReceiverDashboard
+      parameters:
+      - in: path
+        name: receiverId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/webhooks.v1.GetReceiverDashboardResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/google.rpc.Status"
+          description: Default error response
+      tags:
+      - WebhooksService REST APIs
+  "/webhooks.v1.WebhooksService/GetReceiverDashboard":
+    post:
+      operationId: WebhooksService_GetReceiverDashboard_Connect
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/webhooks.v1.GetReceiverDashboardRequest"
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/webhooks.v1.GetReceiverDashboardResponse"
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/google.rpc.Status"
+          description: Default error response
+      tags:
+      - WebhooksService Grpc Connect API
