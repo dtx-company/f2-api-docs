@@ -1,636 +1,470 @@
-# Generated with protoc-gen-openapi
-# https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
-
 openapi: 3.0.3
 info:
     title: BundleService API
     version: 0.0.1
+tags:
+    - description: Endpoints for traditional RESTful API operations.
+      name: REST APIs
+    - description: Endpoints exposed via gRPC Connect API.
+      name: Grpc Connect API
+servers:
+    - url: f2api.stg.flowcode.com
+    - url: f2api.flowcode.com
+security:
+    - bearerAuth: []
 paths:
     /api/v1/bundles:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_ListBundles
             parameters:
-                - name: orgId
+                - description: Org ID is the organization that the bundles belong to.
                   in: query
-                  description: Org ID is the organization that the bundles belong to.
+                  name: orgId
                   schema:
                     type: string
-                - name: workspaceId
+                - description: Workspace ID is the workspace that the bundles belong to. Must be associated with the org_id.
                   in: query
-                  description: Workspace ID is the workspace that the bundles belong to. Must be associated with the org_id.
+                  name: workspaceId
                   schema:
                     type: string
-                - name: folderPath
+                - description: Show only bundles belonging to this folder path.
                   in: query
-                  description: Show only bundles belonging to this folder path.
+                  name: folderPath
                   schema:
                     type: string
-                - name: creatorId
+                - description: Deprecated. Use creator_ids instead.
                   in: query
-                  description: Deprecated. Use creator_ids instead.
+                  name: creatorId
                   schema:
                     type: string
-                - name: namePrefix
+                - description: Show only bundles that include this prefix in the name.
                   in: query
-                  description: Show only bundles that include this prefix in the name.
+                  name: namePrefix
                   schema:
                     type: string
-                - name: tags
+                - description: Show only bundles that include a tag from this list of tags.
                   in: query
-                  description: Show only bundles that include a tag from this list of tags.
+                  name: tags
                   schema:
-                    type: array
                     items:
                         type: string
-                - name: states
-                  in: query
-                  description: Show only bundles that are in a state from this list of of states.
-                  schema:
                     type: array
+                - description: Show only bundles that are in a state from this list of of states.
+                  in: query
+                  name: states
+                  schema:
                     items:
                         type: string
-                - name: visibilities
-                  in: query
-                  description: Show only bundles that are of a visibility from the list of visibilities.
-                  schema:
                     type: array
+                - description: Show only bundles that are of a visibility from the list of visibilities.
+                  in: query
+                  name: visibilities
+                  schema:
                     items:
                         type: string
-                - name: categories
-                  in: query
-                  description: Show only bundles that are in a category from this list of categories.
-                  schema:
                     type: array
+                - description: Show only bundles that are in a category from this list of categories.
+                  in: query
+                  name: categories
+                  schema:
                     items:
                         type: string
-                - name: creatorIds
-                  in: query
-                  description: Show only bundles that are created by a creator id  of creator ids of the bundles.
-                  schema:
                     type: array
+                - description: Show only bundles that are created by a creator id  of creator ids of the bundles.
+                  in: query
+                  name: creatorIds
+                  schema:
                     items:
                         type: string
-                - name: pagination.after
-                  in: query
-                  description: |-
+                    type: array
+                - description: |-
                     Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most "first" records.
                      This cursor generally comes from the "end_cursor" response string in PaginationPageInfo
+                  in: query
+                  name: pagination.after
                   schema:
                     type: string
-                - name: pagination.before
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most "last" records.
                      This cursor generally comes from the "start_cursor" response string in PaginationPageInfo
+                  in: query
+                  name: pagination.before
                   schema:
                     type: string
-                - name: pagination.first
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate first takes a non-negative integer
 
                      Use this argument to indicate how many records you would like to request
-                  schema:
-                    type: integer
-                    format: int32
-                - name: pagination.last
                   in: query
-                  description: |-
+                  name: pagination.first
+                  schema:
+                    format: int32
+                    type: integer
+                - description: |-
                     Paginate last takes a non-negative integer
 
                      Use this argument to indicate how many records you would like to request
+                  in: query
+                  name: pagination.last
                   schema:
-                    type: integer
                     format: int32
-                - name: pagination.order
-                  in: query
-                  description: Order direction
-                  schema:
                     type: integer
-                    format: enum
-                - name: pagination.orderBy
+                - description: Order direction
                   in: query
-                  description: Which field to order by
+                  name: pagination.order
+                  schema:
+                    format: enum
+                    type: integer
+                - description: Which field to order by
+                  in: query
+                  name: pagination.orderBy
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ListBundlesResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        post:
-            tags:
-                - BundleService
-            operationId: BundleService_CreateBundle
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateBundleRequest'
-                required: true
-            responses:
-                "200":
                     description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CreateBundleResponse'
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /api/v1/bundles/categories:
-        get:
+                    description: Default error response
             tags:
-                - BundleService
-            operationId: BundleService_GetBundleCategories
-            parameters:
-                - name: orgId
-                  in: query
-                  schema:
-                    type: string
-                - name: workspaceId
-                  in: query
-                  schema:
-                    type: string
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetBundleCategoriesResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /api/v1/bundles/{bundle.id}:
-        patch:
-            tags:
-                - BundleService
-            operationId: BundleService_UpdateBundle
-            parameters:
-                - name: bundle.id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-                - name: mask
-                  in: query
-                  schema:
-                    type: string
-                    format: field-mask
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Bundle'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateBundleResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                - REST APIs
     /api/v1/bundles/{id}:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_GetBundle
             parameters:
-                - name: id
-                  in: path
+                - in: path
+                  name: id
                   required: true
                   schema:
                     type: string
-                - name: version
-                  in: query
+                - in: query
+                  name: version
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/GetBundleResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-        delete:
+                    description: Default error response
             tags:
-                - BundleService
-            operationId: BundleService_DeleteBundle
+                - REST APIs
+    /api/v1/bundles/categories:
+        get:
+            operationId: BundleService_GetBundleCategories
             parameters:
-                - name: id
-                  in: path
-                  required: true
+                - in: query
+                  name: orgId
                   schema:
                     type: string
-                - name: version
-                  in: query
+                - in: query
+                  name: workspaceId
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/DeleteBundleResponse'
+                                $ref: '#/components/schemas/GetBundleCategoriesResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - REST APIs
     /api/v1/module-templates:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_ListModuleTemplates
             parameters:
-                - name: orgId
-                  in: query
+                - in: query
+                  name: orgId
                   schema:
                     type: string
-                - name: workspaceId
-                  in: query
+                - in: query
+                  name: workspaceId
                   schema:
                     type: string
-                - name: folderPath
-                  in: query
+                - in: query
+                  name: folderPath
                   schema:
                     type: string
-                - name: namePrefix
-                  in: query
+                - in: query
+                  name: namePrefix
                   schema:
                     type: string
-                - name: tags
-                  in: query
+                - in: query
+                  name: tags
                   schema:
-                    type: array
                     items:
                         type: string
-                - name: states
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: states
+                  schema:
                     items:
                         type: string
-                - name: visibilities
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: visibilities
+                  schema:
                     items:
                         type: string
-                - name: categories
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: categories
+                  schema:
                     items:
                         type: string
-                - name: creatorIds
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: creatorIds
+                  schema:
                     items:
                         type: string
-                - name: pagination.after
-                  in: query
-                  description: |-
+                    type: array
+                - description: |-
                     Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most "first" records.
                      This cursor generally comes from the "end_cursor" response string in PaginationPageInfo
+                  in: query
+                  name: pagination.after
                   schema:
                     type: string
-                - name: pagination.before
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most "last" records.
                      This cursor generally comes from the "start_cursor" response string in PaginationPageInfo
+                  in: query
+                  name: pagination.before
                   schema:
                     type: string
-                - name: pagination.first
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate first takes a non-negative integer
 
                      Use this argument to indicate how many records you would like to request
-                  schema:
-                    type: integer
-                    format: int32
-                - name: pagination.last
                   in: query
-                  description: |-
+                  name: pagination.first
+                  schema:
+                    format: int32
+                    type: integer
+                - description: |-
                     Paginate last takes a non-negative integer
 
                      Use this argument to indicate how many records you would like to request
+                  in: query
+                  name: pagination.last
                   schema:
-                    type: integer
                     format: int32
-                - name: pagination.order
-                  in: query
-                  description: Order direction
-                  schema:
                     type: integer
-                    format: enum
-                - name: pagination.orderBy
+                - description: Order direction
                   in: query
-                  description: Which field to order by
+                  name: pagination.order
+                  schema:
+                    format: enum
+                    type: integer
+                - description: Which field to order by
+                  in: query
+                  name: pagination.orderBy
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ListModuleTemplatesResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        post:
-            tags:
-                - BundleService
-            description: Module templates
-            operationId: BundleService_CreateModuleTemplate
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateModuleTemplateRequest'
-                required: true
-            responses:
-                "200":
                     description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CreateModuleTemplateResponse'
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - REST APIs
     /api/v1/module-templates/{id}:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_GetModuleTemplate
             parameters:
-                - name: id
-                  in: path
+                - in: path
+                  name: id
                   required: true
                   schema:
                     type: string
-                - name: version
-                  in: query
+                - in: query
+                  name: version
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/GetModuleTemplateResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-        delete:
-            tags:
-                - BundleService
-            operationId: BundleService_DeleteModuleTemplate
-            parameters:
-                - name: id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-                - name: version
-                  in: query
-                  schema:
-                    type: string
-            responses:
-                "200":
                     description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/DeleteModuleTemplateResponse'
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /api/v1/module-templates/{template.id}:
-        patch:
+                    description: Default error response
             tags:
-                - BundleService
-            operationId: BundleService_UpdateModuleTemplate
-            parameters:
-                - name: template.id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-                - name: mask
-                  in: query
-                  schema:
-                    type: string
-                    format: field-mask
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ModuleTemplate'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateModuleTemplateResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
+                - REST APIs
     /api/v1/modules/{id}:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_GetModule
             parameters:
-                - name: id
-                  in: path
+                - in: path
+                  name: id
                   required: true
                   schema:
                     type: string
-                - name: version
-                  in: query
+                - in: query
+                  name: version
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/GetModuleResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - REST APIs
     /api/v1/suites:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_ListSuites
             parameters:
-                - name: orgId
-                  in: query
+                - in: query
+                  name: orgId
                   schema:
                     type: string
-                - name: workspaceId
-                  in: query
+                - in: query
+                  name: workspaceId
                   schema:
                     type: string
-                - name: folderPath
-                  in: query
+                - in: query
+                  name: folderPath
                   schema:
                     type: string
-                - name: creatorId
-                  in: query
+                - in: query
+                  name: creatorId
                   schema:
                     type: string
-                - name: namePrefix
-                  in: query
+                - in: query
+                  name: namePrefix
                   schema:
                     type: string
-                - name: tags
-                  in: query
+                - in: query
+                  name: tags
                   schema:
-                    type: array
                     items:
                         type: string
-                - name: states
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: states
+                  schema:
                     items:
                         type: string
-                - name: categories
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: categories
+                  schema:
                     items:
                         type: string
-                - name: creatorIds
-                  in: query
-                  schema:
                     type: array
+                - in: query
+                  name: creatorIds
+                  schema:
                     items:
                         type: string
-                - name: externalId
-                  in: query
+                    type: array
+                - in: query
+                  name: externalId
                   schema:
                     type: string
-                - name: pagination.after
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most "first" records.
                      This cursor generally comes from the "end_cursor" response string in PaginationPageInfo
+                  in: query
+                  name: pagination.after
                   schema:
                     type: string
-                - name: pagination.before
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most "last" records.
                      This cursor generally comes from the "start_cursor" response string in PaginationPageInfo
+                  in: query
+                  name: pagination.before
                   schema:
                     type: string
-                - name: pagination.first
-                  in: query
-                  description: |-
+                - description: |-
                     Paginate first takes a non-negative integer
 
                      Use this argument to indicate how many records you would like to request
-                  schema:
-                    type: integer
-                    format: int32
-                - name: pagination.last
                   in: query
-                  description: |-
+                  name: pagination.first
+                  schema:
+                    format: int32
+                    type: integer
+                - description: |-
                     Paginate last takes a non-negative integer
 
                      Use this argument to indicate how many records you would like to request
+                  in: query
+                  name: pagination.last
                   schema:
-                    type: integer
                     format: int32
-                - name: pagination.order
-                  in: query
-                  description: Order direction
-                  schema:
                     type: integer
-                    format: enum
-                - name: pagination.orderBy
+                - description: Order direction
                   in: query
-                  description: Which field to order by
+                  name: pagination.order
+                  schema:
+                    format: enum
+                    type: integer
+                - description: Which field to order by
+                  in: query
+                  name: pagination.orderBy
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/ListSuitesResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-        post:
+                    description: Default error response
             tags:
-                - BundleService
+                - REST APIs
+        post:
             operationId: BundleService_CreateSuite
             requestBody:
                 content:
@@ -640,80 +474,80 @@ paths:
                 required: true
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/CreateSuiteResponse'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /api/v1/suites/{id}:
-        get:
-            tags:
-                - BundleService
-            operationId: BundleService_GetSuite
-            parameters:
-                - name: id
-                  in: path
-                  required: true
-                  schema:
-                    type: string
-            responses:
-                "200":
                     description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetSuiteResponse'
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-        delete:
+                    description: Default error response
             tags:
-                - BundleService
+                - REST APIs
+    /api/v1/suites/{id}:
+        delete:
             operationId: BundleService_DeleteSuite
             parameters:
-                - name: id
-                  in: path
+                - in: path
+                  name: id
                   required: true
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/DeleteSuiteResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /api/v1/suites/{suite.id}:
-        patch:
+                    description: Default error response
             tags:
-                - BundleService
-            operationId: BundleService_UpdateSuite
+                - REST APIs
+        get:
+            operationId: BundleService_GetSuite
             parameters:
-                - name: suite.id
-                  in: path
+                - in: path
+                  name: id
                   required: true
                   schema:
                     type: string
-                - name: mask
-                  in: query
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - REST APIs
+    /api/v1/suites/{suite.id}:
+        patch:
+            operationId: BundleService_UpdateSuite
+            parameters:
+                - in: path
+                  name: suite.id
+                  required: true
                   schema:
                     type: string
+                - in: query
+                  name: mask
+                  schema:
                     format: field-mask
+                    type: string
             requestBody:
                 content:
                     application/json:
@@ -722,914 +556,1237 @@ paths:
                 required: true
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/UpdateSuiteResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - REST APIs
     /api/v1/suites/{suiteId}/modules:
         get:
-            tags:
-                - BundleService
             operationId: BundleService_GetModulesInSuite
             parameters:
-                - name: suiteId
-                  in: path
+                - in: path
+                  name: suiteId
                   required: true
                   schema:
                     type: string
-                - name: version
-                  in: query
+                - in: query
+                  name: version
                   schema:
                     type: string
             responses:
                 "200":
-                    description: OK
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/GetModulesInSuiteResponse'
+                    description: OK
                 default:
-                    description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - REST APIs
+    /bundles.v1.BundleService/CreateSuite:
+        post:
+            operationId: BundleService_CreateSuite_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/DeleteSuite:
+        post:
+            operationId: BundleService_DeleteSuite_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/GetBundle:
+        post:
+            operationId: BundleService_GetBundle_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetBundleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBundleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/GetBundleCategories:
+        post:
+            operationId: BundleService_GetBundleCategories_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetBundleCategoriesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBundleCategoriesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/GetModule:
+        post:
+            operationId: BundleService_GetModule_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetModuleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetModuleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/GetModuleTemplate:
+        post:
+            operationId: BundleService_GetModuleTemplate_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetModuleTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetModuleTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/GetModulesInSuite:
+        post:
+            operationId: BundleService_GetModulesInSuite_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetModulesInSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetModulesInSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/GetSuite:
+        post:
+            operationId: BundleService_GetSuite_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/ListBundles:
+        post:
+            operationId: BundleService_ListBundles_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListBundlesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBundlesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/ListModuleTemplates:
+        post:
+            operationId: BundleService_ListModuleTemplates_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListModuleTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListModuleTemplatesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/ListSuites:
+        post:
+            operationId: BundleService_ListSuites_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListSuitesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListSuitesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
+    /bundles.v1.BundleService/UpdateSuite:
+        post:
+            operationId: BundleService_UpdateSuite_Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Suite'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect API
 components:
     schemas:
         Action:
-            type: object
             properties:
-                name:
-                    type: string
                 conditions:
-                    type: array
                     items:
                         $ref: '#/components/schemas/Condition'
+                    type: array
                 disabled:
                     type: boolean
-                notifyAction:
-                    $ref: '#/components/schemas/NotifyAction'
-        Actor:
-            type: object
-            properties:
                 name:
                     type: string
+                notifyAction:
+                    $ref: '#/components/schemas/NotifyAction'
+            type: object
+        Actor:
+            properties:
                 email:
                     type: string
-        AgentData:
+                name:
+                    type: string
             type: object
+        AgentData:
             properties:
+                email:
+                    type: string
+                faxNumber:
+                    type: string
                 firstName:
                     type: string
                 lastName:
                     type: string
-                office:
-                    $ref: '#/components/schemas/Office'
-                email:
-                    type: string
                 mobilePhoneNumber:
                     type: string
+                office:
+                    $ref: '#/components/schemas/Office'
                 officePhoneNumber:
-                    type: string
-                faxNumber:
                     type: string
                 photo:
                     type: string
-        AssetRef:
             type: object
+        AssetRef:
+            description: AssetRef is an instantiation of a TemplateRef in a Suite.
             properties:
-                type:
-                    type: integer
-                    description: Type is the type of Asset, usually defined from the associated template reference.
-                    format: enum
-                templateId:
-                    type: string
-                    description: Template ID is the id of the template used to create the Asset
-                templateVersion:
-                    type: string
-                    description: The version of the template to use
                 assetId:
-                    type: string
                     description: Asset ID unique identifier for the asset
+                    type: string
+                config:
+                    description: Config is dependent on the asset type, and its contents are merged with the template ref's default_config to customize the template.
+                    type: object
+                conversionComponent:
+                    description: Conversion Component corresponds is the default value for Flow and Event messages that define the key in the data field of the ExecuteResponse message. This identifies the component that triggered the conversion event.
+                    type: string
                 conversionType:
-                    type: integer
                     description: Conversion Type is an enumeration used to describe the intended purpose of this specific template and eventual asset.
                     format: enum
-                conversionComponent:
-                    type: string
-                    description: Conversion Component corresponds is the default value for Flow and Event messages that define the key in the data field of the ExecuteResponse message. This identifies the component that triggered the conversion event.
-                config:
-                    type: object
-                    description: Config is dependent on the asset type, and its contents are merged with the template ref's default_config to customize the template.
-                disabled:
-                    type: boolean
-                    description: Disabled is a boolean to determine whether this asset should be disabled in the UI when rendering the conversion flow.
-                isCustomizable:
-                    type: boolean
-                    description: Is Customizable is a boolean as to whether or not one is allowed to override the default config.
-                displayName:
-                    type: string
-                    description: A display name for the template used in editors
-                shortName:
-                    type: string
-                    description: The default text rendered as the name for this template in the conversion flow, i.e. the button text to display the asset.
-                iconUrl:
-                    type: string
-                    description: Icon URL can be set to be displayed with the short name when rendering this template in the conversion flow, i.e. the button icon to display the asset.
-                renderMode:
                     type: integer
+                disabled:
+                    description: Disabled is a boolean to determine whether this asset should be disabled in the UI when rendering the conversion flow.
+                    type: boolean
+                displayName:
+                    description: A display name for the template used in editors
+                    type: string
+                iconUrl:
+                    description: Icon URL can be set to be displayed with the short name when rendering this template in the conversion flow, i.e. the button icon to display the asset.
+                    type: string
+                isCustomizable:
+                    description: Is Customizable is a boolean as to whether or not one is allowed to override the default config.
+                    type: boolean
+                renderMode:
                     description: The rendering mode to use when rendering this asset in a suite
                     format: enum
-            description: AssetRef is an instantiation of a TemplateRef in a Suite.
-        Bundle:
+                    type: integer
+                shortName:
+                    description: The default text rendered as the name for this template in the conversion flow, i.e. the button text to display the asset.
+                    type: string
+                templateId:
+                    description: Template ID is the id of the template used to create the Asset
+                    type: string
+                templateVersion:
+                    description: The version of the template to use
+                    type: string
+                type:
+                    description: Type is the type of Asset, usually defined from the associated template reference.
+                    format: enum
+                    type: integer
             type: object
+        Bundle:
+            description: Bundle is a structure to represent a set of asset templates and links between those templates. Bundles are instantiated as a suite during the creation process.
             properties:
-                id:
+                archiveReason:
                     type: string
-                    description: ID is the UUID of the Bundle
-                dagVersion:
-                    type: string
-                version:
+                archivedAt:
+                    format: date-time
                     type: string
                 bundleType:
-                    type: integer
                     description: Bundle Type is the type of bundle that is being created.
                     format: enum
+                    type: integer
                 category:
-                    type: string
                     description: Category is an arbitrary string that can be used to categorize the bundle for template listings.
-                groupId:
                     type: string
-                orgId:
-                    type: string
-                    description: Org ID is the organization that the bundle belongs to.
-                workspaceId:
-                    type: string
-                    description: Workspace ID is the workspace that the bundle belongs to. Must be associated with the org_id.
-                state:
-                    type: string
-                archiveReason:
+                createdAt:
+                    format: date-time
                     type: string
                 creator:
                     allOf:
                         - $ref: '#/components/schemas/Creator'
                     description: Creator is the person who created the bundle.
-                name:
+                dagVersion:
                     type: string
-                    description: Name is the name of the bundle.
                 description:
-                    type: string
                     description: Description is an optional description of the bundle.
+                    type: string
                 folderPath:
                     type: string
-                tags:
+                groupId:
+                    type: string
+                id:
+                    description: ID is the UUID of the Bundle
+                    type: string
+                links:
+                    description: Links represent how templates are connected in the bundle.
+                    items:
+                        $ref: '#/components/schemas/Link'
                     type: array
+                name:
+                    description: Name is the name of the bundle.
+                    type: string
+                orgId:
+                    description: Org ID is the organization that the bundle belongs to.
+                    type: string
+                state:
+                    type: string
+                tags:
+                    description: Tags are a set of strings that can be used to categorize the bundle in various ways.
                     items:
                         type: string
-                    description: Tags are a set of strings that can be used to categorize the bundle in various ways.
-                visibility:
-                    type: string
+                    type: array
                 templates:
-                    type: object
                     additionalProperties:
                         $ref: '#/components/schemas/TemplateRef'
                     description: Templates is a map of template references that are used to create assets in a suite.
-                links:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Link'
-                    description: Links represent how templates are connected in the bundle.
-                createdAt:
-                    type: string
-                    format: date-time
+                    type: object
                 updatedAt:
-                    type: string
                     format: date-time
-                archivedAt:
                     type: string
-                    format: date-time
-            description: Bundle is a structure to represent a set of asset templates and links between those templates. Bundles are instantiated as a suite during the creation process.
-        Category:
+                version:
+                    type: string
+                visibility:
+                    type: string
+                workspaceId:
+                    description: Workspace ID is the workspace that the bundle belongs to. Must be associated with the org_id.
+                    type: string
             type: object
+        Category:
             properties:
                 category:
                     type: string
                 count:
                     type: string
-        CommerceData:
             type: object
+        CommerceData:
             properties:
                 integration:
                     $ref: '#/components/schemas/Integration'
                 product:
                     $ref: '#/components/schemas/Product'
-        CompoundRuleValue:
             type: object
+        CompoundRuleValue:
             properties:
                 lhs:
                     $ref: '#/components/schemas/Condition'
                 operator:
-                    type: integer
                     format: enum
+                    type: integer
                 rhs:
                     $ref: '#/components/schemas/Condition'
-        Condition:
             type: object
+        Condition:
             properties:
-                ruleType:
-                    type: integer
-                    format: enum
-                values:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/RuleValue'
                 label:
                     type: string
-        ContactData:
+                ruleType:
+                    format: enum
+                    type: integer
+                values:
+                    items:
+                        $ref: '#/components/schemas/RuleValue'
+                    type: array
             type: object
+        ContactData:
             properties:
-                photo:
-                    $ref: '#/components/schemas/Image'
-                fullName:
-                    type: string
-                title:
-                    type: string
-                department:
+                address:
+                    $ref: '#/components/schemas/PostalAddress'
+                bio:
                     type: string
                 company:
                     type: string
-                bio:
-                    type: string
-                workNumber:
-                    type: string
-                mobileNumber:
+                department:
                     type: string
                 email:
                     type: string
-                website:
+                fullName:
                     type: string
-                address:
-                    $ref: '#/components/schemas/PostalAddress'
+                mobileNumber:
+                    type: string
+                photo:
+                    $ref: '#/components/schemas/Image'
                 socialLinks:
-                    type: array
                     items:
                         $ref: '#/components/schemas/SocialLink'
-        CreateBundleRequest:
+                    type: array
+                title:
+                    type: string
+                website:
+                    type: string
+                workNumber:
+                    type: string
             type: object
-            properties:
-                dagVersion:
-                    type: string
-                bundleType:
-                    type: integer
-                    format: enum
-                category:
-                    type: string
-                orgId:
-                    type: string
-                workspaceId:
-                    type: string
-                groupId:
-                    type: string
-                name:
-                    type: string
-                description:
-                    type: string
-                folderPath:
-                    type: string
-                tags:
-                    type: array
-                    items:
-                        type: string
-                visibility:
-                    type: string
-                templates:
-                    type: object
-                    additionalProperties:
-                        $ref: '#/components/schemas/TemplateRef'
-                links:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Link'
-        CreateBundleResponse:
-            type: object
-            properties:
-                bundle:
-                    $ref: '#/components/schemas/Bundle'
-        CreateModuleTemplateRequest:
-            type: object
-            properties:
-                dagVersion:
-                    type: string
-                supportedBundleTypes:
-                    type: array
-                    items:
-                        type: integer
-                        format: enum
-                category:
-                    type: string
-                orgId:
-                    type: string
-                workspaceId:
-                    type: string
-                name:
-                    type: string
-                description:
-                    type: string
-                folderPath:
-                    type: string
-                tags:
-                    type: array
-                    items:
-                        type: string
-                visibility:
-                    type: string
-                templates:
-                    type: object
-                    additionalProperties:
-                        $ref: '#/components/schemas/TemplateRef'
-                links:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Link'
-                entryPoint:
-                    type: string
-                configSchema:
-                    type: string
-        CreateModuleTemplateResponse:
-            type: object
-            properties:
-                template:
-                    $ref: '#/components/schemas/ModuleTemplate'
         CreateSuiteRequest:
-            type: object
             properties:
-                orgId:
-                    type: string
-                workspaceId:
-                    type: string
-                state:
+                brandKitId:
                     type: string
                 bundleId:
                     type: string
                 bundleVersion:
                     type: string
-                brandKitId:
-                    type: string
-                name:
-                    type: string
+                config:
+                    additionalProperties:
+                        type: object
+                    type: object
+                data:
+                    $ref: '#/components/schemas/Data'
                 description:
+                    type: string
+                domain:
                     type: string
                 folderPath:
                     type: string
+                name:
+                    type: string
+                orgId:
+                    type: string
+                state:
+                    type: string
                 tags:
-                    type: array
                     items:
                         type: string
-                domain:
-                    type: string
-                config:
-                    type: object
-                    additionalProperties:
-                        type: object
-                data:
-                    $ref: '#/components/schemas/Data'
+                    type: array
                 timezone:
                     type: string
-        CreateSuiteResponse:
+                workspaceId:
+                    type: string
             type: object
+        CreateSuiteResponse:
             properties:
                 suite:
                     $ref: '#/components/schemas/Suite'
-        Creator:
             type: object
+        Creator:
             properties:
-                userId:
+                email:
                     type: string
                 orgId:
                     type: string
                 timezone:
                     type: string
-                email:
+                userId:
                     type: string
-        Data:
             type: object
+        Data:
+            description: Data is a message that represents the data that is associated with a suite.
             properties:
-                realEstate:
-                    $ref: '#/components/schemas/RealEstateData'
                 commerce:
                     $ref: '#/components/schemas/CommerceData'
-                form:
-                    $ref: '#/components/schemas/FormData'
                 contact:
                     $ref: '#/components/schemas/ContactData'
-            description: Data is a message that represents the data that is associated with a suite.
+                form:
+                    $ref: '#/components/schemas/FormData'
+                realEstate:
+                    $ref: '#/components/schemas/RealEstateData'
+            type: object
         DateRange:
-            type: object
             properties:
-                startDate:
-                    type: string
-                    description: Optional timestamp in RFC3339 format
                 endDate:
-                    type: string
                     description: optional timestamp in RFC3339 format
-        DateValue:
+                    type: string
+                startDate:
+                    description: Optional timestamp in RFC3339 format
+                    type: string
             type: object
+        DateValue:
+            description: DateValue is a value that represents a date
             properties:
-                is:
-                    type: string
-                    format: date
-                before:
-                    type: string
-                    format: date
                 after:
-                    type: string
                     format: date
+                    type: string
+                before:
+                    format: date
+                    type: string
                 between:
                     $ref: '#/components/schemas/DateRange'
-            description: DateValue is a value that represents a date
-        DayOfWeekValue:
-            type: object
-            properties:
-                dayNumber:
-                    type: integer
-                    description: 'Deprecated: Use is instead'
-                    format: int32
                 is:
-                    type: integer
-                    format: int32
-                before:
-                    type: integer
-                    format: int32
+                    format: date
+                    type: string
+            type: object
+        DayOfWeekValue:
+            description: DayOfWeekValue is a value that represents a day of the week
+            properties:
                 after:
-                    type: integer
                     format: int32
+                    type: integer
+                before:
+                    format: int32
+                    type: integer
                 between:
                     $ref: '#/components/schemas/Int32Range'
-            description: DayOfWeekValue is a value that represents a day of the week
-        DeleteBundleResponse:
+                dayNumber:
+                    description: 'Deprecated: Use is instead'
+                    format: int32
+                    type: integer
+                is:
+                    format: int32
+                    type: integer
             type: object
-            properties: {}
-        DeleteModuleTemplateResponse:
+        DeleteSuiteRequest:
+            properties:
+                id:
+                    type: string
             type: object
-            properties: {}
         DeleteSuiteResponse:
             type: object
-            properties: {}
         DeviceTypeValue:
-            type: object
             properties:
                 deviceType:
-                    type: integer
                     format: enum
-        Flow:
+                    type: integer
             type: object
+        Flow:
             properties:
-                rules:
-                    type: string
-                conversionType:
-                    type: integer
-                    format: enum
                 conversionComponent:
                     type: string
+                conversionType:
+                    format: enum
+                    type: integer
                 disabled:
                     type: boolean
-        FormData:
-            type: object
-            properties:
-                name:
+                rules:
                     type: string
+            type: object
+        FormData:
+            properties:
                 description:
                     type: string
-                photos:
-                    type: array
-                    items:
-                        type: string
                 images:
-                    type: array
                     items:
                         $ref: '#/components/schemas/Image'
-        GeoValue:
+                    type: array
+                name:
+                    type: string
+                photos:
+                    items:
+                        type: string
+                    type: array
             type: object
+        GeoValue:
             properties:
+                county:
+                    type: string
                 region:
                     type: string
                 state:
                     type: string
-                county:
-                    type: string
                 zip:
                     type: string
-        GetBundleCategoriesResponse:
             type: object
+        GetBundleCategoriesRequest:
+            properties:
+                org_id:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        GetBundleCategoriesResponse:
             properties:
                 categories:
-                    type: array
                     items:
                         $ref: '#/components/schemas/Category'
-        GetBundleResponse:
+                    type: array
             type: object
+        GetBundleRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        GetBundleResponse:
             properties:
                 bundle:
                     $ref: '#/components/schemas/Bundle'
-        GetModuleResponse:
             type: object
+        GetModuleRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        GetModuleResponse:
             properties:
                 module:
                     $ref: '#/components/schemas/Module'
-        GetModuleTemplateResponse:
             type: object
+        GetModuleTemplateRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        GetModuleTemplateResponse:
             properties:
                 template:
                     $ref: '#/components/schemas/ModuleTemplate'
-        GetModulesInSuiteResponse:
             type: object
+        GetModulesInSuiteRequest:
+            properties:
+                suite_id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        GetModulesInSuiteResponse:
             properties:
                 modules:
-                    type: object
                     additionalProperties:
                         $ref: '#/components/schemas/Module'
-        GetSuiteResponse:
+                    type: object
             type: object
+        GetSuiteRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        GetSuiteResponse:
             properties:
                 suite:
                     $ref: '#/components/schemas/Suite'
-        GoogleProtobufAny:
             type: object
-            properties:
-                '@type':
-                    type: string
-                    description: The type of the serialized message.
+        GoogleProtobufAny:
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
+            properties:
+                '@type':
+                    description: The type of the serialized message.
+                    type: string
+            type: object
         GoogleProtobufValue:
             description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
         HourOfDayValue:
-            type: object
+            description: HourOfDayValue is a value that represents an hour of the day
             properties:
+                after:
+                    $ref: '#/components/schemas/TimeBound'
+                before:
+                    $ref: '#/components/schemas/TimeBound'
+                between:
+                    $ref: '#/components/schemas/TimeBoundRange'
+                is:
+                    $ref: '#/components/schemas/TimeBound'
                 lowerBound:
                     allOf:
                         - $ref: '#/components/schemas/TimeBound'
                     description: 'Deprecated: Use between instead'
                 upperBound:
                     $ref: '#/components/schemas/TimeBound'
-                is:
-                    $ref: '#/components/schemas/TimeBound'
-                before:
-                    $ref: '#/components/schemas/TimeBound'
-                after:
-                    $ref: '#/components/schemas/TimeBound'
-                between:
-                    $ref: '#/components/schemas/TimeBoundRange'
-            description: HourOfDayValue is a value that represents an hour of the day
-        Image:
             type: object
+        Image:
             properties:
-                url:
-                    type: string
-                height:
-                    type: integer
-                    format: int32
-                width:
-                    type: integer
-                    format: int32
                 altText:
                     type: string
+                height:
+                    format: int32
+                    type: integer
+                url:
+                    type: string
+                width:
+                    format: int32
+                    type: integer
+            type: object
         Int32Range:
-            type: object
-            properties:
-                start:
-                    type: integer
-                    format: int32
-                end:
-                    type: integer
-                    format: int32
             description: Int32Range is a range of integers
-        Integration:
-            type: object
             properties:
+                end:
+                    format: int32
+                    type: integer
+                start:
+                    format: int32
+                    type: integer
+            type: object
+        Integration:
+            properties:
+                createdAt:
+                    format: date-time
+                    type: string
+                description:
+                    type: string
                 id:
                     type: string
                 integrationType:
                     type: string
-                orgId:
-                    type: string
-                name:
-                    type: string
-                description:
-                    type: string
                 logo:
                     $ref: '#/components/schemas/Image'
-                url:
+                name:
+                    type: string
+                orgId:
                     type: string
                 paymentSettings:
                     $ref: '#/components/schemas/PaymentSettings'
-                createdAt:
-                    type: string
-                    format: date-time
                 updatedAt:
-                    type: string
                     format: date-time
-        Link:
+                    type: string
+                url:
+                    type: string
             type: object
+        Link:
+            description: Link is a key structure that defines how templates are connected in bundles. It is the primary mechanism for defining navigation between templates and their corresponding assets.
             properties:
-                source:
-                    type: string
-                    description: Source is the key in the parent element's map (i.e. a Bundle's Templates field) specifying which element defines the start of the link.
-                destination:
-                    type: string
-                    description: Destination is the key in the parent element's map (i.e. a Bundle's Templates field) specifying which element defines the end of the link.
-                sourceAnchor:
-                    type: string
-                    description: Source Anchor is an arbitrary string defining where to draw the source link in a flow editor
-                destinationAnchor:
-                    type: string
-                    description: Destination Anchor is an arbitrary string defining where to draw the destination link in a flow editor
-                conditions:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Condition'
-                    description: Conditions define the rules of when the source and destination link is allowed to be followed, i.e. a smart rule for location or device.
                 actions:
-                    type: array
+                    description: Actions define a set of events which can be triggered when a link is followed. This occurs after conditions are processed.
                     items:
                         $ref: '#/components/schemas/Action'
-                    description: Actions define a set of events which can be triggered when a link is followed. This occurs after conditions are processed.
-            description: Link is a key structure that defines how templates are connected in bundles. It is the primary mechanism for defining navigation between templates and their corresponding assets.
-        ListBundlesResponse:
+                    type: array
+                conditions:
+                    description: Conditions define the rules of when the source and destination link is allowed to be followed, i.e. a smart rule for location or device.
+                    items:
+                        $ref: '#/components/schemas/Condition'
+                    type: array
+                destination:
+                    description: Destination is the key in the parent element's map (i.e. a Bundle's Templates field) specifying which element defines the end of the link.
+                    type: string
+                destinationAnchor:
+                    description: Destination Anchor is an arbitrary string defining where to draw the destination link in a flow editor
+                    type: string
+                source:
+                    description: Source is the key in the parent element's map (i.e. a Bundle's Templates field) specifying which element defines the start of the link.
+                    type: string
+                sourceAnchor:
+                    description: Source Anchor is an arbitrary string defining where to draw the source link in a flow editor
+                    type: string
             type: object
+        ListBundlesRequest:
+            properties:
+                categories:
+                    description: |4
+                         Show only bundles that are in a category from this list of categories.
+                    type: string
+                creator_id:
+                    description: |4
+                         Deprecated. Use creator_ids instead.
+                    type: string
+                creator_ids:
+                    description: |4
+                         Show only bundles that are created by a creator id  of creator ids of the bundles.
+                    type: string
+                folder_path:
+                    description: |4
+                         Show only bundles belonging to this folder path.
+                    type: string
+                name_prefix:
+                    description: |4
+                         Show only bundles that include this prefix in the name.
+                    type: string
+                org_id:
+                    description: |4
+                         Org ID is the organization that the bundles belong to.
+                    type: string
+                states:
+                    description: |4
+                         Show only bundles that are in a state from this list of of states.
+                    type: string
+                tags:
+                    description: |4
+                         Show only bundles that include a tag from this list of tags.
+                    type: string
+                visibilities:
+                    description: |4
+                         Show only bundles that are of a visibility from the list of visibilities.
+                    type: string
+                workspace_id:
+                    description: |4
+                         Workspace ID is the workspace that the bundles belong to. Must be associated with the org_id.
+                    type: string
+            type: object
+        ListBundlesResponse:
             properties:
                 bundles:
-                    type: array
+                    description: List of bundles that match the query.
                     items:
                         $ref: '#/components/schemas/Bundle'
-                    description: List of bundles that match the query.
+                    type: array
                 pageInfo:
                     allOf:
                         - $ref: '#/components/schemas/PaginationPageInfo'
                     description: Pagination information.
-        ListModuleTemplatesResponse:
             type: object
+        ListModuleTemplatesRequest:
             properties:
+                categories:
+                    type: string
+                creator_ids:
+                    type: string
+                folder_path:
+                    type: string
+                name_prefix:
+                    type: string
+                org_id:
+                    type: string
+                states:
+                    type: string
+                tags:
+                    type: string
+                visibilities:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        ListModuleTemplatesResponse:
+            properties:
+                pageInfo:
+                    $ref: '#/components/schemas/PaginationPageInfo'
                 templates:
-                    type: array
                     items:
                         $ref: '#/components/schemas/ModuleTemplate'
+                    type: array
+            type: object
+        ListSuitesRequest:
+            properties:
+                categories:
+                    type: string
+                creator_id:
+                    type: string
+                creator_ids:
+                    type: string
+                external_id:
+                    type: string
+                folder_path:
+                    type: string
+                name_prefix:
+                    type: string
+                org_id:
+                    type: string
+                states:
+                    type: string
+                tags:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        ListSuitesResponse:
+            properties:
                 pageInfo:
                     $ref: '#/components/schemas/PaginationPageInfo'
-        ListSuitesResponse:
-            type: object
-            properties:
                 suites:
-                    type: array
                     items:
                         $ref: '#/components/schemas/Suite'
-                pageInfo:
-                    $ref: '#/components/schemas/PaginationPageInfo'
-        ListingData:
+                    type: array
             type: object
+        ListingData:
+            description: ListingData is a message that represents a real estate listing.
             properties:
-                mlsId:
-                    type: string
-                    description: The MLS ID of the listing
-                url:
-                    type: string
-                    description: URL of the original listing
                 active:
-                    type: boolean
                     description: Active is a boolean to determine if the listing is currently active.
+                    type: boolean
+                additionalDetails:
+                    type: string
                 address:
                     allOf:
                         - $ref: '#/components/schemas/PostalAddress'
                     description: Address is the postal address of the listing.
-                propertyType:
-                    type: string
-                description:
-                    type: string
-                bedrooms:
-                    type: integer
-                    format: int32
                 bathrooms:
-                    type: integer
                     description: '@deprecated in favor of float total_bathrooms'
                     format: int32
-                totalBathrooms:
-                    type: number
-                    format: float
+                    type: integer
+                bedrooms:
+                    format: int32
+                    type: integer
+                description:
+                    type: string
                 fullBathrooms:
-                    type: integer
                     format: int32
+                    type: integer
                 halfBathrooms:
-                    type: integer
                     format: int32
+                    type: integer
+                listingDate:
+                    format: date-time
+                    type: string
                 livingArea:
-                    type: integer
                     format: int32
+                    type: integer
                 lotSize:
-                    type: integer
                     format: int32
-                price:
-                    $ref: '#/components/schemas/Money'
+                    type: integer
+                mlsId:
+                    description: The MLS ID of the listing
+                    type: string
                 photos:
-                    type: array
                     items:
                         type: string
-                additionalDetails:
+                    type: array
+                price:
+                    $ref: '#/components/schemas/Money'
+                propertyType:
                     type: string
-                listingDate:
+                totalBathrooms:
+                    format: float
+                    type: number
+                url:
+                    description: URL of the original listing
                     type: string
-                    format: date-time
-            description: ListingData is a message that represents a real estate listing.
-        Location:
             type: object
+        Location:
+            description: Location represents a lat/long pair as a Decimal Degree (DD)
             properties:
                 lat:
-                    type: number
                     format: double
+                    type: number
                 lng:
-                    type: number
                     format: double
-            description: Location represents a lat/long pair as a Decimal Degree (DD)
-        Module:
+                    type: number
             type: object
+        Module:
             properties:
-                id:
-                    type: string
-                    description: The id of this module instance
-                version:
-                    type: string
-                    description: The specific version of the module
-                dagVersion:
-                    type: string
-                    description: The version of the underlying DAG
-                templateId:
-                    type: string
-                    description: The id of the module template this module was created from
-                templateVersion:
-                    type: string
-                    description: The version of the module template this module was created from
-                brandKitId:
-                    type: string
-                    description: The id of the bundle this module is associated with
-                orgId:
-                    type: string
-                    description: The organization this module is associated with
-                workspaceId:
-                    type: string
-                    description: The workspace this module is associated with
-                state:
-                    type: string
-                    description: The state of the module
                 archiveReason:
-                    type: string
                     description: The reason the module was archived
+                    type: string
+                archivedAt:
+                    description: The timestamp at which this module was archived
+                    format: date-time
+                    type: string
+                assets:
+                    additionalProperties:
+                        $ref: '#/components/schemas/AssetRef'
+                    description: The assets associated with this module
+                    type: object
+                brandKitId:
+                    description: The id of the bundle this module is associated with
+                    type: string
+                createdAt:
+                    description: The timestamp at which this mocdule was created
+                    format: date-time
+                    type: string
                 creator:
                     allOf:
                         - $ref: '#/components/schemas/Creator'
                     description: The creator of the module
-                name:
+                dagVersion:
+                    description: The version of the underlying DAG
                     type: string
-                    description: The name of the module
                 description:
-                    type: string
                     description: An optional description of the module
-                folderPath:
                     type: string
-                    description: The folder path of the module
-                tags:
-                    type: array
-                    items:
-                        type: string
-                    description: Tags associated with the module
                 domain:
-                    type: string
                     description: The domain to use with this module
-                assets:
-                    type: object
-                    additionalProperties:
-                        $ref: '#/components/schemas/AssetRef'
-                    description: The assets associated with this module
+                    type: string
+                entryPoint:
+                    description: The entry point for this module
+                    type: string
+                folderPath:
+                    description: The folder path of the module
+                    type: string
+                id:
+                    description: The id of this module instance
+                    type: string
                 links:
-                    type: array
+                    description: The set of links between assets in this module
                     items:
                         $ref: '#/components/schemas/Link'
-                    description: The set of links between assets in this module
-                entryPoint:
+                    type: array
+                name:
+                    description: The name of the module
                     type: string
-                    description: The entry point for this module
-                createdAt:
+                orgId:
+                    description: The organization this module is associated with
                     type: string
-                    description: The timestamp at which this mocdule was created
-                    format: date-time
+                state:
+                    description: The state of the module
+                    type: string
+                tags:
+                    description: Tags associated with the module
+                    items:
+                        type: string
+                    type: array
+                templateId:
+                    description: The id of the module template this module was created from
+                    type: string
+                templateVersion:
+                    description: The version of the module template this module was created from
+                    type: string
                 updatedAt:
-                    type: string
                     description: The timestamp at which this module was last updated
                     format: date-time
-                archivedAt:
                     type: string
-                    description: The timestamp at which this module was archived
-                    format: date-time
-        ModuleTemplate:
-            type: object
-            properties:
-                id:
-                    type: string
-                    description: The id of this module template
                 version:
+                    description: The specific version of the module
                     type: string
-                    description: The specific version of the module template
-                dagVersion:
-                    type: string
-                    description: The version of the underlying DAG
-                supportedBundleTypes:
-                    type: array
-                    items:
-                        type: integer
-                        format: enum
-                    description: The list of bundle types that this module template supports
-                category:
-                    type: string
-                    description: The category of the module template
-                orgId:
-                    type: string
-                    description: The organization this module template is associated with
                 workspaceId:
+                    description: The workspace this module is associated with
                     type: string
-                    description: The workspace this module template is associated with
-                state:
-                    type: string
-                    description: The state of the module template
+            type: object
+        ModuleTemplate:
+            properties:
                 archiveReason:
-                    type: string
                     description: The reason the module template was archived
+                    type: string
+                archivedAt:
+                    description: The timestamp at which this module template was archived
+                    format: date-time
+                    type: string
+                category:
+                    description: The category of the module template
+                    type: string
+                configSchema:
+                    description: The schema for the config of this module template
+                    type: string
+                createdAt:
+                    description: The timestamp at which this module template was created
+                    format: date-time
+                    type: string
                 creator:
                     allOf:
                         - $ref: '#/components/schemas/Creator'
                     description: The creator of the module template
-                name:
+                dagVersion:
+                    description: The version of the underlying DAG
                     type: string
-                    description: The name of the module template
                 description:
-                    type: string
                     description: The description of the module template
-                folderPath:
                     type: string
+                entryPoint:
+                    description: The entry point for this module template
+                    type: string
+                folderPath:
                     description: The folder path of the module template
-                tags:
+                    type: string
+                id:
+                    description: The id of this module template
+                    type: string
+                links:
+                    description: The links between templates in this module template
+                    items:
+                        $ref: '#/components/schemas/Link'
                     type: array
+                name:
+                    description: The name of the module template
+                    type: string
+                orgId:
+                    description: The organization this module template is associated with
+                    type: string
+                state:
+                    description: The state of the module template
+                    type: string
+                supportedBundleTypes:
+                    description: The list of bundle types that this module template supports
+                    items:
+                        format: enum
+                        type: integer
+                    type: array
+                tags:
+                    description: Tags associated with the module template
                     items:
                         type: string
-                    description: Tags associated with the module template
-                visibility:
-                    type: string
-                    description: The visibility of this module template
+                    type: array
                 templates:
-                    type: object
                     additionalProperties:
                         $ref: '#/components/schemas/TemplateRef'
                     description: The templates associated with this module template
-                links:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Link'
-                    description: The links between templates in this module template
-                entryPoint:
-                    type: string
-                    description: The entry point for this module template
-                configSchema:
-                    type: string
-                    description: The schema for the config of this module template
-                createdAt:
-                    type: string
-                    description: The timestamp at which this module template was created
-                    format: date-time
+                    type: object
                 updatedAt:
-                    type: string
                     description: The timestamp at which this module template was last updated
                     format: date-time
-                archivedAt:
                     type: string
-                    description: The timestamp at which this module template was archived
-                    format: date-time
-        Money:
+                version:
+                    description: The specific version of the module template
+                    type: string
+                visibility:
+                    description: The visibility of this module template
+                    type: string
+                workspaceId:
+                    description: The workspace this module template is associated with
+                    type: string
             type: object
+        Money:
+            description: Represents an amount of money with its currency type.
             properties:
                 currencyCode:
-                    type: string
                     description: The three-letter currency code defined in ISO 4217.
-                units:
                     type: string
-                    description: |-
-                        The whole units of the amount.
-                         For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
                 nanos:
-                    type: integer
                     description: |-
                         Number of nano (10^-9) units of the amount.
                          The value must be between -999,999,999 and +999,999,999 inclusive.
@@ -1638,82 +1795,87 @@ components:
                          If `units` is negative, `nanos` must be negative or zero.
                          For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.
                     format: int32
-            description: Represents an amount of money with its currency type.
-        NearbyValue:
-            type: object
-            properties:
-                location:
-                    $ref: '#/components/schemas/Location'
-                distance:
-                    type: number
-                    format: double
-                unit:
                     type: integer
-                    format: enum
+                units:
+                    description: |-
+                        The whole units of the amount.
+                         For example if `currencyCode` is `"USD"`, then 1 unit is one US dollar.
+                    type: string
+            type: object
+        NearbyValue:
+            properties:
+                distance:
+                    format: double
+                    type: number
                 fullAddress:
                     type: string
-        NotValue:
+                location:
+                    $ref: '#/components/schemas/Location'
+                unit:
+                    format: enum
+                    type: integer
             type: object
+        NotValue:
             properties:
                 condition:
                     $ref: '#/components/schemas/Condition'
-        NotifyAction:
             type: object
+        NotifyAction:
             properties:
-                notificationType:
-                    type: integer
-                    format: enum
-                sender:
-                    $ref: '#/components/schemas/Sender'
-                recipients:
-                    type: array
+                ccs:
                     items:
                         $ref: '#/components/schemas/Actor'
-                subject:
-                    type: string
-                templateId:
-                    type: string
+                    type: array
                 defaultTemplateId:
                     type: string
                 delay:
                     pattern: ^-?(?:0|[1-9][0-9]{0,11})(?:\.[0-9]{1,9})?s$
                     type: string
-                suppressionGroupId:
-                    type: string
-                ccs:
-                    type: array
+                notificationType:
+                    format: enum
+                    type: integer
+                recipients:
                     items:
                         $ref: '#/components/schemas/Actor'
-        Office:
-            type: object
-            properties:
-                brokerage:
+                    type: array
+                sender:
+                    $ref: '#/components/schemas/Sender'
+                subject:
                     type: string
+                suppressionGroupId:
+                    type: string
+                templateId:
+                    type: string
+            type: object
+        Office:
+            properties:
                 address:
                     $ref: '#/components/schemas/PostalAddress'
+                brokerage:
+                    type: string
+            type: object
         PaginationPageInfo:
-            type: object
-            properties:
-                hasNextPage:
-                    type: boolean
-                    description: Indicates whether more data exists following the set defined by the clients arguments
-                hasPreviousPage:
-                    type: boolean
-                    description: Indicates whether more data exists prior to the set defined by the clients argument
-                startCursor:
-                    type: string
-                    description: Opaque cursor corresponding to the first record in the response array
-                endCursor:
-                    type: string
-                    description: Opaque cursor corresponding to the last record in the response array
             description: Response object used to inform the next pagination arguments
-        PaymentSettings:
+            properties:
+                endCursor:
+                    description: Opaque cursor corresponding to the last record in the response array
+                    type: string
+                hasNextPage:
+                    description: Indicates whether more data exists following the set defined by the clients arguments
+                    type: boolean
+                hasPreviousPage:
+                    description: Indicates whether more data exists prior to the set defined by the clients argument
+                    type: boolean
+                startCursor:
+                    description: Opaque cursor corresponding to the first record in the response array
+                    type: string
             type: object
+        PaymentSettings:
             properties:
                 acceptedCardBrands:
-                    type: array
                     items:
                         type: string
+                    type: array
                 cardVaultUrl:
                     type: string
                 countryCode:
@@ -1721,100 +1883,47 @@ components:
                 currencyCode:
                     type: string
                 enabledPresentmentCurrencies:
-                    type: array
                     items:
                         type: string
+                    type: array
                 paymentAccountId:
                     type: string
                 supportedDigitalWallets:
-                    type: array
                     items:
                         type: string
-        Point:
+                    type: array
             type: object
+        Point:
+            description: Point is used to define where an object is placed visually in a user expience, i.e. the Builder experience.
             properties:
                 x:
-                    type: number
                     format: float
-                y:
                     type: number
+                "y":
                     format: float
-            description: Point is used to define where an object is placed visually in a user expience, i.e. the Builder experience.
-        PostalAddress:
+                    type: number
             type: object
+        PostalAddress:
+            description: |-
+                Represents a postal address, e.g. for postal delivery or payments addresses.
+                 Given a postal address, a postal service can deliver items to a premise, P.O.
+                 Box or similar.
+                 It is not intended to model geographical locations (roads, towns,
+                 mountains).
+
+                 In typical usage an address would be created via user input or from importing
+                 existing data, depending on the type of process.
+
+                 Advice on address input / editing:
+                  - Use an i18n-ready address widget such as
+                    https://github.com/google/libaddressinput)
+                 - Users should not be presented with UI elements for input or editing of
+                   fields outside countries where that field is used.
+
+                 For more guidance on how to use this schema, please see:
+                 https://support.google.com/business/answer/6397478
             properties:
-                revision:
-                    type: integer
-                    description: |-
-                        The schema revision of the `PostalAddress`. This must be set to 0, which is
-                         the latest revision.
-
-                         All new revisions **must** be backward compatible with old revisions.
-                    format: int32
-                regionCode:
-                    type: string
-                    description: |-
-                        Required. CLDR region code of the country/region of the address. This
-                         is never inferred and it is up to the user to ensure the value is
-                         correct. See http://cldr.unicode.org/ and
-                         http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
-                         for details. Example: "CH" for Switzerland.
-                languageCode:
-                    type: string
-                    description: |-
-                        Optional. BCP-47 language code of the contents of this address (if
-                         known). This is often the UI language of the input form or is expected
-                         to match one of the languages used in the address' country/region, or their
-                         transliterated equivalents.
-                         This can affect formatting in certain countries, but is not critical
-                         to the correctness of the data and will never affect any validation or
-                         other non-formatting related operations.
-
-                         If this value is not known, it should be omitted (rather than specifying a
-                         possibly incorrect default).
-
-                         Examples: "zh-Hant", "ja", "ja-Latn", "en".
-                postalCode:
-                    type: string
-                    description: |-
-                        Optional. Postal code of the address. Not all countries use or require
-                         postal codes to be present, but where they are used, they may trigger
-                         additional validation with other parts of the address (e.g. state/zip
-                         validation in the U.S.A.).
-                sortingCode:
-                    type: string
-                    description: |-
-                        Optional. Additional, country-specific, sorting code. This is not used
-                         in most regions. Where it is used, the value is either a string like
-                         "CEDEX", optionally followed by a number (e.g. "CEDEX 7"), or just a number
-                         alone, representing the "sector code" (Jamaica), "delivery area indicator"
-                         (Malawi) or "post office indicator" (e.g. Côte d'Ivoire).
-                administrativeArea:
-                    type: string
-                    description: |-
-                        Optional. Highest administrative subdivision which is used for postal
-                         addresses of a country or region.
-                         For example, this can be a state, a province, an oblast, or a prefecture.
-                         Specifically, for Spain this is the province and not the autonomous
-                         community (e.g. "Barcelona" and not "Catalonia").
-                         Many countries don't use an administrative area in postal addresses. E.g.
-                         in Switzerland this should be left unpopulated.
-                locality:
-                    type: string
-                    description: |-
-                        Optional. Generally refers to the city/town portion of the address.
-                         Examples: US city, IT comune, UK post town.
-                         In regions of the world where localities are not well defined or do not fit
-                         into this structure well, leave locality empty and use address_lines.
-                sublocality:
-                    type: string
-                    description: |-
-                        Optional. Sublocality of the address.
-                         For example, this can be neighborhoods, boroughs, districts.
                 addressLines:
-                    type: array
-                    items:
-                        type: string
                     description: |-
                         Unstructured address lines describing the lower levels of an address.
 
@@ -1838,385 +1947,432 @@ components:
                          then geocoding is the recommended way to handle completely unstructured
                          addresses (as opposed to guessing which parts of the address should be
                          localities or administrative areas).
-                recipients:
-                    type: array
                     items:
                         type: string
+                    type: array
+                administrativeArea:
+                    description: |-
+                        Optional. Highest administrative subdivision which is used for postal
+                         addresses of a country or region.
+                         For example, this can be a state, a province, an oblast, or a prefecture.
+                         Specifically, for Spain this is the province and not the autonomous
+                         community (e.g. "Barcelona" and not "Catalonia").
+                         Many countries don't use an administrative area in postal addresses. E.g.
+                         in Switzerland this should be left unpopulated.
+                    type: string
+                languageCode:
+                    description: |-
+                        Optional. BCP-47 language code of the contents of this address (if
+                         known). This is often the UI language of the input form or is expected
+                         to match one of the languages used in the address' country/region, or their
+                         transliterated equivalents.
+                         This can affect formatting in certain countries, but is not critical
+                         to the correctness of the data and will never affect any validation or
+                         other non-formatting related operations.
+
+                         If this value is not known, it should be omitted (rather than specifying a
+                         possibly incorrect default).
+
+                         Examples: "zh-Hant", "ja", "ja-Latn", "en".
+                    type: string
+                locality:
+                    description: |-
+                        Optional. Generally refers to the city/town portion of the address.
+                         Examples: US city, IT comune, UK post town.
+                         In regions of the world where localities are not well defined or do not fit
+                         into this structure well, leave locality empty and use address_lines.
+                    type: string
+                organization:
+                    description: Optional. The name of the organization at the address.
+                    type: string
+                postalCode:
+                    description: |-
+                        Optional. Postal code of the address. Not all countries use or require
+                         postal codes to be present, but where they are used, they may trigger
+                         additional validation with other parts of the address (e.g. state/zip
+                         validation in the U.S.A.).
+                    type: string
+                recipients:
                     description: |-
                         Optional. The recipient at the address.
                          This field may, under certain circumstances, contain multiline information.
                          For example, it might contain "care of" information.
-                organization:
+                    items:
+                        type: string
+                    type: array
+                regionCode:
+                    description: |-
+                        Required. CLDR region code of the country/region of the address. This
+                         is never inferred and it is up to the user to ensure the value is
+                         correct. See http://cldr.unicode.org/ and
+                         http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html
+                         for details. Example: "CH" for Switzerland.
                     type: string
-                    description: Optional. The name of the organization at the address.
-            description: |-
-                Represents a postal address, e.g. for postal delivery or payments addresses.
-                 Given a postal address, a postal service can deliver items to a premise, P.O.
-                 Box or similar.
-                 It is not intended to model geographical locations (roads, towns,
-                 mountains).
+                revision:
+                    description: |-
+                        The schema revision of the `PostalAddress`. This must be set to 0, which is
+                         the latest revision.
 
-                 In typical usage an address would be created via user input or from importing
-                 existing data, depending on the type of process.
-
-                 Advice on address input / editing:
-                  - Use an i18n-ready address widget such as
-                    https://github.com/google/libaddressinput)
-                 - Users should not be presented with UI elements for input or editing of
-                   fields outside countries where that field is used.
-
-                 For more guidance on how to use this schema, please see:
-                 https://support.google.com/business/answer/6397478
-        PriceRange:
+                         All new revisions **must** be backward compatible with old revisions.
+                    format: int32
+                    type: integer
+                sortingCode:
+                    description: |-
+                        Optional. Additional, country-specific, sorting code. This is not used
+                         in most regions. Where it is used, the value is either a string like
+                         "CEDEX", optionally followed by a number (e.g. "CEDEX 7"), or just a number
+                         alone, representing the "sector code" (Jamaica), "delivery area indicator"
+                         (Malawi) or "post office indicator" (e.g. Côte d'Ivoire).
+                    type: string
+                sublocality:
+                    description: |-
+                        Optional. Sublocality of the address.
+                         For example, this can be neighborhoods, boroughs, districts.
+                    type: string
             type: object
+        PriceRange:
             properties:
-                minVariantPrice:
-                    $ref: '#/components/schemas/Money'
                 maxVariantPrice:
                     $ref: '#/components/schemas/Money'
-        Product:
+                minVariantPrice:
+                    $ref: '#/components/schemas/Money'
             type: object
+        Product:
             properties:
-                id:
-                    type: string
-                integrationId:
-                    type: string
-                handle:
-                    type: string
-                title:
+                availableForSale:
+                    type: boolean
+                compareAtPriceRange:
+                    $ref: '#/components/schemas/PriceRange'
+                createdAt:
+                    format: date-time
                     type: string
                 description:
                     type: string
                 featuredImage:
                     $ref: '#/components/schemas/Image'
+                handle:
+                    type: string
+                id:
+                    type: string
                 images:
-                    type: array
                     items:
                         $ref: '#/components/schemas/Image'
-                compareAtPriceRange:
-                    $ref: '#/components/schemas/PriceRange'
+                    type: array
+                integrationId:
+                    type: string
+                onlineStoreUrl:
+                    type: string
                 priceRange:
                     $ref: '#/components/schemas/PriceRange'
-                variants:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Variant'
+                productType:
+                    type: string
                 rating:
                     $ref: '#/components/schemas/Rating'
                 ratingCount:
                     type: string
+                title:
+                    type: string
                 totalInventory:
                     type: string
-                productType:
+                updatedAt:
+                    format: date-time
                     type: string
-                onlineStoreUrl:
-                    type: string
+                variants:
+                    items:
+                        $ref: '#/components/schemas/Variant'
+                    type: array
                 vendor:
                     type: string
-                availableForSale:
-                    type: boolean
-                createdAt:
-                    type: string
-                    format: date-time
-                updatedAt:
-                    type: string
-                    format: date-time
+            type: object
         Rating:
-            type: object
             properties:
-                value:
-                    type: number
-                    format: float
-                scaleMin:
-                    type: number
-                    format: float
                 scaleMax:
-                    type: number
                     format: float
-        RealEstateData:
+                    type: number
+                scaleMin:
+                    format: float
+                    type: number
+                value:
+                    format: float
+                    type: number
             type: object
+        RealEstateData:
             properties:
-                listing:
-                    $ref: '#/components/schemas/ListingData'
                 agent:
                     $ref: '#/components/schemas/AgentData'
+                listing:
+                    $ref: '#/components/schemas/ListingData'
+            type: object
         RequestContextValue:
-            type: object
             properties:
                 key:
                     type: string
                 operator:
-                    type: integer
                     format: enum
+                    type: integer
                 value:
                     $ref: '#/components/schemas/GoogleProtobufValue'
+            type: object
         RequestValue:
-            type: object
             properties:
                 key:
                     type: string
                 operator:
-                    type: integer
                     format: enum
+                    type: integer
                 value:
                     $ref: '#/components/schemas/GoogleProtobufValue'
-        RuleValue:
             type: object
+        RuleValue:
             properties:
+                compoundValue:
+                    $ref: '#/components/schemas/CompoundRuleValue'
+                contextValue:
+                    $ref: '#/components/schemas/RequestContextValue'
+                dateValue:
+                    $ref: '#/components/schemas/DateValue'
                 dayOfWeekValue:
                     $ref: '#/components/schemas/DayOfWeekValue'
-                hourOfDayValue:
-                    $ref: '#/components/schemas/HourOfDayValue'
                 deviceTypeValue:
                     $ref: '#/components/schemas/DeviceTypeValue'
                 geoValue:
                     $ref: '#/components/schemas/GeoValue'
+                hourOfDayValue:
+                    $ref: '#/components/schemas/HourOfDayValue'
                 nearbyValue:
                     $ref: '#/components/schemas/NearbyValue'
-                requestValue:
-                    $ref: '#/components/schemas/RequestValue'
-                contextValue:
-                    $ref: '#/components/schemas/RequestContextValue'
-                compoundValue:
-                    $ref: '#/components/schemas/CompoundRuleValue'
                 notValue:
                     $ref: '#/components/schemas/NotValue'
-                dateValue:
-                    $ref: '#/components/schemas/DateValue'
-        Sender:
+                requestValue:
+                    $ref: '#/components/schemas/RequestValue'
             type: object
+        Sender:
             properties:
                 from:
                     $ref: '#/components/schemas/Actor'
-                replyTo:
-                    $ref: '#/components/schemas/Actor'
                 ipGroupId:
                     type: string
-        SocialLink:
+                replyTo:
+                    $ref: '#/components/schemas/Actor'
             type: object
+        SocialLink:
             properties:
-                type:
-                    type: integer
-                    format: enum
                 id:
                     type: string
-        Status:
+                type:
+                    format: enum
+                    type: integer
             type: object
+        Status:
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
             properties:
                 code:
-                    type: integer
                     description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
                     format: int32
-                message:
-                    type: string
-                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                    type: integer
                 details:
-                    type: array
+                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
                     items:
                         $ref: '#/components/schemas/GoogleProtobufAny'
-                    description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
-            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
-        Suite:
-            type: object
-            properties:
-                id:
+                    type: array
+                message:
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
                     type: string
-                    description: ID is the unique identifier for the suite.
-                bundleType:
-                    type: integer
-                    description: Bundle Type is the type of bundle that the suite is based on.
-                    format: enum
-                category:
+            type: object
+        Suite:
+            description: Suite is an instantiation of a Bundle. It is the primary object that is created and managed by the user to create a conversion flow.
+            properties:
+                advancedGeoEnabled:
+                    description: Advanced Geo Enabled is a boolean to determine if the suite will have advanced geo capabilities on by default.
+                    type: boolean
+                archiveReason:
+                    description: Archive Reason is optional informational text as to why the suite was archived.
+                    type: string
+                archivedAt:
+                    description: Archived At is the timestamp when the suite was archived. This is only relevant if the state field is set to archived.
+                    format: date-time
+                    type: string
+                assets:
+                    additionalProperties:
+                        $ref: '#/components/schemas/AssetRef'
+                    description: Assets is the set of key/value pairs of instantiated assets in the suite, created from the Bundle's TemplateRefs.
+                    type: object
+                brandKitId:
+                    description: Brand Kit ID is the unique identifier for the brand kit that the suite is associated with.
                     type: string
                 bundleId:
-                    type: string
                     description: Bundle ID is the unique identifier for the bundle that the suite is based on.
+                    type: string
+                bundleType:
+                    description: Bundle Type is the type of bundle that the suite is based on.
+                    format: enum
+                    type: integer
                 bundleVersion:
-                    type: string
                     description: Bundle Version is the version of the bundle that the suite was originally created from, as the bundle may have multiple versions.
-                brandKitId:
                     type: string
-                    description: Brand Kit ID is the unique identifier for the brand kit that the suite is associated with.
-                orgId:
+                category:
                     type: string
-                    description: Org ID is the organization that the suite belongs to.
-                workspaceId:
+                createdAt:
+                    description: Created At is the timestamp when the suite was created.
+                    format: date-time
                     type: string
-                    description: Workspace ID is the workspace that the suite belongs to. Must be associated with the org_id.
-                state:
-                    type: string
-                    description: State respresents the current state of the suite. Valid values are active, archived or draft.
-                archiveReason:
-                    type: string
-                    description: Archive Reason is optional informational text as to why the suite was archived.
                 creator:
                     allOf:
                         - $ref: '#/components/schemas/Creator'
                     description: Creator is the person who created the suite.
-                name:
-                    type: string
-                    description: Name is the name of the suite.
-                description:
-                    type: string
-                    description: Description is an optional description of the suite.
-                folderPath:
-                    type: string
-                    description: The path to the folder where the suite is located.
-                folderId:
-                    type: string
-                    description: The ID of the folder where the suite is located.
-                tags:
-                    type: array
-                    items:
-                        type: string
-                    description: Tags are a set of strings that can be used to categorize the suite in various ways.
-                domain:
-                    type: string
-                assets:
-                    type: object
-                    additionalProperties:
-                        $ref: '#/components/schemas/AssetRef'
-                    description: Assets is the set of key/value pairs of instantiated assets in the suite, created from the Bundle's TemplateRefs.
-                flows:
-                    type: object
-                    additionalProperties:
-                        $ref: '#/components/schemas/Flow'
-                    description: Flows are how Assets in the Suite are connected to each other.
-                links:
-                    type: array
-                    items:
-                        $ref: '#/components/schemas/Link'
-                    description: Links represent how templates are connected in the bundle.
                 data:
                     allOf:
                         - $ref: '#/components/schemas/Data'
                     description: The set of data that is associated with the suite. This is dependent on the bundle type.
-                advancedGeoEnabled:
-                    type: boolean
-                    description: Advanced Geo Enabled is a boolean to determine if the suite will have advanced geo capabilities on by default.
-                timezone:
+                description:
+                    description: Description is an optional description of the suite.
                     type: string
+                domain:
+                    type: string
+                flows:
+                    additionalProperties:
+                        $ref: '#/components/schemas/Flow'
+                    description: Flows are how Assets in the Suite are connected to each other.
+                    type: object
+                folderId:
+                    description: The ID of the folder where the suite is located.
+                    type: string
+                folderPath:
+                    description: The path to the folder where the suite is located.
+                    type: string
+                id:
+                    description: ID is the unique identifier for the suite.
+                    type: string
+                links:
+                    description: Links represent how templates are connected in the bundle.
+                    items:
+                        $ref: '#/components/schemas/Link'
+                    type: array
+                name:
+                    description: Name is the name of the suite.
+                    type: string
+                orgId:
+                    description: Org ID is the organization that the suite belongs to.
+                    type: string
+                state:
+                    description: State respresents the current state of the suite. Valid values are active, archived or draft.
+                    type: string
+                tags:
+                    description: Tags are a set of strings that can be used to categorize the suite in various ways.
+                    items:
+                        type: string
+                    type: array
+                timezone:
                     description: |-
                         The specific timeezone to use when resolving time-based rules. If not set,
                          the timezone of the scanner will be used.
-                createdAt:
                     type: string
-                    description: Created At is the timestamp when the suite was created.
-                    format: date-time
                 updatedAt:
-                    type: string
                     description: Updated At is the timestamp when the suite was last updated.
                     format: date-time
-                archivedAt:
                     type: string
-                    description: Archived At is the timestamp when the suite was archived. This is only relevant if the state field is set to archived.
-                    format: date-time
-            description: Suite is an instantiation of a Bundle. It is the primary object that is created and managed by the user to create a conversion flow.
-        TemplateRef:
+                workspaceId:
+                    description: Workspace ID is the workspace that the suite belongs to. Must be associated with the org_id.
+                    type: string
             type: object
+        TemplateRef:
+            description: TemplateRef defines a template to an asset which can be used to instantiate an asset in a suite.
             properties:
-                type:
-                    type: integer
-                    description: Asset Type will define the structure for the default config and how the TemplateRef should be interpreted.
-                    format: enum
-                templateId:
+                conversionComponent:
+                    description: Conversion Component corresponds is the default value for Flow and Event messages that define the key in the data field of the ExecuteResponse message. This identifies the component that triggered the conversion event.
                     type: string
-                    description: A unique ID to the template.
-                templateVersion:
-                    type: string
-                    description: The version of the template to use
                 conversionType:
-                    type: integer
                     description: Conversion Type is an enumeration used to describe the intended purpose of this specific template and eventual asset.
                     format: enum
-                conversionComponent:
-                    type: string
-                    description: Conversion Component corresponds is the default value for Flow and Event messages that define the key in the data field of the ExecuteResponse message. This identifies the component that triggered the conversion event.
+                    type: integer
                 defaultConfig:
-                    type: object
                     description: Default Config contains the default configuration for this asset type. It is dependent on the asset type, and is merged in an asset ref with any overrides.
-                initiallyDisabled:
-                    type: boolean
-                    description: Initially Disabled is a boolean to determine whether this template should appear disabled in the UI when creating the asset.
+                    type: object
                 displayName:
-                    type: string
                     description: A display name for the template used in editors
-                shortName:
                     type: string
-                    description: The default text rendered as the name for this template in the conversion flow, i.e. the button text to display the asset.
                 iconUrl:
-                    type: string
                     description: Icon URL can be set to be displayed with the short name when rendering this template in the conversion flow, i.e. the button icon to display the asset.
+                    type: string
+                initiallyDisabled:
+                    description: Initially Disabled is a boolean to determine whether this template should appear disabled in the UI when creating the asset.
+                    type: boolean
                 position:
                     allOf:
                         - $ref: '#/components/schemas/Point'
                     description: Position is a set of x, y coordinates for where this template should be rendered relative to other templates in a flow editor.
                 renderMode:
-                    type: integer
                     description: The rendering mode to use when rendering this asset in a suite
                     format: enum
-            description: TemplateRef defines a template to an asset which can be used to instantiate an asset in a suite.
-        TimeBound:
+                    type: integer
+                shortName:
+                    description: The default text rendered as the name for this template in the conversion flow, i.e. the button text to display the asset.
+                    type: string
+                templateId:
+                    description: A unique ID to the template.
+                    type: string
+                templateVersion:
+                    description: The version of the template to use
+                    type: string
+                type:
+                    description: Asset Type will define the structure for the default config and how the TemplateRef should be interpreted.
+                    format: enum
+                    type: integer
             type: object
+        TimeBound:
+            description: TimeBound is a bounded point in time
             properties:
                 hour:
-                    type: integer
                     format: int32
+                    type: integer
                 minute:
-                    type: integer
                     format: int32
-            description: TimeBound is a bounded point in time
-        TimeBoundRange:
+                    type: integer
             type: object
+        TimeBoundRange:
+            description: TimeBoundRange is a bounded range of time
             properties:
-                start:
-                    $ref: '#/components/schemas/TimeBound'
                 end:
                     $ref: '#/components/schemas/TimeBound'
-            description: TimeBoundRange is a bounded range of time
-        UpdateBundleResponse:
+                start:
+                    $ref: '#/components/schemas/TimeBound'
             type: object
-            properties:
-                bundle:
-                    $ref: '#/components/schemas/Bundle'
-        UpdateModuleTemplateResponse:
-            type: object
-            properties:
-                template:
-                    $ref: '#/components/schemas/ModuleTemplate'
         UpdateSuiteResponse:
-            type: object
             properties:
                 suite:
                     $ref: '#/components/schemas/Suite'
-        Variant:
             type: object
+        Variant:
             properties:
+                availableForSale:
+                    type: boolean
+                barcode:
+                    type: string
+                compareAtPrice:
+                    $ref: '#/components/schemas/Money'
+                currentlyNotInStock:
+                    type: boolean
                 id:
                     type: string
+                image:
+                    $ref: '#/components/schemas/Image'
+                price:
+                    $ref: '#/components/schemas/Money'
+                quantityAvailable:
+                    type: string
+                requiresShipping:
+                    type: boolean
+                selectedOptions:
+                    additionalProperties:
+                        type: string
+                    type: object
                 sku:
                     type: string
                 title:
                     type: string
-                image:
-                    $ref: '#/components/schemas/Image'
-                compareAtPrice:
-                    $ref: '#/components/schemas/Money'
-                price:
-                    $ref: '#/components/schemas/Money'
-                barcode:
-                    type: string
-                selectedOptions:
-                    type: object
-                    additionalProperties:
-                        type: string
-                quantityAvailable:
-                    type: string
-                availableForSale:
-                    type: boolean
-                currentlyNotInStock:
-                    type: boolean
-                requiresShipping:
-                    type: boolean
-tags:
-    - name: BundleService
+            type: object
+    securitySchemes:
+        bearerAuth:
+            bearerFormat: JWT
+            scheme: bearer
+            type: http
