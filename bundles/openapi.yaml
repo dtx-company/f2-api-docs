@@ -8,8 +8,8 @@ tags:
     - description: Endpoints exposed via gRPC Connect API.
       name: Grpc Connect API
 servers:
-    - url: f2api.stg.flowcode.com
-    - url: f2api.flowcode.com
+    - url: api.conversions.stg.flowcode.com
+    - url: api.conversions.flowcode.com
 security:
     - bearerAuth: []
 paths:
