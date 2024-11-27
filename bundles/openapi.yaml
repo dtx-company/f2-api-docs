@@ -7,8 +7,6 @@ tags:
       name: REST APIs
     - description: Endpoints exposed via gRPC Connect API.
       name: Grpc Connect API
-security:
-    - bearerAuth: []
 paths:
     /api/v1/bundles:
         get:
@@ -2368,8 +2366,3 @@ components:
                 title:
                     type: string
             type: object
-    securitySchemes:
-        bearerAuth:
-            bearerFormat: JWT
-            scheme: bearer
-            type: http
