@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
     title: BundleService API
-    version: 0.0.1
+    version: 1.0.0
 tags:
     - description: Endpoints for traditional RESTful API operations.
       name: REST APIs
