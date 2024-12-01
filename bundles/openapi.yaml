@@ -6,13 +6,446 @@ tags:
     - description: Endpoints for traditional RESTful API operations.
       name: REST APIs
     - description: Endpoints exposed via gRPC Connect API.
-      name: Grpc Connect API
+      name: Grpc Connect APIs
 servers: []
 security: []
 paths:
-    /api/v1/bundles:
+    /bundles.v1.BundleService/CreateBundle:
+        post:
+            operationId: Create Bundle Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBundleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBundleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/CreateModuleTemplate:
+        post:
+            description: Module templates
+            operationId: Create Module Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateModuleTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateModuleTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/CreateSuite:
+        post:
+            operationId: Create Suite Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/DeleteBundle:
+        post:
+            operationId: Delete Bundle Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteBundleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteBundleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/DeleteModuleTemplate:
+        post:
+            operationId: Delete Module Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteModuleTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteModuleTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/DeleteSuite:
+        post:
+            operationId: Delete Suite Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/GetBundle:
+        post:
+            operationId: Get Bundle Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetBundleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBundleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/GetBundleCategories:
+        post:
+            operationId: Get Bundle Categories Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetBundleCategoriesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBundleCategoriesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/GetModule:
+        post:
+            operationId: Get Module Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetModuleRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetModuleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/GetModuleTemplate:
+        post:
+            operationId: Get Module Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetModuleTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetModuleTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/GetModulesInSuite:
+        post:
+            operationId: Get Modules In Suite Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetModulesInSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetModulesInSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/GetSuite:
+        post:
+            operationId: Get Suite Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetSuiteRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/ListBundles:
+        post:
+            operationId: List Bundles Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListBundlesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBundlesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/ListModuleTemplates:
+        post:
+            operationId: List Module Templates Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListModuleTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListModuleTemplatesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/ListSuites:
+        post:
+            operationId: List Suites Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListSuitesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListSuitesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/UpdateBundle:
+        post:
+            operationId: Update Bundle Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Bundle'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateBundleResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/UpdateModuleTemplate:
+        post:
+            operationId: Update Module Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ModuleTemplate'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateModuleTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles.v1.BundleService/UpdateSuite:
+        post:
+            operationId: Update Suite Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/Suite'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateSuiteResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /bundles/api/v1/bundles:
         get:
-            operationId: BundleService_ListBundles
+            operationId: List Bundles
             parameters:
                 - description: Org ID is the organization that the bundles belong to.
                   in: query
@@ -133,7 +566,7 @@ paths:
             tags:
                 - REST APIs
         post:
-            operationId: BundleService_CreateBundle
+            operationId: Create Bundle
             requestBody:
                 content:
                     application/json:
@@ -155,9 +588,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/bundles/{bundle.id}:
+    /bundles/api/v1/bundles/{bundle.id}:
         patch:
-            operationId: BundleService_UpdateBundle
+            operationId: Update Bundle
             parameters:
                 - in: path
                   name: bundle.id
@@ -190,9 +623,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/bundles/{id}:
+    /bundles/api/v1/bundles/{id}:
         delete:
-            operationId: BundleService_DeleteBundle
+            operationId: Delete Bundle
             parameters:
                 - in: path
                   name: id
@@ -219,7 +652,7 @@ paths:
             tags:
                 - REST APIs
         get:
-            operationId: BundleService_GetBundle
+            operationId: Get Bundle
             parameters:
                 - in: path
                   name: id
@@ -245,9 +678,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/bundles/categories:
+    /bundles/api/v1/bundles/categories:
         get:
-            operationId: BundleService_GetBundleCategories
+            operationId: Get Bundle Categories
             parameters:
                 - in: query
                   name: orgId
@@ -272,9 +705,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/module-templates:
+    /bundles/api/v1/module-templates:
         get:
-            operationId: BundleService_ListModuleTemplates
+            operationId: List Module Templates
             parameters:
                 - in: query
                   name: orgId
@@ -382,7 +815,7 @@ paths:
                 - REST APIs
         post:
             description: Module templates
-            operationId: BundleService_CreateModuleTemplate
+            operationId: Create Module Template
             requestBody:
                 content:
                     application/json:
@@ -404,9 +837,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/module-templates/{id}:
+    /bundles/api/v1/module-templates/{id}:
         delete:
-            operationId: BundleService_DeleteModuleTemplate
+            operationId: Delete Module Template
             parameters:
                 - in: path
                   name: id
@@ -433,7 +866,7 @@ paths:
             tags:
                 - REST APIs
         get:
-            operationId: BundleService_GetModuleTemplate
+            operationId: Get Module Template
             parameters:
                 - in: path
                   name: id
@@ -459,9 +892,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/module-templates/{template.id}:
+    /bundles/api/v1/module-templates/{template.id}:
         patch:
-            operationId: BundleService_UpdateModuleTemplate
+            operationId: Update Module Template
             parameters:
                 - in: path
                   name: template.id
@@ -494,9 +927,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/modules/{id}:
+    /bundles/api/v1/modules/{id}:
         get:
-            operationId: BundleService_GetModule
+            operationId: Get Module
             parameters:
                 - in: path
                   name: id
@@ -522,9 +955,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/suites:
+    /bundles/api/v1/suites:
         get:
-            operationId: BundleService_ListSuites
+            operationId: List Suites
             parameters:
                 - in: query
                   name: orgId
@@ -633,7 +1066,7 @@ paths:
             tags:
                 - REST APIs
         post:
-            operationId: BundleService_CreateSuite
+            operationId: Create Suite
             requestBody:
                 content:
                     application/json:
@@ -655,9 +1088,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/suites/{id}:
+    /bundles/api/v1/suites/{id}:
         delete:
-            operationId: BundleService_DeleteSuite
+            operationId: Delete Suite
             parameters:
                 - in: path
                   name: id
@@ -680,7 +1113,7 @@ paths:
             tags:
                 - REST APIs
         get:
-            operationId: BundleService_GetSuite
+            operationId: Get Suite
             parameters:
                 - in: path
                   name: id
@@ -702,9 +1135,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/suites/{suite.id}:
+    /bundles/api/v1/suites/{suite.id}:
         patch:
-            operationId: BundleService_UpdateSuite
+            operationId: Update Suite
             parameters:
                 - in: path
                   name: suite.id
@@ -737,9 +1170,9 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /api/v1/suites/{suiteId}/modules:
+    /bundles/api/v1/suites/{suiteId}/modules:
         get:
-            operationId: BundleService_GetModulesInSuite
+            operationId: Get Modules In Suite
             parameters:
                 - in: path
                   name: suiteId
@@ -765,439 +1198,6 @@ paths:
                     description: Default error response
             tags:
                 - REST APIs
-    /bundles.v1.BundleService/CreateBundle:
-        post:
-            operationId: BundleService_CreateBundle_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateBundleRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CreateBundleResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/CreateModuleTemplate:
-        post:
-            description: Module templates
-            operationId: BundleService_CreateModuleTemplate_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateModuleTemplateRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CreateModuleTemplateResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/CreateSuite:
-        post:
-            operationId: BundleService_CreateSuite_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/CreateSuiteRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/CreateSuiteResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/DeleteBundle:
-        post:
-            operationId: BundleService_DeleteBundle_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/DeleteBundleRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/DeleteBundleResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/DeleteModuleTemplate:
-        post:
-            operationId: BundleService_DeleteModuleTemplate_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/DeleteModuleTemplateRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/DeleteModuleTemplateResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/DeleteSuite:
-        post:
-            operationId: BundleService_DeleteSuite_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/DeleteSuiteRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/DeleteSuiteResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/GetBundle:
-        post:
-            operationId: BundleService_GetBundle_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/GetBundleRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetBundleResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/GetBundleCategories:
-        post:
-            operationId: BundleService_GetBundleCategories_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/GetBundleCategoriesRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetBundleCategoriesResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/GetModule:
-        post:
-            operationId: BundleService_GetModule_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/GetModuleRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetModuleResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/GetModuleTemplate:
-        post:
-            operationId: BundleService_GetModuleTemplate_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/GetModuleTemplateRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetModuleTemplateResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/GetModulesInSuite:
-        post:
-            operationId: BundleService_GetModulesInSuite_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/GetModulesInSuiteRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetModulesInSuiteResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/GetSuite:
-        post:
-            operationId: BundleService_GetSuite_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/GetSuiteRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/GetSuiteResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/ListBundles:
-        post:
-            operationId: BundleService_ListBundles_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ListBundlesRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListBundlesResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/ListModuleTemplates:
-        post:
-            operationId: BundleService_ListModuleTemplates_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ListModuleTemplatesRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListModuleTemplatesResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/ListSuites:
-        post:
-            operationId: BundleService_ListSuites_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ListSuitesRequest'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/ListSuitesResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/UpdateBundle:
-        post:
-            operationId: BundleService_UpdateBundle_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Bundle'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateBundleResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/UpdateModuleTemplate:
-        post:
-            operationId: BundleService_UpdateModuleTemplate_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/ModuleTemplate'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateModuleTemplateResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
-    /bundles.v1.BundleService/UpdateSuite:
-        post:
-            operationId: BundleService_UpdateSuite_Connect
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Suite'
-                required: true
-            responses:
-                "200":
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/UpdateSuiteResponse'
-                    description: OK
-                default:
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-                    description: Default error response
-            tags:
-                - Grpc Connect API
 components:
     schemas:
         Action:
@@ -1916,7 +1916,11 @@ components:
                             description: |4
                                  Order direction
                             oneOf:
-                                - format: enum
+                                - enum:
+                                    - - yaml: ORDER_UNSPECIFIED
+                                      - yaml: ORDER_ASC
+                                      - yaml: ORDER_DESC
+                                  format: enum
                                   type: integer
                         order_by:
                             description: |4
@@ -1999,7 +2003,11 @@ components:
                             description: |4
                                  Order direction
                             oneOf:
-                                - format: enum
+                                - enum:
+                                    - - yaml: ORDER_UNSPECIFIED
+                                      - yaml: ORDER_ASC
+                                      - yaml: ORDER_DESC
+                                  format: enum
                                   type: integer
                         order_by:
                             description: |4
@@ -2075,7 +2083,11 @@ components:
                             description: |4
                                  Order direction
                             oneOf:
-                                - format: enum
+                                - enum:
+                                    - - yaml: ORDER_UNSPECIFIED
+                                      - yaml: ORDER_ASC
+                                      - yaml: ORDER_DESC
+                                  format: enum
                                   type: integer
                         order_by:
                             description: |4
@@ -2432,7 +2444,11 @@ components:
                     description: |4
                          Order direction
                     oneOf:
-                        - format: enum
+                        - enum:
+                            - - yaml: ORDER_UNSPECIFIED
+                              - yaml: ORDER_ASC
+                              - yaml: ORDER_DESC
+                          format: enum
                           type: integer
                 order_by:
                     description: |4
