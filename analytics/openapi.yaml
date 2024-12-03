@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
     title: ""
-    version: 1.0.0
+    version: 2.0.0
 tags:
     - description: Endpoints exposed via gRPC Connect API.
       name: Grpc Connect APIs
