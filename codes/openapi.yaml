@@ -1,0 +1,1656 @@
+openapi: 3.0.3
+info:
+    title: Codes APIs
+    version: 1.0.0
+tags:
+    - description: Endpoints exposed via gRPC Connect API.
+      name: Grpc Connect APIs
+servers: []
+security: []
+paths:
+    /codes.v3.CodeService/AddCodeToBatch:
+        post:
+            operationId: Add Code To Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddCodeToBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AddCodeToBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/AddCodesToBatch:
+        post:
+            operationId: Add Codes To Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AddCodesToBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/AddCodesToBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/BulkExportCodes:
+        post:
+            operationId: Bulk Export Codes Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BulkExportCodesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BulkExportCodesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/BulkImportCodes:
+        post:
+            operationId: Bulk Import Codes Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/BulkImportCodesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/BulkImportCodesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateBatch:
+        post:
+            operationId: Create Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateBatchFromTemplate:
+        post:
+            operationId: Create Batch From Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBatchFromTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBatchFromTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateBatchTemplate:
+        post:
+            operationId: Create Batch Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBatchTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBatchTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateBatchTemplateVersion:
+        post:
+            operationId: Create Batch Template Version Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateBatchTemplateVersionRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateBatchTemplateVersionResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateCode:
+        post:
+            operationId: Create Code Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateCodeRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateCodeResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateStudioConfig:
+        post:
+            operationId: Create Studio Config Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateStudioConfigRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateStudioConfigResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/CreateStudioConfigVersion:
+        post:
+            operationId: Create Studio Config Version Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/CreateStudioConfigVersionRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/CreateStudioConfigVersionResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/DeleteBatch:
+        post:
+            operationId: Delete Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/DeleteBatchTemplate:
+        post:
+            operationId: Delete Batch Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteBatchTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteBatchTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/DeleteCode:
+        post:
+            operationId: Delete Code Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteCodeRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteCodeResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/DeleteCodesInBatch:
+        post:
+            operationId: Delete Codes In Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteCodesInBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteCodesInBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/DeleteStudioConfig:
+        post:
+            operationId: Delete Studio Config Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/DeleteStudioConfigRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/DeleteStudioConfigResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/GetBatch:
+        post:
+            operationId: Get Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/GetBatchTemplate:
+        post:
+            operationId: Get Batch Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetBatchTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetBatchTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/GetCode:
+        post:
+            operationId: Get Code Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetCodeRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCodeResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/GetCodes:
+        post:
+            operationId: Get Codes Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetCodesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetCodesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/GetStudioConfig:
+        post:
+            operationId: Get Studio Config Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/GetStudioConfigRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/GetStudioConfigResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/ListBatchTemplates:
+        post:
+            operationId: List Batch Templates Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListBatchTemplatesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBatchTemplatesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/ListBatches:
+        post:
+            operationId: List Batches Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListBatchesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListBatchesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/ListCodes:
+        post:
+            operationId: List Codes Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListCodesRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListCodesResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/ListStudioConfigs:
+        post:
+            operationId: List Studio Configs Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/ListStudioConfigsRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/ListStudioConfigsResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/PreviewDesign:
+        post:
+            operationId: Preview Design Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PreviewDesignRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PreviewDesignResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/PublishBatchTemplateVersion:
+        post:
+            operationId: Publish Batch Template Version Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PublishBatchTemplateVersionRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PublishBatchTemplateVersionResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/PublishStudioConfigVersion:
+        post:
+            operationId: Publish Studio Config Version Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/PublishStudioConfigVersionRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/PublishStudioConfigVersionResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/UpdateBatch:
+        post:
+            operationId: Update Batch Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateBatchRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateBatchResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/UpdateBatchTemplate:
+        post:
+            operationId: Update Batch Template Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateBatchTemplateRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateBatchTemplateResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/UpdateCode:
+        post:
+            operationId: Update Code Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateCodeRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateCodeResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+    /codes.v3.CodeService/UpdateStudioConfig:
+        post:
+            operationId: Update Studio Config Connect
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/UpdateStudioConfigRequest'
+                required: true
+            responses:
+                "200":
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/UpdateStudioConfigResponse'
+                    description: OK
+                default:
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/Status'
+                    description: Default error response
+            tags:
+                - Grpc Connect APIs
+components:
+    schemas:
+        AddCodeToBatchRequest:
+            properties:
+                batch_id:
+                    type: string
+                description:
+                    type: string
+                link_suffix:
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/Struct'
+                name:
+                    type: string
+                org_id:
+                    type: string
+                tags:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        AddCodeToBatchResponse:
+            properties:
+                code:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        AddCodesToBatchRequest:
+            properties:
+                batch_id:
+                    type: string
+                org_id:
+                    type: string
+                requests:
+                    $ref: '#/components/schemas/AddCodeToBatchRequest'
+                workspace_id:
+                    type: string
+            type: object
+        AddCodesToBatchResponse:
+            properties:
+                codes:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        Batch:
+            description: |4
+                Batch
+            properties:
+                base_design:
+                    $ref: '#/components/schemas/CodeDesign'
+                base_destination:
+                    $ref: '#/components/schemas/Destination'
+                brand_kit_id:
+                    type: string
+                created_at:
+                    $ref: '#/components/schemas/Timestamp'
+                creator:
+                    $ref: '#/components/schemas/Creator'
+                description:
+                    type: string
+                domain:
+                    type: string
+                domain_id:
+                    type: string
+                folder_path:
+                    type: string
+                id:
+                    type: string
+                link_suffix:
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/Struct'
+                metadata_schema:
+                    type: string
+                name:
+                    type: string
+                org_id:
+                    type: string
+                state:
+                    type: string
+                tags:
+                    type: string
+                updated_at:
+                    $ref: '#/components/schemas/Timestamp'
+                workspace_id:
+                    type: string
+            type: object
+        BatchTemplate:
+            description: |4
+                Batch Templates
+            properties:
+                base_design:
+                    $ref: '#/components/schemas/CodeDesign'
+                brand_kit_id:
+                    type: string
+                created_at:
+                    $ref: '#/components/schemas/Timestamp'
+                creator:
+                    $ref: '#/components/schemas/Creator'
+                description:
+                    type: string
+                domain_id:
+                    type: string
+                folder_path:
+                    type: string
+                id:
+                    type: string
+                metadata_schema:
+                    type: string
+                name:
+                    type: string
+                org_id:
+                    type: string
+                state:
+                    type: string
+                tags:
+                    type: string
+                updated_at:
+                    $ref: '#/components/schemas/Timestamp'
+                version:
+                    type: string
+                visibility:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        BulkExportCodesRequest:
+            properties:
+                dpi:
+                    format: int32
+                    type: integer
+                email_recipients:
+                    type: string
+                format:
+                    oneOf:
+                        - enum:
+                            - - yaml: FILE_FORMAT_UNSPECIFIED
+                              - yaml: FILE_FORMAT_PNG
+                              - yaml: FILE_FORMAT_JPG
+                              - yaml: FILE_FORMAT_SVG
+                              - yaml: FILE_FORMAT_PDF
+                              - yaml: FILE_FORMAT_EPS
+                          format: enum
+                          type: string
+                notify:
+                    type: boolean
+                req:
+                    $ref: '#/components/schemas/ListCodesRequest'
+                sink:
+                    $ref: '#/components/schemas/OutputSink'
+            type: object
+        BulkExportCodesResponse:
+            properties:
+                zip_url:
+                    type: string
+            type: object
+        BulkImportCodesRequest:
+            properties:
+                batch_id:
+                    type: string
+                file_url:
+                    type: string
+                has_header:
+                    type: boolean
+                header:
+                    type: string
+                mapping:
+                    $ref: '#/components/schemas/BulkImportCodesRequest_MappingEntry'
+                org_id:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        BulkImportCodesRequest_MappingEntry:
+            properties:
+                key:
+                    type: string
+                value:
+                    $ref: '#/components/schemas/MappedValue'
+            type: object
+        BulkImportCodesResponse:
+            type: object
+        Code:
+            description: |4
+                 Code is the reprensation of a flowcode containing:
+                   - the data it needs to render an image of it
+                   - the scan destination which determines the interaction a user has when scanning
+            properties:
+                batch_id:
+                    type: string
+                brand_kit_id:
+                    type: string
+                code_design:
+                    $ref: '#/components/schemas/CodeDesign'
+                created_at:
+                    $ref: '#/components/schemas/Timestamp'
+                creator:
+                    $ref: '#/components/schemas/Creator'
+                description:
+                    type: string
+                destinations:
+                    $ref: '#/components/schemas/Destination'
+                domain_id:
+                    type: string
+                folder_path:
+                    type: string
+                id:
+                    type: string
+                is_static:
+                    description: |4
+                         IsStatic is used to determine if the code is encoded with the short_url or just the value
+                    type: boolean
+                link_hash:
+                    type: string
+                link_suffix:
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/Struct'
+                name:
+                    type: string
+                org_id:
+                    type: string
+                short_url:
+                    description: |4
+                         This is the url used to encode the flowcode.
+
+                         Shorturl uses a flowcode domain or in the case of white-label redirects
+                         it will contain a different domain
+                    type: string
+                state:
+                    type: string
+                tags:
+                    type: string
+                updated_at:
+                    $ref: '#/components/schemas/Timestamp'
+                workspace_id:
+                    type: string
+            type: object
+        CodeDesign:
+            properties:
+                config:
+                    $ref: '#/components/schemas/Struct'
+                id:
+                    description: |4
+                         id represents the the studio_config_id
+                    type: string
+                type:
+                    oneOf:
+                        - enum:
+                            - - yaml: DESIGN_TYPE_UNSPECIFIED
+                              - yaml: DESIGN_TYPE_STUDIO_CONFIG
+                              - yaml: DESIGN_TYPE_CUSTOM_CONFIG
+                              - yaml: DESIGN_TYPE_BRANDKIT_DERIVED
+                              - yaml: DESIGN_TYPE_BRANDKIT_STUDIO_CONFIG
+                              - yaml: DESIGN_TYPE_BRANDKIT_CUSTOM_CONFIG
+                          format: enum
+                          type: string
+                version:
+                    type: string
+            type: object
+        CreateBatchFromTemplateRequest:
+            properties:
+                base_destination:
+                    $ref: '#/components/schemas/Destination'
+                brand_kit_id:
+                    type: string
+                description:
+                    type: string
+                domain_id:
+                    type: string
+                folder_path:
+                    type: string
+                metadata:
+                    $ref: '#/components/schemas/Struct'
+                metadata_schema:
+                    type: string
+                name:
+                    type: string
+                org_id:
+                    type: string
+                tags:
+                    type: string
+                template_id:
+                    type: string
+                template_version:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        CreateBatchFromTemplateResponse:
+            properties:
+                batch:
+                    $ref: '#/components/schemas/Batch'
+            type: object
+        CreateBatchRequest:
+            properties:
+                batch:
+                    $ref: '#/components/schemas/Batch'
+            type: object
+        CreateBatchResponse:
+            properties:
+                batch:
+                    $ref: '#/components/schemas/Batch'
+            type: object
+        CreateBatchTemplateRequest:
+            properties:
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        CreateBatchTemplateResponse:
+            properties:
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        CreateBatchTemplateVersionRequest:
+            properties:
+                base_version:
+                    type: string
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        CreateBatchTemplateVersionResponse:
+            properties:
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        CreateCodeRequest:
+            properties:
+                code:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        CreateCodeResponse:
+            properties:
+                code:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        CreateStudioConfigRequest:
+            properties:
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        CreateStudioConfigResponse:
+            properties:
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        CreateStudioConfigVersionRequest:
+            properties:
+                base_version:
+                    type: string
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        CreateStudioConfigVersionResponse:
+            properties:
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        Creator:
+            properties:
+                email:
+                    type: string
+                org_id:
+                    type: string
+                timezone:
+                    type: string
+                user_id:
+                    type: string
+            type: object
+        DeleteBatchRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        DeleteBatchResponse:
+            type: object
+        DeleteBatchTemplateRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        DeleteBatchTemplateResponse:
+            type: object
+        DeleteCodeRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        DeleteCodeResponse:
+            type: object
+        DeleteCodesInBatchRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        DeleteCodesInBatchResponse:
+            type: object
+        DeleteStudioConfigRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        DeleteStudioConfigResponse:
+            type: object
+        Destination:
+            properties:
+                is_active:
+                    description: |4
+                         IsActive denotes whether the destination is active or not in the case
+                         where multiple destinations are stored per code
+                    type: boolean
+                rule:
+                    $ref: '#/components/schemas/Struct'
+                type:
+                    description: |4
+                         Type describes the "type" of destination a code leads to
+                    oneOf:
+                        - enum:
+                            - - yaml: DESTINATION_TYPE_UNSPECIFIED
+                              - yaml: DESTINATION_TYPE_URL
+                              - yaml: DESTINATION_TYPE_SMS
+                              - yaml: DESTINATION_TYPE_EVENT
+                              - yaml: DESTINATION_TYPE_FILE
+                              - yaml: DESTINATION_TYPE_VENMO
+                              - yaml: DESTINATION_TYPE_INSTAGRAM
+                              - yaml: DESTINATION_TYPE_FACEBOOK
+                              - yaml: DESTINATION_TYPE_LINKEDIN
+                              - yaml: DESTINATION_TYPE_TIKTOK
+                              - yaml: DESTINATION_TYPE_SNAPCHAT
+                              - yaml: DESTINATION_TYPE_TWITTER
+                              - yaml: DESTINATION_TYPE_SPOTIFY
+                              - yaml: DESTINATION_TYPE_GOOGLE_DOC
+                              - yaml: DESTINATION_TYPE_YOUTUBE
+                              - yaml: DESTINATION_TYPE_SOCIAL
+                              - yaml: DESTINATION_TYPE_PHONE
+                              - yaml: DESTINATION_TYPE_FLOWPAGE
+                              - yaml: DESTINATION_TYPE_WIFI
+                              - yaml: DESTINATION_TYPE_SOCIAL_MEDIA
+                              - yaml: DESTINATION_TYPE_SCAN_TO_OWN
+                              - yaml: DESTINATION_TYPE_SCAN_TO_ACTIVATE
+                              - yaml: DESTINATION_TYPE_PRESET_FP
+                              - yaml: DESTINATION_TYPE_COLLECTIBLE_FP
+                              - yaml: DESTINATION_TYPE_ONE_TIME_URL
+                              - yaml: DESTINATION_TYPE_VCARD
+                              - yaml: DESTINATION_TYPE_RULE
+                              - yaml: DESTINATION_TYPE_EMAIL
+                          format: enum
+                          type: string
+                value:
+                    description: |4
+                         Value is the redirect_value of the code
+                    type: string
+            type: object
+        FieldMask:
+            format: field-mask
+            type: string
+        GetBatchRequest:
+            properties:
+                id:
+                    type: string
+            type: object
+        GetBatchResponse:
+            properties:
+                batch:
+                    $ref: '#/components/schemas/Batch'
+            type: object
+        GetBatchTemplateRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        GetBatchTemplateResponse:
+            properties:
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        GetCodeRequest:
+            properties:
+                id:
+                    type: string
+                omit_default_metadata:
+                    type: boolean
+            type: object
+        GetCodeResponse:
+            properties:
+                code:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        GetCodesRequest:
+            properties:
+                ids:
+                    type: string
+            type: object
+        GetCodesResponse:
+            properties:
+                codes:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        GetStudioConfigRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+            type: object
+        GetStudioConfigResponse:
+            properties:
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        GoogleProtobufAny:
+            additionalProperties: true
+            description: Contains an arbitrary serialized along with a @type that describes the type of the serialized message.
+            properties:
+                '@type':
+                    description: 'The type of the serialized '
+                    type: string
+            type: object
+        ListBatchTemplatesRequest:
+            properties:
+                creator_id:
+                    type: string
+                folder_path:
+                    type: string
+                name_prefix:
+                    type: string
+                org_id:
+                    type: string
+                pagination:
+                    $ref: '#/components/schemas/PaginationArguments'
+                tags:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        ListBatchTemplatesResponse:
+            properties:
+                page_info:
+                    $ref: '#/components/schemas/PaginationPageInfo'
+                templates:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        ListBatchesRequest:
+            properties:
+                creator_id:
+                    type: string
+                folder_path:
+                    type: string
+                name_prefix:
+                    type: string
+                org_id:
+                    type: string
+                pagination:
+                    $ref: '#/components/schemas/PaginationArguments'
+                states:
+                    type: string
+                tags:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        ListBatchesResponse:
+            properties:
+                batches:
+                    $ref: '#/components/schemas/Batch'
+                page_info:
+                    $ref: '#/components/schemas/PaginationPageInfo'
+            type: object
+        ListCodesRequest:
+            properties:
+                batch_id:
+                    type: string
+                creator_id:
+                    type: string
+                exact_name:
+                    type: string
+                folder_path:
+                    type: string
+                name_prefix:
+                    type: string
+                omit_default_metadata:
+                    type: boolean
+                org_id:
+                    type: string
+                pagination:
+                    $ref: '#/components/schemas/PaginationArguments'
+                states:
+                    type: string
+                tags:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        ListCodesResponse:
+            properties:
+                codes:
+                    $ref: '#/components/schemas/Code'
+                page_info:
+                    $ref: '#/components/schemas/PaginationPageInfo'
+            type: object
+        ListStudioConfigsRequest:
+            properties:
+                creator_id:
+                    type: string
+                folder_path:
+                    type: string
+                name_prefix:
+                    type: string
+                org_id:
+                    type: string
+                pagination:
+                    $ref: '#/components/schemas/PaginationArguments'
+                tags:
+                    type: string
+                visibilities:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        ListStudioConfigsResponse:
+            properties:
+                page_info:
+                    $ref: '#/components/schemas/PaginationPageInfo'
+                studio_configs:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        MappedValue:
+            properties:
+                default:
+                    type: string
+                money:
+                    $ref: '#/components/schemas/MoneyOptions'
+                phone:
+                    $ref: '#/components/schemas/PhoneOptions'
+                timestamp:
+                    $ref: '#/components/schemas/TimestampOptions'
+                value:
+                    type: string
+            type: object
+        MoneyOptions:
+            properties:
+                currency:
+                    type: string
+            type: object
+        OutputSink:
+            properties:
+                bucket:
+                    $ref: '#/components/schemas/S3Bucket'
+            type: object
+        PaginationArguments:
+            description: |4
+                 Cursor pagination arguments to provide both forward and backward pagination
+
+                 Use the first/after arguments to paginate forward
+                 Use the last/before arguments to paginate backward
+            properties:
+                after:
+                    description: |4
+                         Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most "first" records.
+                         This cursor generally comes from the "end_cursor" response string in PaginationPageInfo
+                    type: string
+                before:
+                    description: |4
+                         Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most "last" records.
+                         This cursor generally comes from the "start_cursor" response string in PaginationPageInfo
+                    type: string
+                first:
+                    description: |4
+                         Paginate first takes a non-negative integer
+
+                         Use this argument to indicate how many records you would like to request
+                    format: int32
+                    type: integer
+                last:
+                    description: |4
+                         Paginate last takes a non-negative integer
+
+                         Use this argument to indicate how many records you would like to request
+                    format: int32
+                    type: integer
+                order:
+                    description: |4
+                         Order direction
+                    oneOf:
+                        - enum:
+                            - - yaml: ORDER_UNSPECIFIED
+                              - yaml: ORDER_ASC
+                              - yaml: ORDER_DESC
+                          format: enum
+                          type: string
+                order_by:
+                    description: |4
+                         Which field to order by
+                    type: string
+            type: object
+        PaginationPageInfo:
+            description: |4
+                 Response object used to inform the next pagination arguments
+            properties:
+                end_cursor:
+                    description: |4
+                         Opaque cursor corresponding to the last record in the response array
+                    type: string
+                has_next_page:
+                    description: |4
+                         Indicates whether more data exists following the set defined by the clients arguments
+                    type: boolean
+                has_previous_page:
+                    description: |4
+                         Indicates whether more data exists prior to the set defined by the clients argument
+                    type: boolean
+                start_cursor:
+                    description: |4
+                         Opaque cursor corresponding to the first record in the response array
+                    type: string
+            type: object
+        PhoneOptions:
+            properties:
+                country:
+                    type: string
+            type: object
+        PreviewDesignRequest:
+            properties:
+                brand_kit_id:
+                    type: string
+                design:
+                    $ref: '#/components/schemas/CodeDesign'
+            type: object
+        PreviewDesignResponse:
+            properties:
+                code_design:
+                    $ref: '#/components/schemas/CodeDesign'
+            type: object
+        PublishBatchTemplateVersionRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+                visibility:
+                    type: string
+            type: object
+        PublishBatchTemplateVersionResponse:
+            properties:
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        PublishStudioConfigVersionRequest:
+            properties:
+                id:
+                    type: string
+                version:
+                    type: string
+                visibility:
+                    type: string
+            type: object
+        PublishStudioConfigVersionResponse:
+            properties:
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        S3Bucket:
+            properties:
+                directory:
+                    type: string
+                name:
+                    type: string
+            type: object
+        Status:
+            description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
+            properties:
+                code:
+                    description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+                    format: int32
+                    type: integer
+                details:
+                    $ref: '#/components/schemas/GoogleProtobufAny'
+                message:
+                    description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+                    type: string
+            type: object
+        Struct:
+            type: object
+        StudioConfig:
+            description: |4
+                Studio Configs
+            properties:
+                config:
+                    $ref: '#/components/schemas/Struct'
+                created_at:
+                    $ref: '#/components/schemas/Timestamp'
+                creator:
+                    $ref: '#/components/schemas/Creator'
+                description:
+                    type: string
+                folder_path:
+                    type: string
+                id:
+                    type: string
+                name:
+                    type: string
+                org_id:
+                    type: string
+                state:
+                    type: string
+                tags:
+                    type: string
+                updated_at:
+                    $ref: '#/components/schemas/Timestamp'
+                version:
+                    type: string
+                visibility:
+                    type: string
+                workspace_id:
+                    type: string
+            type: object
+        Timestamp:
+            format: date-time
+            type: string
+        TimestampOptions:
+            properties:
+                format:
+                    type: string
+                path:
+                    type: string
+            type: object
+        UpdateBatchRequest:
+            properties:
+                batch:
+                    $ref: '#/components/schemas/Batch'
+                mask:
+                    $ref: '#/components/schemas/FieldMask'
+            type: object
+        UpdateBatchResponse:
+            properties:
+                batch:
+                    $ref: '#/components/schemas/Batch'
+            type: object
+        UpdateBatchTemplateRequest:
+            properties:
+                mask:
+                    $ref: '#/components/schemas/FieldMask'
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        UpdateBatchTemplateResponse:
+            properties:
+                template:
+                    $ref: '#/components/schemas/BatchTemplate'
+            type: object
+        UpdateCodeRequest:
+            properties:
+                code:
+                    $ref: '#/components/schemas/Code'
+                mask:
+                    $ref: '#/components/schemas/FieldMask'
+            type: object
+        UpdateCodeResponse:
+            properties:
+                code:
+                    $ref: '#/components/schemas/Code'
+            type: object
+        UpdateStudioConfigRequest:
+            properties:
+                mask:
+                    $ref: '#/components/schemas/FieldMask'
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
+        UpdateStudioConfigResponse:
+            properties:
+                studio_config:
+                    $ref: '#/components/schemas/StudioConfig'
+            type: object
