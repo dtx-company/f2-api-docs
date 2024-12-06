@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-    title: Analytics
+    title: "Analytics"
     version: 2.0.0
 tags:
     - description: Endpoints exposed via gRPC Connect API.
@@ -396,255 +396,275 @@ components:
     schemas:
         ActivityFilter:
             properties:
-                conversion_types:
-                    oneOf:
-                        - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
-                          format: enum
-                          type: string
-                current_folder_filter:
-                    $ref: '#/components/schemas/CurrentFolderFilter'
-                current_tag_filter:
-                    $ref: '#/components/schemas/CurrentTagFilter'
+                conversionTypes:
+                    items:
+                        oneOf:
+                            - enum:
+                                - - CONVERSION_TYPE_UNSPECIFIED
+                                  - CONVERSION_TYPE_NONE
+                                  - CONVERSION_TYPE_CONTACT_COLLECTION
+                                  - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                                  - CONVERSION_TYPE_PURCHASE
+                                  - CONVERSION_TYPE_FORM_SUBMISSION
+                                  - CONVERSION_TYPE_EXTERNAL_PIXEL
+                              format: enum
+                              type: string
+                    type: array
+                currentFolderFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentFolderFilter'
+                    type: array
+                currentTagFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentTagFilter'
+                    type: array
                 email:
                     type: string
-                entry_point_filter:
-                    $ref: '#/components/schemas/EntryPoint'
-                event_types:
-                    type: string
-                folder_filter:
-                    $ref: '#/components/schemas/FolderFilter'
+                entryPoint:
+                    items:
+                        $ref: '#/components/schemas/EntryPoint'
+                    type: array
+                eventTypes:
+                    items:
+                        type: string
+                    type: array
+                folderFilter:
+                    items:
+                        $ref: '#/components/schemas/FolderFilter'
+                    type: array
                 key:
                     type: string
-                metadata_filter:
-                    $ref: '#/components/schemas/MetadataFilter'
+                metadataFilter:
+                    items:
+                        $ref: '#/components/schemas/MetadataFilter'
+                    type: array
                 name:
                     type: string
-                suite_id:
+                suiteId:
                     type: string
-                tag_filter:
-                    $ref: '#/components/schemas/TagFilter'
+                tagFilter:
+                    items:
+                        $ref: '#/components/schemas/TagFilter'
+                    type: array
             type: object
         AdvancedFilter:
             properties:
-                sets:
-                    $ref: '#/components/schemas/PredicateSet'
+                predicateSet:
+                    items:
+                        $ref: '#/components/schemas/PredicateSet'
+                    type: array
             type: object
         AudienceSummary:
             properties:
-                avg_clicks:
+                avgClicks:
                     format: float
                     type: number
-                avg_conversions:
+                avgConversions:
                     format: float
                     type: number
-                avg_scans:
+                avgScans:
                     format: float
                     type: number
-                avg_views:
+                avgViews:
                     format: float
                     type: number
                 contacts:
                     type: string
-                conversion_type_segment:
-                    $ref: '#/components/schemas/UserSegment'
-                engagement_segment:
-                    $ref: '#/components/schemas/UserSegment'
-                identified_segment:
-                    $ref: '#/components/schemas/UserSegment'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
+                userSegment:
+                    $ref: '#/components/schemas/UserSegment'
                 visitors:
                     type: string
             type: object
         CompoundConstraint:
             properties:
-                lhs:
-                    $ref: '#/components/schemas/Constraint'
-                operator:
-                    oneOf:
-                        - enum:
-                            - - yaml: OPERATOR_UNSPECIFIED
-                              - yaml: OPERATOR_AND
-                              - yaml: OPERATOR_OR
-                          format: enum
-                          type: string
-                rhs:
-                    $ref: '#/components/schemas/Constraint'
+              constraint:
+                type: object
+                additionalProperties: true
+              operator:
+                  oneOf:
+                      - enum:
+                          - - OPERATOR_UNSPECIFIED
+                            - OPERATOR_AND
+                            - OPERATOR_OR
+                        format: enum
+                        type: string
             type: object
         Constraint:
-            properties:
-                compound:
-                    $ref: '#/components/schemas/CompoundConstraint'
-                interaction:
-                    $ref: '#/components/schemas/InteractionConstraint'
-                interval:
-                    $ref: '#/components/schemas/IntervalConstraint'
-                segment:
-                    $ref: '#/components/schemas/SegmentConstraint'
-                simple:
-                    $ref: '#/components/schemas/SimpleConstraint'
+            oneOf:
+                - $ref: '#/components/schemas/SimpleConstraint'
+                - $ref: '#/components/schemas/CompoundConstraint'
+                - $ref: '#/components/schemas/InteractionConstraint'
+                - $ref: '#/components/schemas/IntervalConstraint'
+                - $ref: '#/components/schemas/SegmentConstraint'
             type: object
         Contact:
             properties:
-                conversion_count:
+                contactSource:
+                    $ref: '#/components/schemas/ContactSource'
+                conversionCount:
                     type: string
-                distinct_conversion_count:
+                distinctConversionCount:
                     type: string
-                first_converted_at:
-                    $ref: '#/components/schemas/Timestamp'
-                last_converted_at:
-                    $ref: '#/components/schemas/Timestamp'
-                last_interacted_at:
-                    $ref: '#/components/schemas/Timestamp'
                 ltv:
                     format: double
                     type: number
-                source:
-                    $ref: '#/components/schemas/ContactSource'
+                timestamp:
+                    $ref: '#/components/schemas/Timestamp'
                 user:
                     $ref: '#/components/schemas/User'
             type: object
         ContactSource:
             properties:
-                suite_count:
+                suiteCount:
                     format: int32
                     type: integer
-                suite_id:
+                suiteId:
                     type: string
-                suite_name:
+                suiteName:
                     type: string
             type: object
         ContactsFilter:
             properties:
-                advanced_filter:
+                advancedFilter:
                     $ref: '#/components/schemas/AdvancedFilter'
                 cities:
-                    type: string
-                date_filter:
+                    items:
+                        type: string
+                    type: array
+                dateFilter:
                     $ref: '#/components/schemas/DateFilter'
                 email:
                     type: string
-                engagement_level:
-                    oneOf:
-                        - enum:
-                            - - yaml: SEGMENT_LEVEL_UNSPECIFIED
-                              - yaml: SEGMENT_LEVEL_1
-                              - yaml: SEGMENT_LEVEL_2
-                              - yaml: SEGMENT_LEVEL_3
-                          format: enum
-                          type: string
-                entry_point_filter:
-                    $ref: '#/components/schemas/EntryPoint'
+                engagementLevel:
+                    items:
+                        oneOf:
+                            - enum:
+                                - - SEGMENT_LEVEL_UNSPECIFIED
+                                  - SEGMENT_LEVEL_1
+                                  - SEGMENT_LEVEL_2
+                                  - SEGMENT_LEVEL_3
+                              format: enum
+                              type: string
+                    type: array
+                entryPoint:
+                    items:
+                        $ref: '#/components/schemas/EntryPoint'
+                    type: array
                 name:
                     type: string
-                past_conversion_types:
-                    oneOf:
-                        - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
-                          format: enum
-                          type: string
-                past_interaction_types:
-                    type: string
-                postal_codes:
-                    type: string
+                pastConversionTypes:
+                    items:
+                        oneOf:
+                            - enum:
+                                - - CONVERSION_TYPE_UNSPECIFIED
+                                  - CONVERSION_TYPE_NONE
+                                  - CONVERSION_TYPE_CONTACT_COLLECTION
+                                  - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                                  - CONVERSION_TYPE_PURCHASE
+                                  - CONVERSION_TYPE_FORM_SUBMISSION
+                                  - CONVERSION_TYPE_EXTERNAL_PIXEL
+                              format: enum
+                              type: string
+                    type: array
+                pastInteractionTypes:
+                    items:
+                        type: string
+                    type: array
+                postalCodes:
+                    items:
+                        type: string
+                    type: array
                 states:
-                    type: string
+                    items:
+                        type: string
+                    type: array
                 suites:
-                    type: string
+                    items:
+                        type: string
+                    type: array
             type: object
         ContactsFilterOptions:
             properties:
-                contacts_filter_type:
+                contactsFilterType:
                     oneOf:
                         - enum:
-                            - - yaml: CONTACTS_FILTER_TYPE_UNSPECIFIED
-                              - yaml: CONTACTS_FILTER_TYPE_SUITE
-                              - yaml: CONTACTS_FILTER_TYPE_CONVERSION_TYPE
-                              - yaml: CONTACTS_FILTER_TYPE_INTERACTION_TYPE
-                              - yaml: CONTACTS_FILTER_TYPE_CITY
-                              - yaml: CONTACTS_FILTER_TYPE_STATE
-                              - yaml: CONTACTS_FILTER_TYPE_POSTAL_CODE
-                              - yaml: CONTACTS_FILTER_TYPE_ENGAGEMENT_LEVEL
+                            - - CONTACTS_FILTER_TYPE_UNSPECIFIED
+                              - CONTACTS_FILTER_TYPE_SUITE
+                              - CONTACTS_FILTER_TYPE_CONVERSION_TYPE
+                              - CONTACTS_FILTER_TYPE_INTERACTION_TYPE
+                              - CONTACTS_FILTER_TYPE_CITY
+                              - CONTACTS_FILTER_TYPE_STATE
+                              - CONTACTS_FILTER_TYPE_POSTAL_CODE
+                              - CONTACTS_FILTER_TYPE_ENGAGEMENT_LEVEL
                           format: enum
                           type: string
-                filter_options:
-                    $ref: '#/components/schemas/FilterOption'
-                page_info:
+                filterOption:
+                    items:
+                        $ref: '#/components/schemas/FilterOption'
+                    type: array
+                paginationPageInfo:
                     $ref: '#/components/schemas/PaginationPageInfo'
-                selected_filters:
-                    $ref: '#/components/schemas/FilterOption'
             type: object
         ContactsSummary:
             properties:
+                conversion:
+                    items:
+                        $ref: '#/components/schemas/Conversion'
+                    type: array
+                date:
+                    $ref: '#/components/schemas/Date'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                range_end:
-                    $ref: '#/components/schemas/Date'
-                range_start:
-                    $ref: '#/components/schemas/Date'
                 timezone:
                     type: string
-                total_contacts:
+                totalContacts:
                     type: string
-                total_contacts_percent_change:
+                totalContactsPercentChange:
                     format: float
                     type: number
-                totals:
-                    $ref: '#/components/schemas/Conversion'
-                unique_contacts:
+                uniqueContacts:
                     type: string
-                unique_contacts_percent_change:
+                uniqueContactsPercentChange:
                     format: float
                     type: number
             type: object
@@ -660,38 +680,50 @@ components:
             type: object
         ConversionFilter:
             properties:
-                conversion_type:
+                conversionType:
                     oneOf:
                         - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
+                            - - CONVERSION_TYPE_UNSPECIFIED
+                              - CONVERSION_TYPE_NONE
+                              - CONVERSION_TYPE_CONTACT_COLLECTION
+                              - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                              - CONVERSION_TYPE_PURCHASE
+                              - CONVERSION_TYPE_FORM_SUBMISSION
+                              - CONVERSION_TYPE_EXTERNAL_PIXEL
                           format: enum
                           type: string
-                current_folder_filter:
-                    $ref: '#/components/schemas/CurrentFolderFilter'
-                current_tag_filter:
-                    $ref: '#/components/schemas/CurrentTagFilter'
-                entry_point_filter:
-                    $ref: '#/components/schemas/EntryPoint'
-                folder_filter:
-                    $ref: '#/components/schemas/FolderFilter'
-                metadata_filter:
-                    $ref: '#/components/schemas/MetadataFilter'
+                currentFolderFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentFolderFilter'
+                    type: array
+                currentTagFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentTagFilter'
+                    type: array
+                entryPoint:
+                    items:
+                        $ref: '#/components/schemas/EntryPoint'
+                    type: array
+                folderFilter:
+                    items:
+                        $ref: '#/components/schemas/FolderFilter'
+                    type: array
+                metadataFilter:
+                    items:
+                        $ref: '#/components/schemas/MetadataFilter'
+                    type: array
                 name:
                     type: string
-                tag_filter:
-                    $ref: '#/components/schemas/TagFilter'
+                tagFilter:
+                    items:
+                        $ref: '#/components/schemas/TagFilter'
+                    type: array
             type: object
         ConversionRate:
             properties:
                 clicks:
                     type: string
-                conversion_rate:
+                conversionRate:
                     format: float
                     type: number
                 conversions:
@@ -708,169 +740,193 @@ components:
             type: object
         ConversionRateFilter:
             properties:
-                conversion_type:
+                conversionType:
                     oneOf:
                         - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
+                            - - CONVERSION_TYPE_UNSPECIFIED
+                              - CONVERSION_TYPE_NONE
+                              - CONVERSION_TYPE_CONTACT_COLLECTION
+                              - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                              - CONVERSION_TYPE_PURCHASE
+                              - CONVERSION_TYPE_FORM_SUBMISSION
+                              - CONVERSION_TYPE_EXTERNAL_PIXEL
                           format: enum
                           type: string
-                current_folder_filter:
-                    $ref: '#/components/schemas/CurrentFolderFilter'
-                current_tag_filter:
-                    $ref: '#/components/schemas/CurrentTagFilter'
-                entry_point_filter:
-                    $ref: '#/components/schemas/EntryPoint'
-                folder_filter:
-                    $ref: '#/components/schemas/FolderFilter'
+                currentFolderFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentFolderFilter'
+                    type: array
+                currentTagFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentTagFilter'
+                    type: array
+                entryPoint:
+                    items:
+                        $ref: '#/components/schemas/EntryPoint'
+                    type: array
+                folderFilter:
+                    items:
+                        $ref: '#/components/schemas/FolderFilter'
+                    type: array
                 key:
                     type: string
-                metadata_filter:
-                    $ref: '#/components/schemas/MetadataFilter'
-                suite_id:
+                metadataFilter:
+                    items:
+                        $ref: '#/components/schemas/MetadataFilter'
+                    type: array
+                suiteId:
                     type: string
-                tag_filter:
-                    $ref: '#/components/schemas/TagFilter'
+                tagFilter:
+                    items:
+                        $ref: '#/components/schemas/TagFilter'
+                    type: array
             type: object
         ConversionRateSummary:
             properties:
+                conversionRate:
+                    items:
+                        $ref: '#/components/schemas/ConversionRate'
+                    type: array
+                date:
+                    $ref: '#/components/schemas/Date'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                range_end:
-                    $ref: '#/components/schemas/Date'
-                range_start:
-                    $ref: '#/components/schemas/Date'
-                rates:
-                    $ref: '#/components/schemas/ConversionRate'
                 timezone:
                     type: string
-                total_clicks:
+                totalClicks:
                     type: string
-                total_clicks_percent_change:
+                totalClicksPercentChange:
                     format: float
                     type: number
-                total_conversion_rate:
+                totalConversionRate:
                     format: float
                     type: number
-                total_conversion_rate_percent_change:
+                totalConversionRatePercentChange:
                     format: float
                     type: number
-                total_conversions:
+                totalConversions:
                     type: string
-                total_conversions_percent_change:
+                totalConversionsPercentChange:
                     format: float
                     type: number
-                total_scans:
+                totalScans:
                     type: string
-                total_scans_percent_change:
+                totalScansPercentChange:
                     format: float
                     type: number
-                total_unique_visitors:
+                totalUniqueVisitors:
                     type: string
-                total_unique_visitors_percent_change:
+                totalUniqueVisitorsPercentChange:
                     format: float
                     type: number
-                total_views:
+                totalViews:
                     type: string
-                total_views_percent_change:
+                totalViewsPercentChange:
                     format: float
                     type: number
             type: object
         ConversionTypeFilter:
             properties:
-                current_folder_filter:
-                    $ref: '#/components/schemas/CurrentFolderFilter'
-                current_tag_filter:
-                    $ref: '#/components/schemas/CurrentTagFilter'
-                entry_point_filter:
-                    $ref: '#/components/schemas/EntryPoint'
-                folder_filter:
-                    $ref: '#/components/schemas/FolderFilter'
+                currentFolderFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentFolderFilter'
+                    type: array
+                currentTagFilter:
+                    items:
+                        $ref: '#/components/schemas/CurrentTagFilter'
+                    type: array
+                entryPoint:
+                    items:
+                        $ref: '#/components/schemas/EntryPoint'
+                    type: array
+                folderFilter:
+                    items:
+                        $ref: '#/components/schemas/FolderFilter'
+                    type: array
                 key:
                     type: string
-                metadata_filter:
-                    $ref: '#/components/schemas/MetadataFilter'
-                suite_id:
+                metadataFilter:
+                    items:
+                        $ref: '#/components/schemas/MetadataFilter'
+                    type: array
+                suiteId:
                     type: string
-                tag_filter:
-                    $ref: '#/components/schemas/TagFilter'
+                tagFilter:
+                    items:
+                        $ref: '#/components/schemas/TagFilter'
+                    type: array
             type: object
         ConversionTypeSummary:
             properties:
-                conversion_type:
+                conversion:
+                    items:
+                        $ref: '#/components/schemas/Conversion'
+                    type: array
+                conversionType:
                     oneOf:
                         - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
+                            - - CONVERSION_TYPE_UNSPECIFIED
+                              - CONVERSION_TYPE_NONE
+                              - CONVERSION_TYPE_CONTACT_COLLECTION
+                              - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                              - CONVERSION_TYPE_PURCHASE
+                              - CONVERSION_TYPE_FORM_SUBMISSION
+                              - CONVERSION_TYPE_EXTERNAL_PIXEL
                           format: enum
                           type: string
-                conversions:
-                    $ref: '#/components/schemas/Conversion'
+                date:
+                    $ref: '#/components/schemas/Date'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                range_end:
-                    $ref: '#/components/schemas/Date'
-                range_start:
-                    $ref: '#/components/schemas/Date'
                 timezone:
                     type: string
                 total:
                     type: string
-                total_percent_change:
+                totalPercentChange:
                     format: float
                     type: number
             type: object
@@ -885,13 +941,17 @@ components:
             type: object
         CurrentFolderFilter:
             properties:
-                folder_ids:
-                    type: string
+                folderIds:
+                    items:
+                        type: string
+                    type: array
             type: object
         CurrentTagFilter:
             properties:
                 tags:
-                    type: string
+                    items:
+                        type: string
+                    type: array
             type: object
         Date:
             format: date
@@ -905,23 +965,19 @@ components:
             type: object
         DateFilter:
             properties:
-                end_time:
-                    $ref: '#/components/schemas/Timestamp'
-                start_time:
+                timestamp:
                     $ref: '#/components/schemas/Timestamp'
                 timezone:
                     type: string
             type: object
         DeleteEventsRequest:
             properties:
-                org_id:
+                orgId:
                     type: string
             type: object
         DeleteEventsResponse:
             type: object
         EntryPoint:
-            description: |4
-                 Entrypoint is an asset a user has interacted with to initially enter a suite (BATCH or CODE_V3)
             properties:
                 id:
                     description: |4
@@ -933,9 +989,9 @@ components:
                     type: string
             type: object
         EqualConstraint:
+            oneOf:
+                - $ref: '#/components/schemas/DateColumn'
             properties:
-                date:
-                    $ref: '#/components/schemas/DateColumn'
                 id:
                     type: string
                 name:
@@ -944,56 +1000,52 @@ components:
                     type: string
             type: object
         Event:
-            description: |4
-                 Event is a message that is fired when a user interacts with a suite.
             properties:
-                conversion_component:
+                conversionComponent:
                     description: |4
                          The specific conversion component
                     type: string
-                conversion_type:
+                conversionType:
                     oneOf:
                         - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
+                            - - CONVERSION_TYPE_UNSPECIFIED
+                              - CONVERSION_TYPE_NONE
+                              - CONVERSION_TYPE_CONTACT_COLLECTION
+                              - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                              - CONVERSION_TYPE_PURCHASE
+                              - CONVERSION_TYPE_FORM_SUBMISSION
+                              - CONVERSION_TYPE_EXTERNAL_PIXEL
                           format: enum
                           type: string
-                created_at:
-                    $ref: '#/components/schemas/Timestamp'
                 description:
                     type: string
-                device_type:
+                deviceType:
                     oneOf:
                         - enum:
-                            - - yaml: DEVICE_TYPE_UNSPECIFIED
-                              - yaml: DEVICE_TYPE_IOS
-                              - yaml: DEVICE_TYPE_ANDROID
-                              - yaml: DEVICE_TYPE_DESKTOP
+                            - - DEVICE_TYPE_UNSPECIFIED
+                              - DEVICE_TYPE_IOS
+                              - DEVICE_TYPE_ANDROID
+                              - DEVICE_TYPE_DESKTOP
                           format: enum
                           type: string
-                event_type:
+                eventType:
                     type: string
+                geoLocation:
+                    $ref: '#/components/schemas/GeoLocation'
                 key:
                     type: string
-                location:
-                    $ref: '#/components/schemas/GeoLocation'
                 name:
                     type: string
-                photo_url:
+                photoUrl:
                     type: string
-                request_data:
+                struct:
                     $ref: '#/components/schemas/Struct'
-                response_data:
-                    $ref: '#/components/schemas/Struct'
-                suite_id:
+                suiteId:
                     description: |4
                          The suite that the user interacted with
                     type: string
+                timestamp:
+                    $ref: '#/components/schemas/Timestamp'
                 user:
                     $ref: '#/components/schemas/User'
             type: object
@@ -1006,17 +1058,19 @@ components:
             type: object
         FolderFilter:
             properties:
-                folder_ids:
-                    type: string
+                folderIds:
+                    items:
+                        type: string
+                    type: array
             type: object
         FormField:
             properties:
-                field_id:
+                fieldId:
                     type: string
-                field_type:
+                fieldType:
                     format: int32
                     type: integer
-                form_id:
+                formId:
                     type: string
                 name:
                     type: string
@@ -1024,19 +1078,15 @@ components:
                     type: string
             type: object
         GeoLocation:
-            description: |4
-                 GeoLocation represents a location captured from a device
-                 with GeoLocation capabilities that may have been hydrated
-                 with additional information
             properties:
-                accuracy_meters:
+                accuracyMeters:
                     format: double
                     type: number
                 city:
                     type: string
-                continent_code:
+                continentCode:
                     type: string
-                country_iso:
+                countryIso:
                     type: string
                 latitude:
                     format: float
@@ -1044,56 +1094,56 @@ components:
                 longitude:
                     format: float
                     type: number
-                metro_code:
+                metroCode:
                     type: string
-                postal_code:
+                postalCode:
                     type: string
-                subdivision1_iso:
+                subdivision1Iso:
                     type: string
-                subdivision2_iso:
+                subdivision2Iso:
                     type: string
                 timezone:
                     type: string
             type: object
         GetAudienceSummaryRequest:
             properties:
-                contacts_filter:
+                contactsFilter:
                     $ref: '#/components/schemas/ContactsFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetAudienceSummaryResponse:
             properties:
-                summary:
+                audienceSummary:
                     $ref: '#/components/schemas/AudienceSummary'
             type: object
         GetContactRequest:
             properties:
                 email:
                     type: string
-                org_id:
+                orgId:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetContactResponse:
@@ -1103,211 +1153,215 @@ components:
             type: object
         GetContactsFilterOptionsRequest:
             properties:
-                filter:
+                contactsFilter:
                     $ref: '#/components/schemas/ContactsFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
-                paginated_contacts_filter_types:
-                    $ref: '#/components/schemas/PaginatedContactsFilterType'
-                time_range:
+                paginatedContactsFilterType:
+                    items:
+                        $ref: '#/components/schemas/PaginatedContactsFilterType'
+                    type: array
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetContactsFilterOptionsResponse:
             properties:
-                contacts_filter_options:
-                    $ref: '#/components/schemas/ContactsFilterOptions'
+                contactsFilterOptions:
+                    items:
+                        $ref: '#/components/schemas/ContactsFilterOptions'
+                    type: array
             type: object
         GetContactsSummaryRequest:
             properties:
-                filter:
+                conversionTypeFilter:
                     $ref: '#/components/schemas/ConversionTypeFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetContactsSummaryResponse:
             properties:
-                summary:
+                contactsSummary:
                     $ref: '#/components/schemas/ContactsSummary'
             type: object
         GetConversionRateSummaryRequest:
             properties:
-                filter:
+                conversionRateFilter:
                     $ref: '#/components/schemas/ConversionRateFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetConversionRateSummaryResponse:
             properties:
-                summary:
+                conversionRateSummary:
                     $ref: '#/components/schemas/ConversionRateSummary'
             type: object
         GetConversionTypeSummaryRequest:
             properties:
-                conversion_type:
+                conversionType:
                     oneOf:
                         - enum:
-                            - - yaml: CONVERSION_TYPE_UNSPECIFIED
-                              - yaml: CONVERSION_TYPE_NONE
-                              - yaml: CONVERSION_TYPE_CONTACT_COLLECTION
-                              - yaml: CONVERSION_TYPE_CONTACT_DOWNLOADED
-                              - yaml: CONVERSION_TYPE_PURCHASE
-                              - yaml: CONVERSION_TYPE_FORM_SUBMISSION
-                              - yaml: CONVERSION_TYPE_EXTERNAL_PIXEL
+                            - - CONVERSION_TYPE_UNSPECIFIED
+                              - CONVERSION_TYPE_NONE
+                              - CONVERSION_TYPE_CONTACT_COLLECTION
+                              - CONVERSION_TYPE_CONTACT_DOWNLOADED
+                              - CONVERSION_TYPE_PURCHASE
+                              - CONVERSION_TYPE_FORM_SUBMISSION
+                              - CONVERSION_TYPE_EXTERNAL_PIXEL
                           format: enum
                           type: string
-                filter:
+                conversionTypeFilter:
                     $ref: '#/components/schemas/ConversionTypeFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetConversionTypeSummaryResponse:
             properties:
-                summary:
+                conversionTypeSummary:
                     $ref: '#/components/schemas/ConversionTypeSummary'
             type: object
         GetGeoSummaryRequest:
             properties:
-                filter:
+                conversionTypeFilter:
                     $ref: '#/components/schemas/ConversionTypeFilter'
-                geo_admin_level:
+                geoAdminLevel:
                     oneOf:
                         - enum:
-                            - - yaml: GEO_ADMIN_LEVEL_UNSPECIFIED
-                              - yaml: GEO_ADMIN_LEVEL_ADMINISTRATIVE_AREA
-                              - yaml: GEO_ADMIN_LEVEL_POSTAL_CODE
+                            - - GEO_ADMIN_LEVEL_UNSPECIFIED
+                              - GEO_ADMIN_LEVEL_ADMINISTRATIVE_AREA
+                              - GEO_ADMIN_LEVEL_POSTAL_CODE
                           format: enum
                           type: string
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
                 viewport:
                     $ref: '#/components/schemas/Viewport'
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetGeoSummaryResponse:
@@ -1318,44 +1372,44 @@ components:
             type: object
         GetRevenueSummaryRequest:
             properties:
-                filter:
+                conversionTypeFilter:
                     $ref: '#/components/schemas/ConversionTypeFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         GetRevenueSummaryResponse:
             properties:
-                summary:
+                revenueSummary:
                     $ref: '#/components/schemas/RevenueSummary'
             type: object
         GoogleProtobufAny:
@@ -1366,12 +1420,11 @@ components:
                     description: 'The type of the serialized '
                     type: string
             type: object
-        GoogleProtobufValue:
-            description: Represents a dynamically typed value which can be either null, a number, a string, a boolean, a recursive struct value, or a list of values.
+        GoogleProtobufValue: {}
         GreaterConstraint:
+            oneOf:
+                - $ref: '#/components/schemas/DateColumn'
             properties:
-                date:
-                    $ref: '#/components/schemas/DateColumn'
                 id:
                     type: string
                 name:
@@ -1380,9 +1433,9 @@ components:
                     type: string
             type: object
         GreaterEqualConstraint:
+            oneOf:
+                - $ref: '#/components/schemas/DateColumn'
             properties:
-                date:
-                    $ref: '#/components/schemas/DateColumn'
                 id:
                     type: string
                 name:
@@ -1394,37 +1447,40 @@ components:
             properties:
                 clicks:
                     type: string
-                conversion_rate:
+                conversionRate:
                     format: float
                     type: number
                 conversions:
                     type: string
-                group:
+                googleProtobufValue:
                     $ref: '#/components/schemas/GoogleProtobufValue'
-                group_id:
+                groupId:
                     type: string
                 scans:
                     type: string
-                unique_visitors:
+                uniqueVisitors:
                     type: string
                 views:
                     type: string
             type: object
         InConstraint:
+            oneOf:
+                - $ref: '#/components/schemas/DateColumn'
             properties:
-                date:
-                    $ref: '#/components/schemas/DateColumn'
                 id:
                     type: string
                 name:
                     type: string
                 values:
-                    type: string
+                    items:
+                        type: string
+                    type: array
             type: object
         InteractionConstraint:
             properties:
-                constraint:
-                    $ref: '#/components/schemas/Constraint'
+              constraint:
+                type: object
+                additionalProperties: true
             type: object
         IntervalConstraint:
             properties:
@@ -1433,26 +1489,26 @@ components:
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
             type: object
         LikeConstraint:
+            oneOf:
+                - $ref: '#/components/schemas/DateColumn'
             properties:
-                date:
-                    $ref: '#/components/schemas/DateColumn'
                 id:
                     type: string
                 name:
@@ -1462,209 +1518,218 @@ components:
             type: object
         ListActivityRequest:
             properties:
-                filter:
+                activityFilter:
                     $ref: '#/components/schemas/ActivityFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
-                pagination:
+                paginationArguments:
                     $ref: '#/components/schemas/PaginationArguments'
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         ListActivityResponse:
             properties:
-                events:
-                    $ref: '#/components/schemas/Event'
-                page_info:
+                event:
+                    items:
+                        $ref: '#/components/schemas/Event'
+                    type: array
+                paginationPageInfo:
                     $ref: '#/components/schemas/PaginationPageInfo'
             type: object
         ListContactsRequest:
             properties:
-                filter:
+                contactsFilter:
                     $ref: '#/components/schemas/ContactsFilter'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
-                pagination:
+                paginationArguments:
                     $ref: '#/components/schemas/PaginationArguments'
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         ListContactsResponse:
             properties:
-                contacts:
-                    $ref: '#/components/schemas/Contact'
-                page_info:
+                contact:
+                    items:
+                        $ref: '#/components/schemas/Contact'
+                    type: array
+                paginationPageInfo:
                     $ref: '#/components/schemas/PaginationPageInfo'
             type: object
         ListConversionRatesRequest:
             properties:
-                filter:
+                conversionRateFilter:
                     $ref: '#/components/schemas/ConversionRateFilter'
-                group_by:
+                groupBy:
                     type: string
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                org_id:
+                orgId:
                     type: string
-                pagination:
+                paginationArguments:
                     $ref: '#/components/schemas/PaginationArguments'
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                workspace_id:
+                workspaceId:
                     type: string
             type: object
         ListConversionRatesResponse:
             properties:
-                conversion_rates:
-                    $ref: '#/components/schemas/GroupedConversionRate'
-                group_by:
+                groupBy:
                     type: string
+                groupedConversionRate:
+                    items:
+                        $ref: '#/components/schemas/GroupedConversionRate'
+                    type: array
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
-                page_info:
+                paginationPageInfo:
                     $ref: '#/components/schemas/PaginationPageInfo'
-                time_range:
+                timeRange:
                     $ref: '#/components/schemas/TimeRange'
                 timezone:
                     type: string
-                total_clicks:
+                totalClicks:
                     type: string
-                total_conversions:
+                totalConversions:
                     type: string
-                total_scans:
+                totalScans:
                     type: string
-                total_unique_visitors:
+                totalUniqueVisitors:
                     type: string
-                total_views:
+                totalViews:
                     type: string
             type: object
         ListConversionsByConsumerRequest:
             properties:
+                conversionFilter:
+                    $ref: '#/components/schemas/ConversionFilter'
                 email:
                     type: string
-                filter:
-                    $ref: '#/components/schemas/ConversionFilter'
-                pagination:
+                paginationArguments:
                     $ref: '#/components/schemas/PaginationArguments'
             type: object
         ListConversionsByConsumerResponse:
             properties:
-                conversions:
-                    $ref: '#/components/schemas/Event'
-                page_info:
+                event:
+                    items:
+                        $ref: '#/components/schemas/Event'
+                    type: array
+                paginationPageInfo:
                     $ref: '#/components/schemas/PaginationPageInfo'
             type: object
         ListFormFieldsRequest:
             properties:
-                form_id:
+                formId:
                     type: string
-                suite_id:
+                suiteId:
                     type: string
             type: object
         ListFormFieldsResponse:
             properties:
-                fields:
-                    $ref: '#/components/schemas/FormField'
+                formField:
+                    items:
+                        $ref: '#/components/schemas/FormField'
+                    type: array
             type: object
         MetadataFilter:
             properties:
-                metadata_key:
+                googleProtobufValue:
+                    items:
+                        $ref: '#/components/schemas/GoogleProtobufValue'
+                    type: array
+                metadataKey:
                     type: string
-                metadata_values:
-                    $ref: '#/components/schemas/GoogleProtobufValue'
             type: object
         NamedCsvRequest:
+            oneOf:
+                - $ref: '#/components/schemas/GetConversionRateSummaryRequest'
+                - $ref: '#/components/schemas/GetConversionTypeSummaryRequest'
+                - $ref: '#/components/schemas/GetContactsSummaryRequest'
+                - $ref: '#/components/schemas/GetRevenueSummaryRequest'
+                - $ref: '#/components/schemas/ListConversionRatesRequest'
+                - $ref: '#/components/schemas/ListActivityRequest'
+                - $ref: '#/components/schemas/ListContactsRequest'
             properties:
-                form_fields:
-                    $ref: '#/components/schemas/FormField'
-                get_contacts_summary_request:
-                    $ref: '#/components/schemas/GetContactsSummaryRequest'
-                get_conversion_rate_summary_request:
-                    $ref: '#/components/schemas/GetConversionRateSummaryRequest'
-                get_conversion_type_summary_request:
-                    $ref: '#/components/schemas/GetConversionTypeSummaryRequest'
-                get_revenue_summary_request:
-                    $ref: '#/components/schemas/GetRevenueSummaryRequest'
-                list_activity_request:
-                    $ref: '#/components/schemas/ListActivityRequest'
-                list_contacts_request:
-                    $ref: '#/components/schemas/ListContactsRequest'
-                list_conversion_rates_request:
-                    $ref: '#/components/schemas/ListConversionRatesRequest'
+                formField:
+                    items:
+                        $ref: '#/components/schemas/FormField'
+                    type: array
                 name:
                     type: string
             type: object
         NotConstraint:
             properties:
-                constraint:
-                    $ref: '#/components/schemas/Constraint'
+              constraint:
+                type: object
+                additionalProperties: true
             type: object
         NullConstraint:
+            oneOf:
+                - $ref: '#/components/schemas/DateColumn'
             properties:
-                date:
-                    $ref: '#/components/schemas/DateColumn'
                 id:
                     type: string
                 name:
@@ -1672,32 +1737,29 @@ components:
             type: object
         PaginatedContactsFilterType:
             properties:
-                contacts_filter_type:
+                contactsFilterType:
                     oneOf:
                         - enum:
-                            - - yaml: CONTACTS_FILTER_TYPE_UNSPECIFIED
-                              - yaml: CONTACTS_FILTER_TYPE_SUITE
-                              - yaml: CONTACTS_FILTER_TYPE_CONVERSION_TYPE
-                              - yaml: CONTACTS_FILTER_TYPE_INTERACTION_TYPE
-                              - yaml: CONTACTS_FILTER_TYPE_CITY
-                              - yaml: CONTACTS_FILTER_TYPE_STATE
-                              - yaml: CONTACTS_FILTER_TYPE_POSTAL_CODE
-                              - yaml: CONTACTS_FILTER_TYPE_ENGAGEMENT_LEVEL
+                            - - CONTACTS_FILTER_TYPE_UNSPECIFIED
+                              - CONTACTS_FILTER_TYPE_SUITE
+                              - CONTACTS_FILTER_TYPE_CONVERSION_TYPE
+                              - CONTACTS_FILTER_TYPE_INTERACTION_TYPE
+                              - CONTACTS_FILTER_TYPE_CITY
+                              - CONTACTS_FILTER_TYPE_STATE
+                              - CONTACTS_FILTER_TYPE_POSTAL_CODE
+                              - CONTACTS_FILTER_TYPE_ENGAGEMENT_LEVEL
                           format: enum
                           type: string
-                pagination:
+                paginationArguments:
                     $ref: '#/components/schemas/PaginationArguments'
-                search_term:
+                searchTerm:
                     type: string
                 selected:
-                    type: string
+                    items:
+                        type: string
+                    type: array
             type: object
         PaginationArguments:
-            description: |4
-                 Cursor pagination arguments to provide both forward and backward pagination
-
-                 Use the first/after arguments to paginate forward
-                 Use the last/before arguments to paginate backward
             properties:
                 after:
                     description: |4
@@ -1728,42 +1790,38 @@ components:
                          Order direction
                     oneOf:
                         - enum:
-                            - - yaml: ORDER_UNSPECIFIED
-                              - yaml: ORDER_ASC
-                              - yaml: ORDER_DESC
+                            - - ORDER_UNSPECIFIED
+                              - ORDER_ASC
+                              - ORDER_DESC
                           format: enum
                           type: string
-                order_by:
+                orderBy:
                     description: |4
                          Which field to order by
                     type: string
             type: object
         PaginationPageInfo:
-            description: |4
-                 Response object used to inform the next pagination arguments
             properties:
-                end_cursor:
+                endCursor:
                     description: |4
                          Opaque cursor corresponding to the last record in the response array
                     type: string
-                has_next_page:
+                hasNextPage:
                     description: |4
                          Indicates whether more data exists following the set defined by the clients arguments
                     type: boolean
-                has_previous_page:
+                hasPreviousPage:
                     description: |4
                          Indicates whether more data exists prior to the set defined by the clients argument
                     type: boolean
-                start_cursor:
+                startCursor:
                     description: |4
                          Opaque cursor corresponding to the first record in the response array
                     type: string
             type: object
         PredicateSet:
             properties:
-                having:
-                    $ref: '#/components/schemas/Constraint'
-                where:
+                constraint:
                     $ref: '#/components/schemas/Constraint'
             type: object
         Revenue:
@@ -1773,8 +1831,10 @@ components:
                 hour:
                     format: int32
                     type: integer
-                revenue_by_currency:
-                    $ref: '#/components/schemas/Revenue_RevenueByCurrencyEntry'
+                revenueRevenueByCurrencyEntry:
+                    items:
+                        $ref: '#/components/schemas/Revenue_RevenueByCurrencyEntry'
+                    type: array
             type: object
         Revenue_RevenueByCurrencyEntry:
             properties:
@@ -1786,42 +1846,46 @@ components:
             type: object
         RevenueSummary:
             properties:
+                date:
+                    $ref: '#/components/schemas/Date'
                 interval:
                     oneOf:
                         - enum:
-                            - - yaml: INTERVAL_UNSPECIFIED
-                              - yaml: INTERVAL_ALL_TIME
-                              - yaml: INTERVAL_TODAY
-                              - yaml: INTERVAL_YESTERDAY
-                              - yaml: INTERVAL_LAST_WEEK
-                              - yaml: INTERVAL_LAST_7_DAYS
-                              - yaml: INTERVAL_LAST_30_DAYS
-                              - yaml: INTERVAL_LAST_90_DAYS
-                              - yaml: INTERVAL_CUSTOM
+                            - - INTERVAL_UNSPECIFIED
+                              - INTERVAL_ALL_TIME
+                              - INTERVAL_TODAY
+                              - INTERVAL_YESTERDAY
+                              - INTERVAL_LAST_WEEK
+                              - INTERVAL_LAST_7_DAYS
+                              - INTERVAL_LAST_30_DAYS
+                              - INTERVAL_LAST_90_DAYS
+                              - INTERVAL_CUSTOM
                           format: enum
                           type: string
                 period:
                     oneOf:
                         - enum:
-                            - - yaml: PERIOD_UNSPECIFIED
-                              - yaml: PERIOD_HOUR
-                              - yaml: PERIOD_DAY
-                              - yaml: PERIOD_WEEK
-                              - yaml: PERIOD_MONTH
+                            - - PERIOD_UNSPECIFIED
+                              - PERIOD_HOUR
+                              - PERIOD_DAY
+                              - PERIOD_WEEK
+                              - PERIOD_MONTH
                           format: enum
                           type: string
-                range_end:
-                    $ref: '#/components/schemas/Date'
-                range_start:
-                    $ref: '#/components/schemas/Date'
+                revenue:
+                    items:
+                        $ref: '#/components/schemas/Revenue'
+                    type: array
+                revenueSummaryTotalRevenueByCurrencyEntry:
+                    items:
+                        $ref: '#/components/schemas/RevenueSummary_TotalRevenueByCurrencyEntry'
+                    type: array
+                revenueSummaryTotalRevenueByCurrencyPercentChangeEntry:
+                    items:
+                        $ref: '#/components/schemas/RevenueSummary_TotalRevenueByCurrencyPercentChangeEntry'
+                    type: array
                 timezone:
                     type: string
-                total_revenue_by_currency:
-                    $ref: '#/components/schemas/RevenueSummary_TotalRevenueByCurrencyEntry'
-                total_revenue_by_currency_percent_change:
-                    $ref: '#/components/schemas/RevenueSummary_TotalRevenueByCurrencyPercentChangeEntry'
-                totals:
-                    $ref: '#/components/schemas/Revenue'
             type: object
         RevenueSummary_TotalRevenueByCurrencyEntry:
             properties:
@@ -1849,32 +1913,27 @@ components:
             type: object
         SegmentConstraint:
             properties:
-                engagement_level:
-                    oneOf:
-                        - enum:
-                            - - yaml: SEGMENT_LEVEL_UNSPECIFIED
-                              - yaml: SEGMENT_LEVEL_1
-                              - yaml: SEGMENT_LEVEL_2
-                              - yaml: SEGMENT_LEVEL_3
-                          format: enum
-                          type: string
+                engagementLevel:
+                    items:
+                        oneOf:
+                            - enum:
+                                - - SEGMENT_LEVEL_UNSPECIFIED
+                                  - SEGMENT_LEVEL_1
+                                  - SEGMENT_LEVEL_2
+                                  - SEGMENT_LEVEL_3
+                              format: enum
+                              type: string
+                    type: array
             type: object
         SimpleConstraint:
-            properties:
-                equal:
-                    $ref: '#/components/schemas/EqualConstraint'
-                greater:
-                    $ref: '#/components/schemas/GreaterConstraint'
-                greater_equal:
-                    $ref: '#/components/schemas/GreaterEqualConstraint'
-                in:
-                    $ref: '#/components/schemas/InConstraint'
-                like:
-                    $ref: '#/components/schemas/LikeConstraint'
-                not:
-                    $ref: '#/components/schemas/NotConstraint'
-                "null":
-                    $ref: '#/components/schemas/NullConstraint'
+            oneOf:
+                - $ref: '#/components/schemas/EqualConstraint'
+                - $ref: '#/components/schemas/NotConstraint'
+                - $ref: '#/components/schemas/InConstraint'
+                - $ref: '#/components/schemas/GreaterConstraint'
+                - $ref: '#/components/schemas/GreaterEqualConstraint'
+                - $ref: '#/components/schemas/LikeConstraint'
+                - $ref: '#/components/schemas/NullConstraint'
             type: object
         Status:
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
@@ -1890,13 +1949,14 @@ components:
                     type: string
             type: object
         StreamCsvFileRequest:
+            oneOf:
+                - $ref: '#/components/schemas/ListContactsRequest'
+                - $ref: '#/components/schemas/ListActivityRequest'
             properties:
-                form_fields:
-                    $ref: '#/components/schemas/FormField'
-                list_activity_request:
-                    $ref: '#/components/schemas/ListActivityRequest'
-                list_contacts_request:
-                    $ref: '#/components/schemas/ListContactsRequest'
+                formField:
+                    items:
+                        $ref: '#/components/schemas/FormField'
+                    type: array
             type: object
         StreamCsvFileResponse:
             properties:
@@ -1906,12 +1966,14 @@ components:
             type: object
         StreamZipFileRequest:
             properties:
-                named_csv_requests:
-                    $ref: '#/components/schemas/NamedCsvRequest'
+                namedCsvRequest:
+                    items:
+                        $ref: '#/components/schemas/NamedCsvRequest'
+                    type: array
             type: object
         StreamZipFileResponse:
             properties:
-                s3_url:
+                s3Url:
                     type: string
             type: object
         Struct:
@@ -1919,21 +1981,19 @@ components:
         TagFilter:
             properties:
                 tags:
-                    type: string
+                    items:
+                        type: string
+                    type: array
             type: object
         TimeRange:
             properties:
-                end_time:
-                    $ref: '#/components/schemas/Timestamp'
-                start_time:
+                timestamp:
                     $ref: '#/components/schemas/Timestamp'
             type: object
         Timestamp:
             format: date-time
             type: string
         User:
-            description: |4
-                 User is a message that represents a user in the system.
             properties:
                 email:
                     type: string
@@ -1943,27 +2003,27 @@ components:
                     type: string
                 phone:
                     type: string
-                photo_url:
+                photoUrl:
                     type: string
             type: object
         UserSegment:
             properties:
-                segments:
-                    $ref: '#/components/schemas/Segment'
+                segment:
+                    items:
+                        $ref: '#/components/schemas/Segment'
+                    type: array
                 type:
                     oneOf:
                         - enum:
-                            - - yaml: USER_SEGMENT_TYPE_UNSPECIFIED
-                              - yaml: USER_SEGMENT_TYPE_IDENTIFIED
-                              - yaml: USER_SEGMENT_TYPE_ENGAGEMENT_LEVEL
-                              - yaml: USER_SEGMENT_TYPE_CONVERSION_TYPE
+                            - - USER_SEGMENT_TYPE_UNSPECIFIED
+                              - USER_SEGMENT_TYPE_IDENTIFIED
+                              - USER_SEGMENT_TYPE_ENGAGEMENT_LEVEL
+                              - USER_SEGMENT_TYPE_CONVERSION_TYPE
                           format: enum
                           type: string
             type: object
         Viewport:
             properties:
-                max:
-                    $ref: '#/components/schemas/Coordinate'
-                min:
+                coordinate:
                     $ref: '#/components/schemas/Coordinate'
             type: object
