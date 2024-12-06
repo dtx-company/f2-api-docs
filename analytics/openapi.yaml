@@ -8,7 +8,7 @@ tags:
 servers: []
 security: []
 paths:
-    /analytics.v2.AnalyticsService/DeleteEvents:
+    /abacus.v2.AbacusService/DeleteEvents:
         post:
             operationId: Delete Events Connect
             requestBody:
@@ -32,7 +32,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetAudienceSummary:
+    /abacus.v2.AbacusService/GetAudienceSummary:
         post:
             operationId: Get Audience Summary Connect
             requestBody:
@@ -56,7 +56,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetContact:
+    /abacus.v2.AbacusService/GetContact:
         post:
             operationId: Get Contact Connect
             requestBody:
@@ -80,7 +80,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetContactsFilterOptions:
+    /abacus.v2.AbacusService/GetContactsFilterOptions:
         post:
             operationId: Get Contacts Filter Options Connect
             requestBody:
@@ -104,7 +104,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetContactsSummary:
+    /abacus.v2.AbacusService/GetContactsSummary:
         post:
             operationId: Get Contacts Summary Connect
             requestBody:
@@ -128,7 +128,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetConversionRateSummary:
+    /abacus.v2.AbacusService/GetConversionRateSummary:
         post:
             operationId: Get Conversion Rate Summary Connect
             requestBody:
@@ -152,7 +152,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetConversionTypeSummary:
+    /abacus.v2.AbacusService/GetConversionTypeSummary:
         post:
             operationId: Get Conversion Type Summary Connect
             requestBody:
@@ -176,7 +176,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetGeoSummary:
+    /abacus.v2.AbacusService/GetGeoSummary:
         post:
             operationId: Get Geo Summary Connect
             requestBody:
@@ -200,7 +200,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/GetRevenueSummary:
+    /abacus.v2.AbacusService/GetRevenueSummary:
         post:
             operationId: Get Revenue Summary Connect
             requestBody:
@@ -224,7 +224,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/ListActivity:
+    /abacus.v2.AbacusService/ListActivity:
         post:
             operationId: List Activity Connect
             requestBody:
@@ -248,7 +248,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/ListContacts:
+    /abacus.v2.AbacusService/ListContacts:
         post:
             operationId: List Contacts Connect
             requestBody:
@@ -272,7 +272,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/ListConversionRates:
+    /abacus.v2.AbacusService/ListConversionRates:
         post:
             operationId: List Conversion Rates Connect
             requestBody:
@@ -296,7 +296,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/ListConversionsByConsumer:
+    /abacus.v2.AbacusService/ListConversionsByConsumer:
         post:
             operationId: List Conversions By Consumer Connect
             requestBody:
@@ -320,7 +320,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/ListFormFields:
+    /abacus.v2.AbacusService/ListFormFields:
         post:
             operationId: List Form Fields Connect
             requestBody:
@@ -344,7 +344,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/StreamCsvFile:
+    /abacus.v2.AbacusService/StreamCsvFile:
         post:
             operationId: Stream Csv File Connect
             requestBody:
@@ -368,7 +368,7 @@ paths:
                     description: Default error response
             tags:
                 - Grpc Connect APIs
-    /analytics.v2.AnalyticsService/StreamZipFile:
+    /abacus.v2.AbacusService/StreamZipFile:
         post:
             operationId: Stream Zip File Connect
             requestBody:
