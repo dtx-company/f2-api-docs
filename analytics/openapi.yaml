@@ -5,7 +5,7 @@ info:
 tags:
     - description: Endpoints exposed via gRPC Connect API.
       name: Grpc Connect APIs
-servers: []
+servers: [ "https://api.conversions.stg.flowcode.com" ]
 security: []
 paths:
     /abacus.v2.AbacusService/DeleteEvents:
