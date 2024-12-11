@@ -1,0 +1,771 @@
+{
+  "components": {
+    "schemas": {
+      "AddCodeToBatchRequest": {
+        "properties": {
+          "batchId": {
+            "description": "Batch ID is the batch that the code will be added to.",
+            "type": "string"
+          },
+          "description": {
+            "description": "Description of the code.",
+            "type": "string"
+          },
+          "linkSuffix": {
+            "description": "Add a link suffix associated with the code.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Name of the code.",
+            "type": "string"
+          },
+          "orgId": {
+            "description": "Org ID is the organization that the batch belongs to.",
+            "type": "string"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/Struct"
+          },
+          "tags": {
+            "items": {
+              "description": "Add a list of tags to the code.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "description": "Workspace ID is the workspace that the batch belongs to. Must be associated with the org_id.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AddCodeToBatchResponse": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/Code"
+          }
+        },
+        "type": "object"
+      },
+      "AddCodesToBatchRequest": {
+        "properties": {
+          "addCodeToBatchRequest": {
+            "items": {
+              "$ref": "#/components/schemas/AddCodeToBatchRequest"
+            },
+            "type": "array"
+          },
+          "batchId": {
+            "description": "Batch ID is the batch that the codes will be added to.",
+            "type": "string"
+          },
+          "orgId": {
+            "description": "Org ID is the organization that the batch belongs to.",
+            "type": "string"
+          },
+          "workspaceId": {
+            "description": "Workspace ID is the workspace that the batch belongs to. Must be associated with the org_id.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "AddCodesToBatchResponse": {
+        "properties": {
+          "code": {
+            "items": {
+              "$ref": "#/components/schemas/Code"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "Code": {
+        "description": " List of codes that match the query.\n",
+        "properties": {
+          "batchId": {
+            "type": "string"
+          },
+          "brandKitId": {
+            "type": "string"
+          },
+          "codeDesign": {
+            "$ref": "#/components/schemas/CodeDesign"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Creator"
+          },
+          "description": {
+            "type": "string"
+          },
+          "destination": {
+            "items": {
+              "$ref": "#/components/schemas/Destination"
+            },
+            "type": "array"
+          },
+          "domainId": {
+            "type": "string"
+          },
+          "folderPath": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isStatic": {
+            "description": "IsStatic is used to determine if the code is encoded with the short_url or just the value",
+            "type": "boolean"
+          },
+          "linkHash": {
+            "type": "string"
+          },
+          "linkSuffix": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "shortUrl": {
+            "description": "This is the url used to encode the flowcode.\n\n Shorturl uses a flowcode domain or in the case of white-label redirects\n it will contain a different domain",
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/Struct"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "timestamp": {
+            "$ref": "#/components/schemas/Timestamp"
+          },
+          "workspaceId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "CodeDesign": {
+        "description": " CodeDesign describes what the code looks like\n The config is fed into the flowcode-generator-v2 which is responsible for interpretting the values\n",
+        "properties": {
+          "id": {
+            "description": "id represents the the studio_config_id",
+            "type": "string"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/Struct"
+          },
+          "type": {
+            "oneOf": [
+              {
+                "enum": [
+                  [
+                    "DESIGN_TYPE_UNSPECIFIED",
+                    "DESIGN_TYPE_STUDIO_CONFIG",
+                    "DESIGN_TYPE_CUSTOM_CONFIG",
+                    "DESIGN_TYPE_BRANDKIT_DERIVED",
+                    "DESIGN_TYPE_BRANDKIT_STUDIO_CONFIG",
+                    "DESIGN_TYPE_BRANDKIT_CUSTOM_CONFIG"
+                  ]
+                ],
+                "format": "enum",
+                "type": "string"
+              }
+            ]
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Creator": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "orgId": {
+            "type": "string"
+          },
+          "timezone": {
+            "type": "string"
+          },
+          "userId": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DeleteCodeRequest": {
+        "properties": {
+          "id": {
+            "description": "ID of the code.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DeleteCodeResponse": {
+        "type": "object"
+      },
+      "Destination": {
+        "description": " Destination describes what happens when a user scans the code\n Codes can contain multiple active and inactive destinations depending on which is toggle on\n",
+        "properties": {
+          "isActive": {
+            "description": "IsActive denotes whether the destination is active or not in the case\n where multiple destinations are stored per code",
+            "type": "boolean"
+          },
+          "struct": {
+            "$ref": "#/components/schemas/Struct"
+          },
+          "type": {
+            "description": "Type describes the \"type\" of destination a code leads to",
+            "oneOf": [
+              {
+                "enum": [
+                  [
+                    "DESTINATION_TYPE_UNSPECIFIED",
+                    "DESTINATION_TYPE_URL",
+                    "DESTINATION_TYPE_SMS",
+                    "DESTINATION_TYPE_EVENT",
+                    "DESTINATION_TYPE_FILE",
+                    "DESTINATION_TYPE_VENMO",
+                    "DESTINATION_TYPE_INSTAGRAM",
+                    "DESTINATION_TYPE_FACEBOOK",
+                    "DESTINATION_TYPE_LINKEDIN",
+                    "DESTINATION_TYPE_TIKTOK",
+                    "DESTINATION_TYPE_SNAPCHAT",
+                    "DESTINATION_TYPE_TWITTER",
+                    "DESTINATION_TYPE_SPOTIFY",
+                    "DESTINATION_TYPE_GOOGLE_DOC",
+                    "DESTINATION_TYPE_YOUTUBE",
+                    "DESTINATION_TYPE_SOCIAL",
+                    "DESTINATION_TYPE_PHONE",
+                    "DESTINATION_TYPE_FLOWPAGE",
+                    "DESTINATION_TYPE_WIFI",
+                    "DESTINATION_TYPE_SOCIAL_MEDIA",
+                    "DESTINATION_TYPE_SCAN_TO_OWN",
+                    "DESTINATION_TYPE_SCAN_TO_ACTIVATE",
+                    "DESTINATION_TYPE_PRESET_FP",
+                    "DESTINATION_TYPE_COLLECTIBLE_FP",
+                    "DESTINATION_TYPE_ONE_TIME_URL",
+                    "DESTINATION_TYPE_VCARD",
+                    "DESTINATION_TYPE_RULE",
+                    "DESTINATION_TYPE_EMAIL"
+                  ]
+                ],
+                "format": "enum",
+                "type": "string"
+              }
+            ]
+          },
+          "value": {
+            "description": "Value is the redirect_value of the code",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "FieldMask": {
+        "description": " Mask of fields to update.\n",
+        "format": "field-mask",
+        "type": "string"
+      },
+      "GetCodeRequest": {
+        "properties": {
+          "id": {
+            "description": "ID of the code.",
+            "type": "string"
+          },
+          "omitDefaultMetadata": {
+            "description": "Omit default metadata fields from the response.",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "GetCodeResponse": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/Code"
+          }
+        },
+        "type": "object"
+      },
+      "GoogleProtobufAny": {
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized along with a @type that describes the type of the serialized message.",
+        "properties": {
+          "@type": {
+            "description": "The type of the serialized ",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListCodesRequest": {
+        "properties": {
+          "batchId": {
+            "description": "Show only codes that are in the batch with this batch id.",
+            "type": "string"
+          },
+          "creatorId": {
+            "description": "Show only codes created by this creator id.",
+            "type": "string"
+          },
+          "exactName": {
+            "description": "Show only codes with this exact name.",
+            "type": "string"
+          },
+          "folderPath": {
+            "description": "Show only codes belonging to this folder path.",
+            "type": "string"
+          },
+          "namePrefix": {
+            "description": "Show only codes that include this prefix in the name.",
+            "type": "string"
+          },
+          "omitDefaultMetadata": {
+            "description": "Omit default metadata fields from the response.",
+            "type": "boolean"
+          },
+          "orgId": {
+            "description": "Org ID is the organization that the codes belong to.",
+            "type": "string"
+          },
+          "paginationArguments": {
+            "$ref": "#/components/schemas/PaginationArguments"
+          },
+          "states": {
+            "items": {
+              "description": "Show only codes that are in a state from this list of of states.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "tags": {
+            "items": {
+              "description": "Show only codes that include a tag from this list of tags.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "workspaceId": {
+            "description": "Workspace ID is the workspace that the codes belong to. Must be associated with the org_id.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ListCodesResponse": {
+        "properties": {
+          "code": {
+            "items": {
+              "$ref": "#/components/schemas/Code"
+            },
+            "type": "array"
+          },
+          "paginationPageInfo": {
+            "$ref": "#/components/schemas/PaginationPageInfo"
+          }
+        },
+        "type": "object"
+      },
+      "PaginationArguments": {
+        "description": " Pagination arguments.\n",
+        "properties": {
+          "after": {
+            "description": "Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most \"first\" records.\n This cursor generally comes from the \"end_cursor\" response string in PaginationPageInfo",
+            "type": "string"
+          },
+          "before": {
+            "description": "Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most \"last\" records.\n This cursor generally comes from the \"start_cursor\" response string in PaginationPageInfo",
+            "type": "string"
+          },
+          "first": {
+            "description": "Paginate first takes a non-negative integer\n\n Use this argument to indicate how many records you would like to request",
+            "format": "int32",
+            "type": "integer"
+          },
+          "last": {
+            "description": "Paginate last takes a non-negative integer\n\n Use this argument to indicate how many records you would like to request",
+            "format": "int32",
+            "type": "integer"
+          },
+          "order": {
+            "description": "Order direction",
+            "oneOf": [
+              {
+                "enum": [
+                  [
+                    "ORDER_UNSPECIFIED",
+                    "ORDER_ASC",
+                    "ORDER_DESC"
+                  ]
+                ],
+                "format": "enum",
+                "type": "string"
+              }
+            ]
+          },
+          "orderBy": {
+            "description": "Which field to order by",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "PaginationPageInfo": {
+        "description": " Pagination information.\n",
+        "properties": {
+          "endCursor": {
+            "description": "Opaque cursor corresponding to the last record in the response array",
+            "type": "string"
+          },
+          "hasNextPage": {
+            "description": "Indicates whether more data exists following the set defined by the clients arguments",
+            "type": "boolean"
+          },
+          "hasPreviousPage": {
+            "description": "Indicates whether more data exists prior to the set defined by the clients argument",
+            "type": "boolean"
+          },
+          "startCursor": {
+            "description": "Opaque cursor corresponding to the first record in the response array",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Status": {
+        "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+        "properties": {
+          "code": {
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+            "format": "int32",
+            "type": "integer"
+          },
+          "details": {
+            "$ref": "#/components/schemas/GoogleProtobufAny"
+          },
+          "message": {
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "Struct": {
+        "description": " Rule is an optional redirect rule attached to a code\n",
+        "type": "object"
+      },
+      "Timestamp": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "UpdateCodeRequest": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/Code"
+          },
+          "fieldMask": {
+            "$ref": "#/components/schemas/FieldMask"
+          }
+        },
+        "type": "object"
+      },
+      "UpdateCodeResponse": {
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/Code"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  },
+  "info": {
+    "title": "codes",
+    "version": "3.0.0"
+  },
+  "openapi": "3.0.3",
+  "paths": {
+    "/codes.v3.CodeService/AddCodeToBatch": {
+      "post": {
+        "operationId": "Add Code To Batch Connect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCodeToBatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddCodeToBatchResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Grpc Connect APIs"
+        ]
+      }
+    },
+    "/codes.v3.CodeService/AddCodesToBatch": {
+      "post": {
+        "operationId": "Add Codes To Batch Connect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCodesToBatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddCodesToBatchResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Grpc Connect APIs"
+        ]
+      }
+    },
+    "/codes.v3.CodeService/DeleteCode": {
+      "post": {
+        "operationId": "Delete Code Connect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteCodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteCodeResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Grpc Connect APIs"
+        ]
+      }
+    },
+    "/codes.v3.CodeService/GetCode": {
+      "post": {
+        "operationId": "Get Code Connect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetCodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCodeResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Grpc Connect APIs"
+        ]
+      }
+    },
+    "/codes.v3.CodeService/ListCodes": {
+      "post": {
+        "operationId": "List Codes Connect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListCodesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListCodesResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Grpc Connect APIs"
+        ]
+      }
+    },
+    "/codes.v3.CodeService/UpdateCode": {
+      "post": {
+        "operationId": "Update Code Connect",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCodeResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Status"
+                }
+              }
+            },
+            "description": "Default error response"
+          }
+        },
+        "tags": [
+          "Grpc Connect APIs"
+        ]
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://api.conversions.flowcode.com"
+    },
+    {
+      "url": "https://api.conversions.stg.flowcode.com"
+    }
+  ],
+  "tags": [
+    {
+      "description": "Endpoints exposed via gRPC Connect API.",
+      "name": "Grpc Connect APIs"
+    }
+  ]
+}

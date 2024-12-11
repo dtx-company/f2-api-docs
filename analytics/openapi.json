@@ -1,0 +1,2071 @@
+{
+    "components": {
+      "schemas": {
+        "AdvancedFilter": {
+          "properties": {
+            "predicateSet": {
+              "items": {
+                "$ref": "#/components/schemas/PredicateSet"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "AudienceSummary": {
+          "properties": {
+            "avgClicks": {
+              "format": "float",
+              "type": "number"
+            },
+            "avgConversions": {
+              "format": "float",
+              "type": "number"
+            },
+            "avgScans": {
+              "format": "float",
+              "type": "number"
+            },
+            "avgViews": {
+              "format": "float",
+              "type": "number"
+            },
+            "contacts": {
+              "type": "string"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "userSegment": {
+              "$ref": "#/components/schemas/UserSegment"
+            },
+            "visitors": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "CompoundConstraint": {
+          "properties": {
+            "constraint": {
+              "$ref": "#/components/schemas/Constraint"
+            },
+            "operator": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "OPERATOR_UNSPECIFIED",
+                      "OPERATOR_AND",
+                      "OPERATOR_OR"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "Constraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/SimpleConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/CompoundConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/InteractionConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/IntervalConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/SegmentConstraint"
+            }
+          ],
+          "type": "object"
+        },
+        "ContactsFilter": {
+          "properties": {
+            "advancedFilter": {
+              "$ref": "#/components/schemas/AdvancedFilter"
+            },
+            "cities": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "dateFilter": {
+              "$ref": "#/components/schemas/DateFilter"
+            },
+            "email": {
+              "type": "string"
+            },
+            "engagementLevel": {
+              "items": {
+                "oneOf": [
+                  {
+                    "enum": [
+                      [
+                        "SEGMENT_LEVEL_UNSPECIFIED",
+                        "SEGMENT_LEVEL_1",
+                        "SEGMENT_LEVEL_2",
+                        "SEGMENT_LEVEL_3"
+                      ]
+                    ],
+                    "format": "enum",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            "entryPoint": {
+              "items": {
+                "$ref": "#/components/schemas/EntryPoint"
+              },
+              "type": "array"
+            },
+            "name": {
+              "type": "string"
+            },
+            "pastConversionTypes": {
+              "items": {
+                "oneOf": [
+                  {
+                    "enum": [
+                      [
+                        "CONVERSION_TYPE_UNSPECIFIED",
+                        "CONVERSION_TYPE_NONE",
+                        "CONVERSION_TYPE_CONTACT_COLLECTION",
+                        "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                        "CONVERSION_TYPE_PURCHASE",
+                        "CONVERSION_TYPE_FORM_SUBMISSION",
+                        "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                      ]
+                    ],
+                    "format": "enum",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            },
+            "pastInteractionTypes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "postalCodes": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "states": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "suites": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "ContactsSummary": {
+          "properties": {
+            "conversion": {
+              "items": {
+                "$ref": "#/components/schemas/Conversion"
+              },
+              "type": "array"
+            },
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "totalContacts": {
+              "type": "string"
+            },
+            "totalContactsPercentChange": {
+              "format": "float",
+              "type": "number"
+            },
+            "uniqueContacts": {
+              "type": "string"
+            },
+            "uniqueContactsPercentChange": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "Conversion": {
+          "properties": {
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "hour": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "total": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ConversionRate": {
+          "properties": {
+            "clicks": {
+              "type": "string"
+            },
+            "conversionRate": {
+              "format": "float",
+              "type": "number"
+            },
+            "conversions": {
+              "type": "string"
+            },
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "hour": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "scans": {
+              "type": "string"
+            },
+            "views": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ConversionRateFilter": {
+          "properties": {
+            "conversionType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "CONVERSION_TYPE_UNSPECIFIED",
+                      "CONVERSION_TYPE_NONE",
+                      "CONVERSION_TYPE_CONTACT_COLLECTION",
+                      "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                      "CONVERSION_TYPE_PURCHASE",
+                      "CONVERSION_TYPE_FORM_SUBMISSION",
+                      "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "currentFolderFilter": {
+              "items": {
+                "$ref": "#/components/schemas/CurrentFolderFilter"
+              },
+              "type": "array"
+            },
+            "currentTagFilter": {
+              "items": {
+                "$ref": "#/components/schemas/CurrentTagFilter"
+              },
+              "type": "array"
+            },
+            "entryPoint": {
+              "items": {
+                "$ref": "#/components/schemas/EntryPoint"
+              },
+              "type": "array"
+            },
+            "folderFilter": {
+              "items": {
+                "$ref": "#/components/schemas/FolderFilter"
+              },
+              "type": "array"
+            },
+            "key": {
+              "type": "string"
+            },
+            "metadataFilter": {
+              "items": {
+                "$ref": "#/components/schemas/MetadataFilter"
+              },
+              "type": "array"
+            },
+            "suiteId": {
+              "type": "string"
+            },
+            "tagFilter": {
+              "items": {
+                "$ref": "#/components/schemas/TagFilter"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "ConversionRateSummary": {
+          "properties": {
+            "conversionRate": {
+              "items": {
+                "$ref": "#/components/schemas/ConversionRate"
+              },
+              "type": "array"
+            },
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "totalClicks": {
+              "type": "string"
+            },
+            "totalClicksPercentChange": {
+              "format": "float",
+              "type": "number"
+            },
+            "totalConversionRate": {
+              "format": "float",
+              "type": "number"
+            },
+            "totalConversionRatePercentChange": {
+              "format": "float",
+              "type": "number"
+            },
+            "totalConversions": {
+              "type": "string"
+            },
+            "totalConversionsPercentChange": {
+              "format": "float",
+              "type": "number"
+            },
+            "totalScans": {
+              "type": "string"
+            },
+            "totalScansPercentChange": {
+              "format": "float",
+              "type": "number"
+            },
+            "totalUniqueVisitors": {
+              "type": "string"
+            },
+            "totalUniqueVisitorsPercentChange": {
+              "format": "float",
+              "type": "number"
+            },
+            "totalViews": {
+              "type": "string"
+            },
+            "totalViewsPercentChange": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "ConversionTypeFilter": {
+          "properties": {
+            "currentFolderFilter": {
+              "items": {
+                "$ref": "#/components/schemas/CurrentFolderFilter"
+              },
+              "type": "array"
+            },
+            "currentTagFilter": {
+              "items": {
+                "$ref": "#/components/schemas/CurrentTagFilter"
+              },
+              "type": "array"
+            },
+            "entryPoint": {
+              "items": {
+                "$ref": "#/components/schemas/EntryPoint"
+              },
+              "type": "array"
+            },
+            "folderFilter": {
+              "items": {
+                "$ref": "#/components/schemas/FolderFilter"
+              },
+              "type": "array"
+            },
+            "key": {
+              "type": "string"
+            },
+            "metadataFilter": {
+              "items": {
+                "$ref": "#/components/schemas/MetadataFilter"
+              },
+              "type": "array"
+            },
+            "suiteId": {
+              "type": "string"
+            },
+            "tagFilter": {
+              "items": {
+                "$ref": "#/components/schemas/TagFilter"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "ConversionTypeSummary": {
+          "properties": {
+            "conversion": {
+              "items": {
+                "$ref": "#/components/schemas/Conversion"
+              },
+              "type": "array"
+            },
+            "conversionType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "CONVERSION_TYPE_UNSPECIFIED",
+                      "CONVERSION_TYPE_NONE",
+                      "CONVERSION_TYPE_CONTACT_COLLECTION",
+                      "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                      "CONVERSION_TYPE_PURCHASE",
+                      "CONVERSION_TYPE_FORM_SUBMISSION",
+                      "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "total": {
+              "type": "string"
+            },
+            "totalPercentChange": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "Coordinate": {
+          "properties": {
+            "x": {
+              "format": "float",
+              "type": "number"
+            },
+            "y": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "CurrentFolderFilter": {
+          "properties": {
+            "folderIds": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "CurrentTagFilter": {
+          "properties": {
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "Date": {
+          "format": "date",
+          "type": "string"
+        },
+        "DateColumn": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "DateFilter": {
+          "properties": {
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            },
+            "timezone": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "EntryPoint": {
+          "properties": {
+            "id": {
+              "description": "The id of the underlying asset, this will always be an instance of a CODE_V3 (ie. the code inside the batch referenced by key)",
+              "type": "string"
+            },
+            "key": {
+              "description": "The key within suite.assets that points to this asset (BATCH or CODE_V3), set even on scan events",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "EqualConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DateColumn"
+            }
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "FolderFilter": {
+          "properties": {
+            "folderIds": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "GetAudienceSummaryRequest": {
+          "properties": {
+            "contactsFilter": {
+              "$ref": "#/components/schemas/ContactsFilter"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetAudienceSummaryResponse": {
+          "properties": {
+            "audienceSummary": {
+              "$ref": "#/components/schemas/AudienceSummary"
+            }
+          },
+          "type": "object"
+        },
+        "GetContactsSummaryRequest": {
+          "properties": {
+            "conversionTypeFilter": {
+              "$ref": "#/components/schemas/ConversionTypeFilter"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetContactsSummaryResponse": {
+          "properties": {
+            "contactsSummary": {
+              "$ref": "#/components/schemas/ContactsSummary"
+            }
+          },
+          "type": "object"
+        },
+        "GetConversionRateSummaryRequest": {
+          "properties": {
+            "conversionRateFilter": {
+              "$ref": "#/components/schemas/ConversionRateFilter"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetConversionRateSummaryResponse": {
+          "properties": {
+            "conversionRateSummary": {
+              "$ref": "#/components/schemas/ConversionRateSummary"
+            }
+          },
+          "type": "object"
+        },
+        "GetConversionTypeSummaryRequest": {
+          "properties": {
+            "conversionType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "CONVERSION_TYPE_UNSPECIFIED",
+                      "CONVERSION_TYPE_NONE",
+                      "CONVERSION_TYPE_CONTACT_COLLECTION",
+                      "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                      "CONVERSION_TYPE_PURCHASE",
+                      "CONVERSION_TYPE_FORM_SUBMISSION",
+                      "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "conversionTypeFilter": {
+              "$ref": "#/components/schemas/ConversionTypeFilter"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetConversionTypeSummaryResponse": {
+          "properties": {
+            "conversionTypeSummary": {
+              "$ref": "#/components/schemas/ConversionTypeSummary"
+            }
+          },
+          "type": "object"
+        },
+        "GetGeoSummaryRequest": {
+          "properties": {
+            "conversionTypeFilter": {
+              "$ref": "#/components/schemas/ConversionTypeFilter"
+            },
+            "geoAdminLevel": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "GEO_ADMIN_LEVEL_UNSPECIFIED",
+                      "GEO_ADMIN_LEVEL_ADMINISTRATIVE_AREA",
+                      "GEO_ADMIN_LEVEL_POSTAL_CODE"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "viewport": {
+              "$ref": "#/components/schemas/Viewport"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetGeoSummaryResponse": {
+          "properties": {
+            "geojson": {
+              "format": "byte",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetRevenueSummaryRequest": {
+          "properties": {
+            "conversionTypeFilter": {
+              "$ref": "#/components/schemas/ConversionTypeFilter"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetRevenueSummaryResponse": {
+          "properties": {
+            "revenueSummary": {
+              "$ref": "#/components/schemas/RevenueSummary"
+            }
+          },
+          "type": "object"
+        },
+        "GoogleProtobufAny": {
+          "additionalProperties": true,
+          "description": "Contains an arbitrary serialized along with a @type that describes the type of the serialized message.",
+          "properties": {
+            "@type": {
+              "description": "The type of the serialized ",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GoogleProtobufValue": {},
+        "GreaterConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DateColumn"
+            }
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GreaterEqualConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DateColumn"
+            }
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GroupedConversionRate": {
+          "properties": {
+            "clicks": {
+              "type": "string"
+            },
+            "conversionRate": {
+              "format": "float",
+              "type": "number"
+            },
+            "conversions": {
+              "type": "string"
+            },
+            "googleProtobufValue": {
+              "$ref": "#/components/schemas/GoogleProtobufValue"
+            },
+            "groupId": {
+              "type": "string"
+            },
+            "scans": {
+              "type": "string"
+            },
+            "uniqueVisitors": {
+              "type": "string"
+            },
+            "views": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "InConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DateColumn"
+            }
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "values": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "InteractionConstraint": {
+          "properties": {
+            "constraint": {
+              "$ref": "#/components/schemas/Constraint"
+            }
+          },
+          "type": "object"
+        },
+        "IntervalConstraint": {
+          "properties": {
+            "column": {
+              "type": "string"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "LikeConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DateColumn"
+            }
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ListConversionRatesRequest": {
+          "properties": {
+            "conversionRateFilter": {
+              "$ref": "#/components/schemas/ConversionRateFilter"
+            },
+            "groupBy": {
+              "type": "string"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "paginationArguments": {
+              "$ref": "#/components/schemas/PaginationArguments"
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ListConversionRatesResponse": {
+          "properties": {
+            "groupBy": {
+              "type": "string"
+            },
+            "groupedConversionRate": {
+              "items": {
+                "$ref": "#/components/schemas/GroupedConversionRate"
+              },
+              "type": "array"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "paginationPageInfo": {
+              "$ref": "#/components/schemas/PaginationPageInfo"
+            },
+            "timeRange": {
+              "$ref": "#/components/schemas/TimeRange"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "totalClicks": {
+              "type": "string"
+            },
+            "totalConversions": {
+              "type": "string"
+            },
+            "totalScans": {
+              "type": "string"
+            },
+            "totalUniqueVisitors": {
+              "type": "string"
+            },
+            "totalViews": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "MetadataFilter": {
+          "properties": {
+            "googleProtobufValue": {
+              "items": {
+                "$ref": "#/components/schemas/GoogleProtobufValue"
+              },
+              "type": "array"
+            },
+            "metadataKey": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "NotConstraint": {
+          "properties": {
+            "constraint": {
+              "$ref": "#/components/schemas/Constraint"
+            }
+          },
+          "type": "object"
+        },
+        "NullConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DateColumn"
+            }
+          ],
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "PaginationArguments": {
+          "properties": {
+            "after": {
+              "description": "Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most \"first\" records.\n This cursor generally comes from the \"end_cursor\" response string in PaginationPageInfo",
+              "type": "string"
+            },
+            "before": {
+              "description": "Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most \"last\" records.\n This cursor generally comes from the \"start_cursor\" response string in PaginationPageInfo",
+              "type": "string"
+            },
+            "first": {
+              "description": "Paginate first takes a non-negative integer\n\n Use this argument to indicate how many records you would like to request",
+              "format": "int32",
+              "type": "integer"
+            },
+            "last": {
+              "description": "Paginate last takes a non-negative integer\n\n Use this argument to indicate how many records you would like to request",
+              "format": "int32",
+              "type": "integer"
+            },
+            "order": {
+              "description": "Order direction",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "ORDER_UNSPECIFIED",
+                      "ORDER_ASC",
+                      "ORDER_DESC"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orderBy": {
+              "description": "Which field to order by",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "PaginationPageInfo": {
+          "properties": {
+            "endCursor": {
+              "description": "Opaque cursor corresponding to the last record in the response array",
+              "type": "string"
+            },
+            "hasNextPage": {
+              "description": "Indicates whether more data exists following the set defined by the clients arguments",
+              "type": "boolean"
+            },
+            "hasPreviousPage": {
+              "description": "Indicates whether more data exists prior to the set defined by the clients argument",
+              "type": "boolean"
+            },
+            "startCursor": {
+              "description": "Opaque cursor corresponding to the first record in the response array",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "PredicateSet": {
+          "properties": {
+            "constraint": {
+              "$ref": "#/components/schemas/Constraint"
+            }
+          },
+          "type": "object"
+        },
+        "Revenue": {
+          "properties": {
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "hour": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "revenueRevenueByCurrencyEntry": {
+              "items": {
+                "$ref": "#/components/schemas/Revenue_RevenueByCurrencyEntry"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "RevenueSummary": {
+          "properties": {
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            },
+            "interval": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "INTERVAL_UNSPECIFIED",
+                      "INTERVAL_ALL_TIME",
+                      "INTERVAL_TODAY",
+                      "INTERVAL_YESTERDAY",
+                      "INTERVAL_LAST_WEEK",
+                      "INTERVAL_LAST_7_DAYS",
+                      "INTERVAL_LAST_30_DAYS",
+                      "INTERVAL_LAST_90_DAYS",
+                      "INTERVAL_CUSTOM"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "period": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "PERIOD_UNSPECIFIED",
+                      "PERIOD_HOUR",
+                      "PERIOD_DAY",
+                      "PERIOD_WEEK",
+                      "PERIOD_MONTH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "revenue": {
+              "items": {
+                "$ref": "#/components/schemas/Revenue"
+              },
+              "type": "array"
+            },
+            "revenueSummaryTotalRevenueByCurrencyEntry": {
+              "items": {
+                "$ref": "#/components/schemas/RevenueSummary_TotalRevenueByCurrencyEntry"
+              },
+              "type": "array"
+            },
+            "revenueSummaryTotalRevenueByCurrencyPercentChangeEntry": {
+              "items": {
+                "$ref": "#/components/schemas/RevenueSummary_TotalRevenueByCurrencyPercentChangeEntry"
+              },
+              "type": "array"
+            },
+            "timezone": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "RevenueSummary_TotalRevenueByCurrencyEntry": {
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "value": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "RevenueSummary_TotalRevenueByCurrencyPercentChangeEntry": {
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "value": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "Revenue_RevenueByCurrencyEntry": {
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "value": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "Segment": {
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "value": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "SegmentConstraint": {
+          "properties": {
+            "engagementLevel": {
+              "items": {
+                "oneOf": [
+                  {
+                    "enum": [
+                      [
+                        "SEGMENT_LEVEL_UNSPECIFIED",
+                        "SEGMENT_LEVEL_1",
+                        "SEGMENT_LEVEL_2",
+                        "SEGMENT_LEVEL_3"
+                      ]
+                    ],
+                    "format": "enum",
+                    "type": "string"
+                  }
+                ]
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "SimpleConstraint": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/EqualConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/NotConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/InConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/GreaterConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/GreaterEqualConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/LikeConstraint"
+            },
+            {
+              "$ref": "#/components/schemas/NullConstraint"
+            }
+          ],
+          "type": "object"
+        },
+        "Status": {
+          "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+          "properties": {
+            "code": {
+              "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+              "format": "int32",
+              "type": "integer"
+            },
+            "details": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "message": {
+              "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "TagFilter": {
+          "properties": {
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "TimeRange": {
+          "properties": {
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            }
+          },
+          "type": "object"
+        },
+        "Timestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "UserSegment": {
+          "properties": {
+            "segment": {
+              "items": {
+                "$ref": "#/components/schemas/Segment"
+              },
+              "type": "array"
+            },
+            "type": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "USER_SEGMENT_TYPE_UNSPECIFIED",
+                      "USER_SEGMENT_TYPE_IDENTIFIED",
+                      "USER_SEGMENT_TYPE_ENGAGEMENT_LEVEL",
+                      "USER_SEGMENT_TYPE_CONVERSION_TYPE"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "Viewport": {
+          "properties": {
+            "coordinate": {
+              "$ref": "#/components/schemas/Coordinate"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "bearerFormat": "JWT",
+          "scheme": "bearer",
+          "type": "http"
+        }
+      }
+    },
+    "info": {
+      "title": "Analytics",
+      "version": "2.0.0"
+    },
+    "openapi": "3.0.3",
+    "paths": {
+      "/abacus.v2.AbacusService/GetAudienceSummary": {
+        "post": {
+          "operationId": "Get Audience Summary Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAudienceSummaryRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetAudienceSummaryResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/abacus.v2.AbacusService/GetContactsSummary": {
+        "post": {
+          "operationId": "Get Contacts Summary Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetContactsSummaryRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetContactsSummaryResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/abacus.v2.AbacusService/GetConversionRateSummary": {
+        "post": {
+          "operationId": "Get Conversion Rate Summary Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConversionRateSummaryRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetConversionRateSummaryResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/abacus.v2.AbacusService/GetConversionTypeSummary": {
+        "post": {
+          "operationId": "Get Conversion Type Summary Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConversionTypeSummaryRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetConversionTypeSummaryResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/abacus.v2.AbacusService/GetGeoSummary": {
+        "post": {
+          "operationId": "Get Geo Summary Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetGeoSummaryRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetGeoSummaryResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/abacus.v2.AbacusService/GetRevenueSummary": {
+        "post": {
+          "operationId": "Get Revenue Summary Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetRevenueSummaryRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetRevenueSummaryResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/abacus.v2.AbacusService/ListConversionRates": {
+        "post": {
+          "operationId": "List Conversion Rates Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListConversionRatesRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ListConversionRatesResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "servers": [
+      {
+        "url": "https://api.conversions.flowcode.com"
+      },
+      {
+        "url": "https://api.conversions.stg.flowcode.com"
+      }
+    ],
+    "tags": [
+      {
+        "description": "Endpoints exposed via gRPC Connect API.",
+        "name": "Grpc Connect APIs"
+      }
+    ]
+  }
