@@ -1,0 +1,2338 @@
+{
+    "components": {
+      "schemas": {
+        "Action": {
+          "description": " Actions define a set of events which can be triggered when a link is followed. This occurs after conditions are processed.\n",
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/NotifyAction"
+            }
+          ],
+          "properties": {
+            "condition": {
+              "items": {
+                "$ref": "#/components/schemas/Condition"
+              },
+              "type": "array"
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Actor": {
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "AgentData": {
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "faxNumber": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "mobilePhoneNumber": {
+              "type": "string"
+            },
+            "office": {
+              "$ref": "#/components/schemas/Office"
+            },
+            "officePhoneNumber": {
+              "type": "string"
+            },
+            "photo": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "AssetRef": {
+          "properties": {
+            "assetId": {
+              "description": "Asset ID unique identifier for the asset",
+              "type": "string"
+            },
+            "conversionComponent": {
+              "description": "Conversion Component corresponds is the default value for Flow and Event messages that define the key in the data field of the ExecuteResponse message. This identifies the component that triggered the conversion event.",
+              "type": "string"
+            },
+            "conversionType": {
+              "description": "Conversion Type is an enumeration used to describe the intended purpose of this specific template and eventual asset.",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "CONVERSION_TYPE_UNSPECIFIED",
+                      "CONVERSION_TYPE_NONE",
+                      "CONVERSION_TYPE_CONTACT_COLLECTION",
+                      "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                      "CONVERSION_TYPE_PURCHASE",
+                      "CONVERSION_TYPE_FORM_SUBMISSION",
+                      "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "disabled": {
+              "description": "Disabled is a boolean to determine whether this asset should be disabled in the UI when rendering the conversion flow.",
+              "type": "boolean"
+            },
+            "displayName": {
+              "description": "A display name for the template used in editors",
+              "type": "string"
+            },
+            "iconUrl": {
+              "description": "Icon URL can be set to be displayed with the short name when rendering this template in the conversion flow, i.e. the button icon to display the asset.",
+              "type": "string"
+            },
+            "isCustomizable": {
+              "description": "Is Customizable is a boolean as to whether or not one is allowed to override the default config.",
+              "type": "boolean"
+            },
+            "renderMode": {
+              "description": "The rendering mode to use when rendering this asset in a suite",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "RENDER_MODE_UNSPECIFIED",
+                      "RENDER_MODE_INLINE",
+                      "RENDER_MODE_MODAL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "shortName": {
+              "description": "The default text rendered as the name for this template in the conversion flow, i.e. the button text to display the asset.",
+              "type": "string"
+            },
+            "struct": {
+              "$ref": "#/components/schemas/Struct"
+            },
+            "templateId": {
+              "description": "Template ID is the id of the template used to create the Asset",
+              "type": "string"
+            },
+            "templateVersion": {
+              "description": "The version of the template to use",
+              "type": "string"
+            },
+            "type": {
+              "description": "Type is the type of Asset, usually defined from the associated template reference.",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "ASSET_TYPE_UNSPECIFIED",
+                      "ASSET_TYPE_PLACEMENT",
+                      "ASSET_TYPE_CODE",
+                      "ASSET_TYPE_PAGE",
+                      "ASSET_TYPE_PAGE_V2",
+                      "ASSET_TYPE_CODE_V3",
+                      "ASSET_TYPE_CODE_BATCH",
+                      "ASSET_TYPE_LANDING_PAGE",
+                      "ASSET_TYPE_EXTERNAL_DESTINATION",
+                      "ASSET_TYPE_EXPERIMENT",
+                      "ASSET_TYPE_WALLET_PASS",
+                      "ASSET_TYPE_WALLET_PASS_BATCH",
+                      "ASSET_TYPE_SHORT_URL",
+                      "ASSET_TYPE_MODULE",
+                      "ASSET_TYPE_ENTRYPOINT_BATCH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "BulkDeleteSuiteRequest": {
+          "properties": {
+            "deleteSuiteRequest": {
+              "items": {
+                "$ref": "#/components/schemas/DeleteSuiteRequest"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "BulkDeleteSuiteResponse": {
+          "properties": {
+            "deleteSuiteResponse": {
+              "$ref": "#/components/schemas/DeleteSuiteResponse"
+            },
+            "status": {
+              "$ref": "#/components/schemas/Status"
+            }
+          },
+          "type": "object"
+        },
+        "BulkUpdateSuiteRequest": {
+          "properties": {
+            "updateSuiteRequest": {
+              "items": {
+                "$ref": "#/components/schemas/UpdateSuiteRequest"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "BulkUpdateSuiteResponse": {
+          "properties": {
+            "status": {
+              "$ref": "#/components/schemas/Status"
+            },
+            "updateSuiteResponse": {
+              "$ref": "#/components/schemas/UpdateSuiteResponse"
+            }
+          },
+          "type": "object"
+        },
+        "Bundle": {
+          "description": " List of bundles that match the query.\n",
+          "properties": {
+            "archiveReason": {
+              "type": "string"
+            },
+            "bundleTemplatesEntry": {
+              "items": {
+                "$ref": "#/components/schemas/Bundle_TemplatesEntry"
+              },
+              "type": "array"
+            },
+            "bundleType": {
+              "description": "Bundle Type is the type of bundle that is being created.",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "BUNDLE_TYPE_UNSPECIFIED",
+                      "BUNDLE_TYPE_CUSTOM",
+                      "BUNDLE_TYPE_REAL_ESTATE",
+                      "BUNDLE_TYPE_COMMERCE",
+                      "BUNDLE_TYPE_FORM",
+                      "BUNDLE_TYPE_EXTERNAL",
+                      "BUNDLE_TYPE_CONTACT"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "category": {
+              "description": "Category is an arbitrary string that can be used to categorize the bundle for template listings.",
+              "type": "string"
+            },
+            "creator": {
+              "$ref": "#/components/schemas/Creator"
+            },
+            "dagVersion": {
+              "type": "string"
+            },
+            "description": {
+              "description": "Description is an optional description of the bundle.",
+              "type": "string"
+            },
+            "folderPath": {
+              "type": "string"
+            },
+            "groupId": {
+              "type": "string"
+            },
+            "id": {
+              "description": "ID is the UUID of the Bundle",
+              "type": "string"
+            },
+            "link": {
+              "items": {
+                "$ref": "#/components/schemas/Link"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Name is the name of the bundle.",
+              "type": "string"
+            },
+            "orgId": {
+              "description": "Org ID is the organization that the bundle belongs to.",
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "tags": {
+              "items": {
+                "description": "Tags are a set of strings that can be used to categorize the bundle in various ways.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            },
+            "version": {
+              "type": "string"
+            },
+            "visibility": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "description": "Workspace ID is the workspace that the bundle belongs to. Must be associated with the org_id.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Bundle_TemplatesEntry": {
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "templateRef": {
+              "$ref": "#/components/schemas/TemplateRef"
+            }
+          },
+          "type": "object"
+        },
+        "CommerceData": {
+          "properties": {
+            "integration": {
+              "$ref": "#/components/schemas/Integration"
+            },
+            "product": {
+              "$ref": "#/components/schemas/Product"
+            }
+          },
+          "type": "object"
+        },
+        "CompoundRuleValue": {
+          "properties": {
+            "condition": {
+              "$ref": "#/components/schemas/Condition"
+            },
+            "operator": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "BOOLEAN_OPERATOR_UNSPECIFIED",
+                      "BOOLEAN_OPERATOR_AND",
+                      "BOOLEAN_OPERATOR_OR"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "Condition": {
+          "description": " Conditions define the rules of when the source and destination link is allowed to be followed, i.e. a smart rule for location or device.\n",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "ruleType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "RULE_TYPE_UNSPECIFIED",
+                      "RULE_TYPE_DAY_OF_WEEK",
+                      "RULE_TYPE_HOUR_OF_DAY",
+                      "RULE_TYPE_DEVICE_TYPE",
+                      "RULE_TYPE_GEO",
+                      "RULE_TYPE_NEARBY",
+                      "RULE_TYPE_REQUEST",
+                      "RULE_TYPE_DYNAMIC_PAGE_REQUEST",
+                      "RULE_TYPE_REQUEST_CONTEXT",
+                      "RULE_TYPE_COMPOUND",
+                      "RULE_TYPE_NOT",
+                      "RULE_TYPE_DATE"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "ruleValue": {
+              "items": {
+                "$ref": "#/components/schemas/RuleValue"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "ContactData": {
+          "properties": {
+            "bio": {
+              "type": "string"
+            },
+            "company": {
+              "type": "string"
+            },
+            "department": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "fullName": {
+              "type": "string"
+            },
+            "image": {
+              "$ref": "#/components/schemas/Image"
+            },
+            "mobileNumber": {
+              "type": "string"
+            },
+            "postalAddress": {
+              "$ref": "#/components/schemas/PostalAddress"
+            },
+            "socialLink": {
+              "items": {
+                "$ref": "#/components/schemas/SocialLink"
+              },
+              "type": "array"
+            },
+            "title": {
+              "type": "string"
+            },
+            "website": {
+              "type": "string"
+            },
+            "workNumber": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "CreateSuiteRequest": {
+          "properties": {
+            "brandKitId": {
+              "type": "string"
+            },
+            "bundleId": {
+              "type": "string"
+            },
+            "bundleVersion": {
+              "type": "string"
+            },
+            "createSuiteRequestConfigEntry": {
+              "items": {
+                "$ref": "#/components/schemas/CreateSuiteRequest_ConfigEntry"
+              },
+              "type": "array"
+            },
+            "data": {
+              "$ref": "#/components/schemas/Data"
+            },
+            "description": {
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "folderPath": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "CreateSuiteRequest_ConfigEntry": {
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "struct": {
+              "$ref": "#/components/schemas/Struct"
+            }
+          },
+          "type": "object"
+        },
+        "CreateSuiteResponse": {
+          "properties": {
+            "suite": {
+              "$ref": "#/components/schemas/Suite"
+            }
+          },
+          "type": "object"
+        },
+        "Creator": {
+          "description": " Creator is the person who created the bundle.\n",
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "timezone": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Data": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/RealEstateData"
+            },
+            {
+              "$ref": "#/components/schemas/CommerceData"
+            },
+            {
+              "$ref": "#/components/schemas/FormData"
+            },
+            {
+              "$ref": "#/components/schemas/ContactData"
+            }
+          ],
+          "type": "object"
+        },
+        "Date": {
+          "format": "date",
+          "type": "string"
+        },
+        "DateRange": {
+          "properties": {
+            "date": {
+              "$ref": "#/components/schemas/Date"
+            }
+          },
+          "type": "object"
+        },
+        "DateValue": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Date"
+            },
+            {
+              "$ref": "#/components/schemas/Date"
+            },
+            {
+              "$ref": "#/components/schemas/Date"
+            },
+            {
+              "$ref": "#/components/schemas/DateRange"
+            }
+          ],
+          "type": "object"
+        },
+        "DayOfWeekValue": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/Int32Range"
+            }
+          ],
+          "properties": {
+            "after": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "before": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "dayNumber": {
+              "description": "Deprecated: Use is instead",
+              "format": "int32",
+              "type": "integer"
+            },
+            "is": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "DeleteSuiteRequest": {
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "DeleteSuiteResponse": {
+          "type": "object"
+        },
+        "DeviceTypeValue": {
+          "properties": {
+            "deviceType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "DEVICE_TYPE_UNSPECIFIED",
+                      "DEVICE_TYPE_IOS",
+                      "DEVICE_TYPE_ANDROID",
+                      "DEVICE_TYPE_DESKTOP"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "Duration": {
+          "pattern": "^-?(?:0|[1-9][0-9]{0,11})(?:\\.[0-9]{1,9})?s$",
+          "type": "string"
+        },
+        "FieldMask": {
+          "format": "field-mask",
+          "type": "string"
+        },
+        "Flow": {
+          "properties": {
+            "conversionComponent": {
+              "type": "string"
+            },
+            "conversionType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "CONVERSION_TYPE_UNSPECIFIED",
+                      "CONVERSION_TYPE_NONE",
+                      "CONVERSION_TYPE_CONTACT_COLLECTION",
+                      "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                      "CONVERSION_TYPE_PURCHASE",
+                      "CONVERSION_TYPE_FORM_SUBMISSION",
+                      "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "disabled": {
+              "type": "boolean"
+            },
+            "rules": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "FormData": {
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "image": {
+              "items": {
+                "$ref": "#/components/schemas/Image"
+              },
+              "type": "array"
+            },
+            "name": {
+              "type": "string"
+            },
+            "photos": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "GeoValue": {
+          "properties": {
+            "county": {
+              "type": "string"
+            },
+            "region": {
+              "type": "string"
+            },
+            "state": {
+              "type": "string"
+            },
+            "zip": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetSuiteRequest": {
+          "properties": {
+            "id": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GetSuiteResponse": {
+          "properties": {
+            "suite": {
+              "$ref": "#/components/schemas/Suite"
+            }
+          },
+          "type": "object"
+        },
+        "GoogleProtobufAny": {
+          "additionalProperties": true,
+          "description": "Contains an arbitrary serialized along with a @type that describes the type of the serialized message.",
+          "properties": {
+            "@type": {
+              "description": "The type of the serialized ",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "GoogleProtobufValue": {},
+        "HourOfDayValue": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/TimeBound"
+            },
+            {
+              "$ref": "#/components/schemas/TimeBound"
+            },
+            {
+              "$ref": "#/components/schemas/TimeBound"
+            },
+            {
+              "$ref": "#/components/schemas/TimeBoundRange"
+            }
+          ],
+          "properties": {
+            "timeBound": {
+              "$ref": "#/components/schemas/TimeBound"
+            }
+          },
+          "type": "object"
+        },
+        "Image": {
+          "properties": {
+            "altText": {
+              "type": "string"
+            },
+            "height": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "url": {
+              "type": "string"
+            },
+            "width": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "Int32Range": {
+          "properties": {
+            "end": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "start": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "Integration": {
+          "properties": {
+            "description": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "image": {
+              "$ref": "#/components/schemas/Image"
+            },
+            "integrationType": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "paymentSettings": {
+              "$ref": "#/components/schemas/PaymentSettings"
+            },
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Link": {
+          "description": " Links represent how templates are connected in the bundle.\n",
+          "properties": {
+            "action": {
+              "items": {
+                "$ref": "#/components/schemas/Action"
+              },
+              "type": "array"
+            },
+            "condition": {
+              "items": {
+                "$ref": "#/components/schemas/Condition"
+              },
+              "type": "array"
+            },
+            "destination": {
+              "description": "Destination is the key in the parent element's map (i.e. a Bundle's Templates field) specifying which element defines the end of the link.",
+              "type": "string"
+            },
+            "destinationAnchor": {
+              "description": "Destination Anchor is an arbitrary string defining where to draw the destination link in a flow editor",
+              "type": "string"
+            },
+            "source": {
+              "description": "Source is the key in the parent element's map (i.e. a Bundle's Templates field) specifying which element defines the start of the link.",
+              "type": "string"
+            },
+            "sourceAnchor": {
+              "description": "Source Anchor is an arbitrary string defining where to draw the source link in a flow editor",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ListBundlesRequest": {
+          "properties": {
+            "categories": {
+              "items": {
+                "description": "Show only bundles that are in a category from this list of categories.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "creatorId": {
+              "description": "Deprecated. Use creator_ids instead.",
+              "type": "string"
+            },
+            "creatorIds": {
+              "items": {
+                "description": "Show only bundles that are created by a creator id  of creator ids of the bundles.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "folderPath": {
+              "description": "Show only bundles belonging to this folder path.",
+              "type": "string"
+            },
+            "namePrefix": {
+              "description": "Show only bundles that include this prefix in the name.",
+              "type": "string"
+            },
+            "orgId": {
+              "description": "Org ID is the organization that the bundles belong to.",
+              "type": "string"
+            },
+            "paginationArguments": {
+              "$ref": "#/components/schemas/PaginationArguments"
+            },
+            "states": {
+              "items": {
+                "description": "Show only bundles that are in a state from this list of of states.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tags": {
+              "items": {
+                "description": "Show only bundles that include a tag from this list of tags.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "visibilities": {
+              "items": {
+                "description": "Show only bundles that are of a visibility from the list of visibilities.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "workspaceId": {
+              "description": "Workspace ID is the workspace that the bundles belong to. Must be associated with the org_id.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ListBundlesResponse": {
+          "properties": {
+            "bundle": {
+              "items": {
+                "$ref": "#/components/schemas/Bundle"
+              },
+              "type": "array"
+            },
+            "paginationPageInfo": {
+              "$ref": "#/components/schemas/PaginationPageInfo"
+            }
+          },
+          "type": "object"
+        },
+        "ListSuitesRequest": {
+          "properties": {
+            "categories": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "creatorId": {
+              "type": "string"
+            },
+            "creatorIds": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "externalId": {
+              "type": "string"
+            },
+            "folderPath": {
+              "type": "string"
+            },
+            "namePrefix": {
+              "type": "string"
+            },
+            "orgId": {
+              "type": "string"
+            },
+            "paginationArguments": {
+              "$ref": "#/components/schemas/PaginationArguments"
+            },
+            "states": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "tags": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "workspaceId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ListSuitesResponse": {
+          "properties": {
+            "paginationPageInfo": {
+              "$ref": "#/components/schemas/PaginationPageInfo"
+            },
+            "suite": {
+              "items": {
+                "$ref": "#/components/schemas/Suite"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "ListingData": {
+          "properties": {
+            "active": {
+              "description": "Active is a boolean to determine if the listing is currently active.",
+              "type": "boolean"
+            },
+            "additionalDetails": {
+              "type": "string"
+            },
+            "bathrooms": {
+              "description": "@deprecated in favor of float total_bathrooms",
+              "format": "int32",
+              "type": "integer"
+            },
+            "bedrooms": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "description": {
+              "type": "string"
+            },
+            "fullBathrooms": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "halfBathrooms": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "livingArea": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "lotSize": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "mlsId": {
+              "description": "The MLS ID of the listing",
+              "type": "string"
+            },
+            "money": {
+              "$ref": "#/components/schemas/Money"
+            },
+            "photos": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "postalAddress": {
+              "$ref": "#/components/schemas/PostalAddress"
+            },
+            "propertyType": {
+              "type": "string"
+            },
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            },
+            "totalBathrooms": {
+              "format": "float",
+              "type": "number"
+            },
+            "url": {
+              "description": "URL of the original listing",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Location": {
+          "properties": {
+            "lat": {
+              "format": "double",
+              "type": "number"
+            },
+            "lng": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "Money": {
+          "properties": {
+            "currencyCode": {
+              "description": "The three-letter currency code defined in ISO 4217.",
+              "type": "string"
+            },
+            "nanos": {
+              "description": "Number of nano (10^-9) units of the amount.\n The value must be between -999,999,999 and +999,999,999 inclusive.\n If `units` is positive, `nanos` must be positive or zero.\n If `units` is zero, `nanos` can be positive, zero, or negative.\n If `units` is negative, `nanos` must be negative or zero.\n For example $-1.75 is represented as `units`=-1 and `nanos`=-750,000,000.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "units": {
+              "description": "The whole units of the amount.\n For example if `currencyCode` is `\"USD\"`, then 1 unit is one US dollar.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "NearbyValue": {
+          "properties": {
+            "distance": {
+              "format": "double",
+              "type": "number"
+            },
+            "fullAddress": {
+              "type": "string"
+            },
+            "location": {
+              "$ref": "#/components/schemas/Location"
+            },
+            "unit": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "DISTANCE_UNIT_UNSPECIFIED",
+                      "DISTANCE_UNIT_MILES",
+                      "DISTANCE_UNIT_METERS",
+                      "DISTANCE_UNIT_KILOMETERS"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "NotValue": {
+          "properties": {
+            "condition": {
+              "$ref": "#/components/schemas/Condition"
+            }
+          },
+          "type": "object"
+        },
+        "NotifyAction": {
+          "properties": {
+            "actor": {
+              "items": {
+                "$ref": "#/components/schemas/Actor"
+              },
+              "type": "array"
+            },
+            "defaultTemplateId": {
+              "type": "string"
+            },
+            "duration": {
+              "$ref": "#/components/schemas/Duration"
+            },
+            "notificationType": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "NOTIFICATION_TYPE_UNSPECIFIED",
+                      "NOTIFICATION_TYPE_EMAIL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "sender": {
+              "$ref": "#/components/schemas/Sender"
+            },
+            "subject": {
+              "type": "string"
+            },
+            "suppressionGroupId": {
+              "type": "string"
+            },
+            "templateId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Office": {
+          "properties": {
+            "brokerage": {
+              "type": "string"
+            },
+            "postalAddress": {
+              "$ref": "#/components/schemas/PostalAddress"
+            }
+          },
+          "type": "object"
+        },
+        "PaginationArguments": {
+          "description": " Pagination arguments.\n",
+          "properties": {
+            "after": {
+              "description": "Paginate after is an opaque cursor that includes any records immediately after sorted by the order field returning at most \"first\" records.\n This cursor generally comes from the \"end_cursor\" response string in PaginationPageInfo",
+              "type": "string"
+            },
+            "before": {
+              "description": "Paginate before is an opaque cursor that includes any records immediately before the cursor sorted by the order field returning at most \"last\" records.\n This cursor generally comes from the \"start_cursor\" response string in PaginationPageInfo",
+              "type": "string"
+            },
+            "first": {
+              "description": "Paginate first takes a non-negative integer\n\n Use this argument to indicate how many records you would like to request",
+              "format": "int32",
+              "type": "integer"
+            },
+            "last": {
+              "description": "Paginate last takes a non-negative integer\n\n Use this argument to indicate how many records you would like to request",
+              "format": "int32",
+              "type": "integer"
+            },
+            "order": {
+              "description": "Order direction",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "ORDER_UNSPECIFIED",
+                      "ORDER_ASC",
+                      "ORDER_DESC"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "orderBy": {
+              "description": "Which field to order by",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "PaginationPageInfo": {
+          "description": " Pagination information.\n",
+          "properties": {
+            "endCursor": {
+              "description": "Opaque cursor corresponding to the last record in the response array",
+              "type": "string"
+            },
+            "hasNextPage": {
+              "description": "Indicates whether more data exists following the set defined by the clients arguments",
+              "type": "boolean"
+            },
+            "hasPreviousPage": {
+              "description": "Indicates whether more data exists prior to the set defined by the clients argument",
+              "type": "boolean"
+            },
+            "startCursor": {
+              "description": "Opaque cursor corresponding to the first record in the response array",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "PaymentSettings": {
+          "properties": {
+            "acceptedCardBrands": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "cardVaultUrl": {
+              "type": "string"
+            },
+            "countryCode": {
+              "type": "string"
+            },
+            "currencyCode": {
+              "type": "string"
+            },
+            "enabledPresentmentCurrencies": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "paymentAccountId": {
+              "type": "string"
+            },
+            "supportedDigitalWallets": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "Point": {
+          "description": " Position is a set of x, y coordinates for where this template should be rendered relative to other templates in a flow editor.\n",
+          "properties": {
+            "x": {
+              "format": "float",
+              "type": "number"
+            },
+            "y": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "PostalAddress": {
+          "description": " Address is the postal address of the listing.\n",
+          "properties": {
+            "addressLines": {
+              "items": {
+                "description": "Unstructured address lines describing the lower levels of an address.\n\n Because values in address_lines do not have type information and may\n sometimes contain multiple values in a single field (e.g.\n \"Austin, TX\"), it is important that the line order is clear. The order of\n address lines should be \"envelope order\" for the country/region of the\n address. In places where this can vary (e.g. Japan), address_language is\n used to make it explicit (e.g. \"ja\" for large-to-small ordering and\n \"ja-Latn\" or \"en\" for small-to-large). This way, the most specific line of\n an address can be selected based on the language.\n\n The minimum permitted structural representation of an address consists\n of a region_code with all remaining information placed in the\n address_lines. It would be possible to format such an address very\n approximately without geocoding, but no semantic reasoning could be\n made about any of the address components until it was at least\n partially resolved.\n\n Creating an address only containing a region_code and address_lines, and\n then geocoding is the recommended way to handle completely unstructured\n addresses (as opposed to guessing which parts of the address should be\n localities or administrative areas).",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "administrativeArea": {
+              "description": "Optional. Highest administrative subdivision which is used for postal\n addresses of a country or region.\n For example, this can be a state, a province, an oblast, or a prefecture.\n Specifically, for Spain this is the province and not the autonomous\n community (e.g. \"Barcelona\" and not \"Catalonia\").\n Many countries don't use an administrative area in postal addresses. E.g.\n in Switzerland this should be left unpopulated.",
+              "type": "string"
+            },
+            "languageCode": {
+              "description": "Optional. BCP-47 language code of the contents of this address (if\n known). This is often the UI language of the input form or is expected\n to match one of the languages used in the address' country/region, or their\n transliterated equivalents.\n This can affect formatting in certain countries, but is not critical\n to the correctness of the data and will never affect any validation or\n other non-formatting related operations.\n\n If this value is not known, it should be omitted (rather than specifying a\n possibly incorrect default).\n\n Examples: \"zh-Hant\", \"ja\", \"ja-Latn\", \"en\".",
+              "type": "string"
+            },
+            "locality": {
+              "description": "Optional. Generally refers to the city/town portion of the address.\n Examples: US city, IT comune, UK post town.\n In regions of the world where localities are not well defined or do not fit\n into this structure well, leave locality empty and use address_lines.",
+              "type": "string"
+            },
+            "organization": {
+              "description": "Optional. The name of the organization at the address.",
+              "type": "string"
+            },
+            "postalCode": {
+              "description": "Optional. Postal code of the address. Not all countries use or require\n postal codes to be present, but where they are used, they may trigger\n additional validation with other parts of the address (e.g. state/zip\n validation in the U.S.A.).",
+              "type": "string"
+            },
+            "recipients": {
+              "items": {
+                "description": "Optional. The recipient at the address.\n This field may, under certain circumstances, contain multiline information.\n For example, it might contain \"care of\" information.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "regionCode": {
+              "description": "Required. CLDR region code of the country/region of the address. This\n is never inferred and it is up to the user to ensure the value is\n correct. See http://cldr.unicode.org/ and\n http://www.unicode.org/cldr/charts/30/supplemental/territory_information.html\n for details. Example: \"CH\" for Switzerland.",
+              "type": "string"
+            },
+            "revision": {
+              "description": "The schema revision of the `PostalAddress`. This must be set to 0, which is\n the latest revision.\n\n All new revisions **must** be backward compatible with old revisions.",
+              "format": "int32",
+              "type": "integer"
+            },
+            "sortingCode": {
+              "description": "Optional. Additional, country-specific, sorting code. This is not used\n in most regions. Where it is used, the value is either a string like\n \"CEDEX\", optionally followed by a number (e.g. \"CEDEX 7\"), or just a number\n alone, representing the \"sector code\" (Jamaica), \"delivery area indicator\"\n (Malawi) or \"post office indicator\" (e.g. Côte d'Ivoire).",
+              "type": "string"
+            },
+            "sublocality": {
+              "description": "Optional. Sublocality of the address.\n For example, this can be neighborhoods, boroughs, districts.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "PriceRange": {
+          "properties": {
+            "money": {
+              "$ref": "#/components/schemas/Money"
+            }
+          },
+          "type": "object"
+        },
+        "Product": {
+          "properties": {
+            "availableForSale": {
+              "type": "boolean"
+            },
+            "description": {
+              "type": "string"
+            },
+            "handle": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            },
+            "image": {
+              "items": {
+                "$ref": "#/components/schemas/Image"
+              },
+              "type": "array"
+            },
+            "integrationId": {
+              "type": "string"
+            },
+            "onlineStoreUrl": {
+              "type": "string"
+            },
+            "priceRange": {
+              "$ref": "#/components/schemas/PriceRange"
+            },
+            "productType": {
+              "type": "string"
+            },
+            "rating": {
+              "$ref": "#/components/schemas/Rating"
+            },
+            "ratingCount": {
+              "type": "string"
+            },
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            },
+            "title": {
+              "type": "string"
+            },
+            "totalInventory": {
+              "type": "string"
+            },
+            "variant": {
+              "items": {
+                "$ref": "#/components/schemas/Variant"
+              },
+              "type": "array"
+            },
+            "vendor": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Rating": {
+          "properties": {
+            "scaleMax": {
+              "format": "float",
+              "type": "number"
+            },
+            "scaleMin": {
+              "format": "float",
+              "type": "number"
+            },
+            "value": {
+              "format": "float",
+              "type": "number"
+            }
+          },
+          "type": "object"
+        },
+        "RealEstateData": {
+          "properties": {
+            "agentData": {
+              "$ref": "#/components/schemas/AgentData"
+            },
+            "listingData": {
+              "$ref": "#/components/schemas/ListingData"
+            }
+          },
+          "type": "object"
+        },
+        "RequestContextValue": {
+          "properties": {
+            "googleProtobufValue": {
+              "$ref": "#/components/schemas/GoogleProtobufValue"
+            },
+            "key": {
+              "type": "string"
+            },
+            "operator": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "OPERATOR_UNSPECIFIED",
+                      "OPERATOR_EQ",
+                      "OPERATOR_NEQ",
+                      "OPERATOR_GT",
+                      "OPERATOR_LT",
+                      "OPERATOR_GTE",
+                      "OPERATOR_LTE",
+                      "OPERATOR_REGEX",
+                      "OPERATOR_CONTAINS",
+                      "OPERATOR_IS_EMPTY",
+                      "OPERATOR_NOT_EMPTY"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "RequestValue": {
+          "properties": {
+            "googleProtobufValue": {
+              "$ref": "#/components/schemas/GoogleProtobufValue"
+            },
+            "key": {
+              "type": "string"
+            },
+            "operator": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "OPERATOR_UNSPECIFIED",
+                      "OPERATOR_EQ",
+                      "OPERATOR_NEQ",
+                      "OPERATOR_GT",
+                      "OPERATOR_LT",
+                      "OPERATOR_GTE",
+                      "OPERATOR_LTE",
+                      "OPERATOR_REGEX",
+                      "OPERATOR_CONTAINS",
+                      "OPERATOR_IS_EMPTY",
+                      "OPERATOR_NOT_EMPTY"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "RuleValue": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/DayOfWeekValue"
+            },
+            {
+              "$ref": "#/components/schemas/HourOfDayValue"
+            },
+            {
+              "$ref": "#/components/schemas/DeviceTypeValue"
+            },
+            {
+              "$ref": "#/components/schemas/GeoValue"
+            },
+            {
+              "$ref": "#/components/schemas/NearbyValue"
+            },
+            {
+              "$ref": "#/components/schemas/RequestValue"
+            },
+            {
+              "$ref": "#/components/schemas/RequestContextValue"
+            },
+            {
+              "$ref": "#/components/schemas/CompoundRuleValue"
+            },
+            {
+              "$ref": "#/components/schemas/NotValue"
+            },
+            {
+              "$ref": "#/components/schemas/DateValue"
+            }
+          ],
+          "type": "object"
+        },
+        "Sender": {
+          "properties": {
+            "actor": {
+              "$ref": "#/components/schemas/Actor"
+            },
+            "ipGroupId": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "SocialLink": {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "type": {
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "SOCIAL_LINK_TYPE_UNSPECIFIED",
+                      "SOCIAL_LINK_TYPE_LINKEDIN",
+                      "SOCIAL_LINK_TYPE_X",
+                      "SOCIAL_LINK_TYPE_INSTAGRAM",
+                      "SOCIAL_LINK_TYPE_THREADS",
+                      "SOCIAL_LINK_TYPE_FACEBOOK",
+                      "SOCIAL_LINK_TYPE_SNAPCHAT",
+                      "SOCIAL_LINK_TYPE_TIKTOK",
+                      "SOCIAL_LINK_TYPE_YOUTUBE",
+                      "SOCIAL_LINK_TYPE_SPOTIFY",
+                      "SOCIAL_LINK_TYPE_SOUNDCLOUD",
+                      "SOCIAL_LINK_TYPE_APPLE_MUSIC",
+                      "SOCIAL_LINK_TYPE_WHATSAPP",
+                      "SOCIAL_LINK_TYPE_TWITCH",
+                      "SOCIAL_LINK_TYPE_DISCORD"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "Status": {
+          "description": "The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).",
+          "properties": {
+            "code": {
+              "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].",
+              "format": "int32",
+              "type": "integer"
+            },
+            "details": {
+              "$ref": "#/components/schemas/GoogleProtobufAny"
+            },
+            "message": {
+              "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Struct": {
+          "description": " Default Config contains the default configuration for this asset type. It is dependent on the asset type, and is merged in an asset ref with any overrides.\n",
+          "type": "object"
+        },
+        "Suite": {
+          "properties": {
+            "advancedGeoEnabled": {
+              "description": "Advanced Geo Enabled is a boolean to determine if the suite will have advanced geo capabilities on by default.",
+              "type": "boolean"
+            },
+            "archiveReason": {
+              "description": "Archive Reason is optional informational text as to why the suite was archived.",
+              "type": "string"
+            },
+            "brandKitId": {
+              "description": "Brand Kit ID is the unique identifier for the brand kit that the suite is associated with.",
+              "type": "string"
+            },
+            "bundleId": {
+              "description": "Bundle ID is the unique identifier for the bundle that the suite is based on.",
+              "type": "string"
+            },
+            "bundleType": {
+              "description": "Bundle Type is the type of bundle that the suite is based on.",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "BUNDLE_TYPE_UNSPECIFIED",
+                      "BUNDLE_TYPE_CUSTOM",
+                      "BUNDLE_TYPE_REAL_ESTATE",
+                      "BUNDLE_TYPE_COMMERCE",
+                      "BUNDLE_TYPE_FORM",
+                      "BUNDLE_TYPE_EXTERNAL",
+                      "BUNDLE_TYPE_CONTACT"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "bundleVersion": {
+              "description": "Bundle Version is the version of the bundle that the suite was originally created from, as the bundle may have multiple versions.",
+              "type": "string"
+            },
+            "category": {
+              "type": "string"
+            },
+            "creator": {
+              "$ref": "#/components/schemas/Creator"
+            },
+            "data": {
+              "$ref": "#/components/schemas/Data"
+            },
+            "description": {
+              "description": "Description is an optional description of the suite.",
+              "type": "string"
+            },
+            "domain": {
+              "type": "string"
+            },
+            "folderId": {
+              "description": "The ID of the folder where the suite is located.",
+              "type": "string"
+            },
+            "folderPath": {
+              "description": "The path to the folder where the suite is located.",
+              "type": "string"
+            },
+            "id": {
+              "description": "ID is the unique identifier for the suite.",
+              "type": "string"
+            },
+            "link": {
+              "items": {
+                "$ref": "#/components/schemas/Link"
+              },
+              "type": "array"
+            },
+            "name": {
+              "description": "Name is the name of the suite.",
+              "type": "string"
+            },
+            "orgId": {
+              "description": "Org ID is the organization that the suite belongs to.",
+              "type": "string"
+            },
+            "state": {
+              "description": "State respresents the current state of the suite. Valid values are active, archived or draft.",
+              "type": "string"
+            },
+            "suiteAssetsEntry": {
+              "items": {
+                "$ref": "#/components/schemas/Suite_AssetsEntry"
+              },
+              "type": "array"
+            },
+            "suiteFlowsEntry": {
+              "items": {
+                "$ref": "#/components/schemas/Suite_FlowsEntry"
+              },
+              "type": "array"
+            },
+            "tags": {
+              "items": {
+                "description": "Tags are a set of strings that can be used to categorize the suite in various ways.",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "timestamp": {
+              "$ref": "#/components/schemas/Timestamp"
+            },
+            "timezone": {
+              "description": "The specific timeezone to use when resolving time-based rules. If not set,\n the timezone of the scanner will be used.",
+              "type": "string"
+            },
+            "workspaceId": {
+              "description": "Workspace ID is the workspace that the suite belongs to. Must be associated with the org_id.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Suite_AssetsEntry": {
+          "properties": {
+            "assetRef": {
+              "$ref": "#/components/schemas/AssetRef"
+            },
+            "key": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "Suite_FlowsEntry": {
+          "properties": {
+            "flow": {
+              "$ref": "#/components/schemas/Flow"
+            },
+            "key": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "TemplateRef": {
+          "properties": {
+            "conversionComponent": {
+              "description": "Conversion Component corresponds is the default value for Flow and Event messages that define the key in the data field of the ExecuteResponse message. This identifies the component that triggered the conversion event.",
+              "type": "string"
+            },
+            "conversionType": {
+              "description": "Conversion Type is an enumeration used to describe the intended purpose of this specific template and eventual asset.",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "CONVERSION_TYPE_UNSPECIFIED",
+                      "CONVERSION_TYPE_NONE",
+                      "CONVERSION_TYPE_CONTACT_COLLECTION",
+                      "CONVERSION_TYPE_CONTACT_DOWNLOADED",
+                      "CONVERSION_TYPE_PURCHASE",
+                      "CONVERSION_TYPE_FORM_SUBMISSION",
+                      "CONVERSION_TYPE_EXTERNAL_PIXEL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "displayName": {
+              "description": "A display name for the template used in editors",
+              "type": "string"
+            },
+            "iconUrl": {
+              "description": "Icon URL can be set to be displayed with the short name when rendering this template in the conversion flow, i.e. the button icon to display the asset.",
+              "type": "string"
+            },
+            "initiallyDisabled": {
+              "description": "Initially Disabled is a boolean to determine whether this template should appear disabled in the UI when creating the asset.",
+              "type": "boolean"
+            },
+            "point": {
+              "$ref": "#/components/schemas/Point"
+            },
+            "renderMode": {
+              "description": "The rendering mode to use when rendering this asset in a suite",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "RENDER_MODE_UNSPECIFIED",
+                      "RENDER_MODE_INLINE",
+                      "RENDER_MODE_MODAL"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            },
+            "shortName": {
+              "description": "The default text rendered as the name for this template in the conversion flow, i.e. the button text to display the asset.",
+              "type": "string"
+            },
+            "struct": {
+              "$ref": "#/components/schemas/Struct"
+            },
+            "templateId": {
+              "description": "A unique ID to the template.",
+              "type": "string"
+            },
+            "templateVersion": {
+              "description": "The version of the template to use",
+              "type": "string"
+            },
+            "type": {
+              "description": "Asset Type will define the structure for the default config and how the TemplateRef should be interpreted.",
+              "oneOf": [
+                {
+                  "enum": [
+                    [
+                      "ASSET_TYPE_UNSPECIFIED",
+                      "ASSET_TYPE_PLACEMENT",
+                      "ASSET_TYPE_CODE",
+                      "ASSET_TYPE_PAGE",
+                      "ASSET_TYPE_PAGE_V2",
+                      "ASSET_TYPE_CODE_V3",
+                      "ASSET_TYPE_CODE_BATCH",
+                      "ASSET_TYPE_LANDING_PAGE",
+                      "ASSET_TYPE_EXTERNAL_DESTINATION",
+                      "ASSET_TYPE_EXPERIMENT",
+                      "ASSET_TYPE_WALLET_PASS",
+                      "ASSET_TYPE_WALLET_PASS_BATCH",
+                      "ASSET_TYPE_SHORT_URL",
+                      "ASSET_TYPE_MODULE",
+                      "ASSET_TYPE_ENTRYPOINT_BATCH"
+                    ]
+                  ],
+                  "format": "enum",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "object"
+        },
+        "TimeBound": {
+          "description": " Deprecated: Use between instead\n",
+          "properties": {
+            "hour": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "minute": {
+              "format": "int32",
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "TimeBoundRange": {
+          "properties": {
+            "timeBound": {
+              "$ref": "#/components/schemas/TimeBound"
+            }
+          },
+          "type": "object"
+        },
+        "Timestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "UpdateSuiteRequest": {
+          "properties": {
+            "fieldMask": {
+              "$ref": "#/components/schemas/FieldMask"
+            },
+            "suite": {
+              "$ref": "#/components/schemas/Suite"
+            }
+          },
+          "type": "object"
+        },
+        "UpdateSuiteResponse": {
+          "properties": {
+            "suite": {
+              "$ref": "#/components/schemas/Suite"
+            }
+          },
+          "type": "object"
+        },
+        "Variant": {
+          "properties": {
+            "availableForSale": {
+              "type": "boolean"
+            },
+            "barcode": {
+              "type": "string"
+            },
+            "currentlyNotInStock": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "image": {
+              "$ref": "#/components/schemas/Image"
+            },
+            "money": {
+              "$ref": "#/components/schemas/Money"
+            },
+            "quantityAvailable": {
+              "type": "string"
+            },
+            "requiresShipping": {
+              "type": "boolean"
+            },
+            "sku": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "variantSelectedOptionsEntry": {
+              "items": {
+                "$ref": "#/components/schemas/Variant_SelectedOptionsEntry"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "Variant_SelectedOptionsEntry": {
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "value": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "bearerFormat": "JWT",
+          "scheme": "bearer",
+          "type": "http"
+        }
+      }
+    },
+    "info": {
+      "title": "bundles",
+      "version": "1.0.0"
+    },
+    "openapi": "3.0.3",
+    "paths": {
+      "/bundles.v1.BundleService/BulkDeleteSuite": {
+        "post": {
+          "operationId": "Bulk Delete Suite Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkDeleteSuiteRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BulkDeleteSuiteResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/BulkUpdateSuite": {
+        "post": {
+          "operationId": "Bulk Update Suite Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUpdateSuiteRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BulkUpdateSuiteResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/CreateSuite": {
+        "post": {
+          "operationId": "Create Suite Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateSuiteRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CreateSuiteResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/DeleteSuite": {
+        "post": {
+          "operationId": "Delete Suite Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteSuiteRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/DeleteSuiteResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/GetSuite": {
+        "post": {
+          "operationId": "Get Suite Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSuiteRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/GetSuiteResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/ListBundles": {
+        "post": {
+          "operationId": "List Bundles Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListBundlesRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ListBundlesResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/ListSuites": {
+        "post": {
+          "operationId": "List Suites Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListSuitesRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ListSuitesResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      },
+      "/bundles.v1.BundleService/UpdateSuite": {
+        "post": {
+          "operationId": "Update Suite Connect",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateSuiteRequest"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UpdateSuiteResponse"
+                  }
+                }
+              },
+              "description": "OK"
+            },
+            "default": {
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Status"
+                  }
+                }
+              },
+              "description": "Default error response"
+            }
+          },
+          "tags": [
+            "Grpc Connect APIs"
+          ]
+        }
+      }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ],
+    "servers": [
+      {
+        "url": "https://api.conversions.flowcode.com"
+      },
+      {
+        "url": "https://api.conversions.stg.flowcode.com"
+      }
+    ],
+    "tags": [
+      {
+        "description": "Endpoints exposed via gRPC Connect API.",
+        "name": "Grpc Connect APIs"
+      }
+    ]
+  }
